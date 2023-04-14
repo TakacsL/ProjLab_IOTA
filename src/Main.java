@@ -48,7 +48,9 @@ public class Main {
             }        	
             switch(option) {
             case 1:
-                System.out.println("Not yet implemented");
+            	PlayableCharacter PC = new PlayableCharacter();
+            	Area a2 = new Area();
+            	PC.MoveTo(a2);
                 scanner.nextLine();scanner.nextLine();
               break;
             case 2:
