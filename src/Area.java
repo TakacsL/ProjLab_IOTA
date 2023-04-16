@@ -1,8 +1,10 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Area {
 	
 	PlayableCharacter player;
+	List<Area> connectedAreas;
 
 	public Area() {
 		// TODO Auto-generated constructor stub
@@ -29,8 +31,20 @@ public class Area {
     		return false;
         }
 	}
-	
+
+	void Connect(Area a){}
+
+	void Fix(){}
+
+	void Break(){}
 	
 	public String toString() {return "[:Area]";}
 
+	public void SetInput(Pipe p) {
+		p.Connect(this);
+	}
+
+	public void SetOutput(Pipe p) {
+		p.Connect(this);
+	}
 }

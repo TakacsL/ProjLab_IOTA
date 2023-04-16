@@ -66,31 +66,48 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 5:
-                System.out.println("Not yet implemented");
+                Repairman r = new Repairman();
+                Pipe pipe = new Pipe();
+                r.PlaceArea(pipe);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 6:
-                System.out.println("Not yet implemented");
+                Repairman r2 = new Repairman();
+                Pipe pipe2 = new Pipe();
+                r2.MoveTo(pipe2);
+                r2.FixArea();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 7:
-                System.out.println("Not yet implemented");
+
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 8:
-                System.out.println("Not yet implemented");
+                Saboteur s = new Saboteur();
+                Pipe pipe3 = new Pipe();
+                s.MoveTo(pipe3);
+                s.BreakArea();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 9:
-                System.out.println("Not yet implemented");
+                Repairman r3 = new Repairman();
+                Pump pump = new Pump();
+                r3.MoveTo(pump);
+                r3.FixArea();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 10:
-                System.out.println("Not yet implemented");
+                Repairman r4 = new Repairman();
+                Pipe pTarget = new Pipe();
+                Pump pump2 = new Pump();
+                r4.PlaceArea(pump2);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 11:
-                System.out.println("Not yet implemented");
+                Repairman r5 = new Repairman();
+                Pump pump3 = new Pump();
+                Pipe pipe4 = new Pipe();
+                Pipe pipe5 = new Pipe();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 12:
