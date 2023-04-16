@@ -32,7 +32,8 @@ public class Main {
                             "11. Pumpa állítása",
                             "12. Csõ létrehozása",
                             "13. Pumpa rongálása",
-                            "14. Kilépés"
+                            "14. Pumpa felvétele",
+                            "15. Kilépés"
         };
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -68,7 +69,7 @@ public class Main {
             case 5:
                 Repairman r = new Repairman();
                 Pipe pipe = new Pipe();
-                r.PlaceArea(pipe);
+                r.PlacePipe(pipe);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 6:
@@ -100,7 +101,7 @@ public class Main {
                 Repairman r4 = new Repairman();
                 Pipe pTarget = new Pipe();
                 Pump pump2 = new Pump();
-                r4.PlaceArea(pump2);
+                r4.PlacePump(pump2);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 11:
@@ -108,6 +109,8 @@ public class Main {
                 Pump pump3 = new Pump();
                 Pipe pipe4 = new Pipe();
                 Pipe pipe5 = new Pipe();
+                r5.MoveTo(pump3);
+                r5.SetPumpConfiguration(pipe4, pipe5);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 12:
@@ -122,6 +125,12 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 14:
+            	Repairman rm = new Repairman();
+                Cistern c = new Cistern();
+                rm.PickupArea(c);
+                scanner.nextLine();scanner.nextLine();
+                break;
+            case 15:
                 System.out.println("Exiting program now...");
                 NotFinished = false;
                 break;
