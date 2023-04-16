@@ -32,8 +32,10 @@ public class PlayableCharacter {
 	}
 
 	public void SetPumpConfiguration(Pipe p1, Pipe p2){
+		System.out.println("->PlayableCharacter.SetPumpConfiguration[Pipe, Pipe]");
 		GetArea().SetInput(p1);
 		GetArea().SetOutput(p2);
+		System.out.println("<-PlayableCharacter.SetPumpConfiguration[Pipe, Pipe]");
 	}
 	
 	public String toString() {return "[:PlayableCharacter]";}
