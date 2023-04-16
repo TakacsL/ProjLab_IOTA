@@ -30,4 +30,8 @@ public class Pipe extends Area{
         broken = false;
         System.out.println("<-Pipe.Break[]");
     }
+    
+    
+    @Override
+	public String toString() {return "[Pipe]"; }
 }

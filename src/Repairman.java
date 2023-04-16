@@ -1,14 +1,38 @@
 public class Repairman extends PlayableCharacter{
-
-    void PlaceArea(Area a){
-        System.out.println("->Repairman.PlaceArea[]");
-        GetArea().Connect(a);
-        System.out.println("<-Repairman.PlaceArea[]");
-    }
+	public Pump p;
 
     void FixArea(){
         System.out.println("->Repairman.FixArea[]");
+    	System.out.println("->[a1].Fix()");
         GetArea().Fix();
+    	System.out.println("<-[a1].Fix()");
         System.out.println("<-Repairman.FixArea[]");
     }
+    void PlacePipe(Pipe pipe){
+        System.out.println("->" + toString() + ".PlacePipe[]");
+    	System.out.println("->[a1].Connect(pipe)");
+        GetArea().Connect(pipe);
+    	System.out.println("<-[a1].Connect(pipe)");
+        System.out.println("<-" + toString() + ".PlacePipe[]");
+    }
+    
+    void PlacePump(Pump pump){
+        System.out.println("->" + toString() + ".PlacePump()");
+        this.PickupArea(new Cistern());
+        System.out.println("->p.PlacePump(pump)");
+        p.PlacePump(pump);
+        System.out.println("<-p.PlacePump(pump)");
+        System.out.println("<-" + toString() + ".PlacePump()");
+    }
+    
+    public void PickupArea(Cistern c) {
+        System.out.println("->" + toString() + ".PickupArea(c)");
+        System.out.println("->c.PickupPump()");
+        p = c.PickupPump();
+        System.out.println("<-c.PickupPump()");
+        System.out.println("<-" + toString() + ".PickupArea(c)");
+    }
+    
+    @Override
+    public String toString() {return "[repairman]";}
 }

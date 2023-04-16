@@ -10,7 +10,7 @@ public class PlayableCharacter {
 	
 	
 	public void MoveTo(Area a2){
-		System.out.println("->" + toString() + '.' + "MoveTo[a2]");
+		System.out.println("->" + toString() + ".MoveTo[a2]");
 		System.out.println("->[a1].RemoveCharacter[character]");
 		Boolean result = a1.RemoveCharacter(this);
 		System.out.println("<-[a1].RemoveCharacter[character]");
@@ -24,7 +24,7 @@ public class PlayableCharacter {
 			else System.out.println("a2 Succesfully accepted character");
 		}
 		
-		System.out.println("<-" + toString() + '.' + "MoveTo[a2]");
+		System.out.println("<-" + toString() + ".MoveTo[a2]");
 	}
 
 	protected Area GetArea(){
@@ -32,12 +32,16 @@ public class PlayableCharacter {
 	}
 
 	public void SetPumpConfiguration(Pipe p1, Pipe p2){
-		System.out.println("->PlayableCharacter.SetPumpConfiguration[Pipe, Pipe]");
+		System.out.println("->" + toString() + ".SetPumpConfiguration[Pipe, Pipe]");
+		System.out.println("->[GetArea()].SetInput(p1)");
 		GetArea().SetInput(p1);
+		System.out.println("<-[GetArea()].SetInput(p1)");
+		System.out.println("->[GetArea()].SetOutput(p)");
 		GetArea().SetOutput(p2);
-		System.out.println("<-PlayableCharacter.SetPumpConfiguration[Pipe, Pipe]");
+		System.out.println("<-[GetArea()].SetOutput(p)");
+		System.out.println("<-" + toString() + ".SetPumpConfiguration[Pipe, Pipe]");
 	}
 	
-	public String toString() {return "[:PlayableCharacter]";}
+	public String toString() {return "[PlayableCharacter]";}
 
 }
