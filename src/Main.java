@@ -88,7 +88,7 @@ public class Main {
                 areaList.add(pump40);
                 System.out.println("Areas on the map:");
                 for (Area a:areaList) {
-                    System.out.println(a.toString());; }
+                    System.out.println(a.toString()); }
 
                 scanner.nextLine();scanner.nextLine();
                 break;
