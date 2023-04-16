@@ -26,6 +26,15 @@ public class PlayableCharacter {
 		
 		System.out.println("<-" + toString() + '.' + "MoveTo[a2]");
 	}
+
+	protected Area GetArea(){
+		return a1;
+	}
+
+	public void SetPumpConfiguration(Pipe p1, Pipe p2){
+		GetArea().SetInput(p1);
+		GetArea().SetOutput(p2);
+	}
 	
 	public String toString() {return "[:PlayableCharacter]";}
 
