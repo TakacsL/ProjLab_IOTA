@@ -115,7 +115,10 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 13:
-                System.out.println("Not yet implemented");
+                Saboteur s2 = new Saboteur();
+                Pump pump4 = new Pump();
+                s2.MoveTo(pump4);
+                s2.BreakArea();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 14:
