@@ -5,9 +5,12 @@ public class Pump extends Area{
     private Area input;
     private Area output;
 
+
     @Override
-    void Connect(Area a) {
-    	this.connectedAreas.add(a);
+    void Connect(Area a){
+        System.out.println("->Pump.Connect["+a.toString()+"]");
+        connectedAreas.add(a);
+        System.out.println("<-Pump.Connect["+a.toString()+"]");
     }
     
     @Override
