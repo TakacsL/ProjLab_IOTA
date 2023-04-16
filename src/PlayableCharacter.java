@@ -1,4 +1,8 @@
 
+/**
+ * Karakterek gyűjtő osztálya, minden játékosnak egy ilyen karaktert kell irányítania a játék folyamán. Képes mozogni a megadott mezőkön, illetve, ha pumpán van, akkor átállíthatja annak a konfigurációját.
+ */
+
 public class PlayableCharacter {
 	Area a1;
 

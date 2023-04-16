@@ -1,5 +1,9 @@
 import java.util.List;
 
+
+/**
+* Cső mező. A két vége forráshoz, ciszternához, vagy pumpához van kötve. Két állapota van, lyukas, vagy működőképes. Egy karakter tartózkodhat rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat, ha nem lyukas a cső. A csövek mozgathatók, bármelyik végét le lehet csatlakoztatni, és elvinni máshova
+*/
 public class Pipe extends Area{
     private int maxCapacity;
     private int waterLevel;

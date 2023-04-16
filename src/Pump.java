@@ -1,3 +1,7 @@
+/**
+ * Pumpa mező. Több bekötött csöve lehet, ezek közül minden pillanatban egy bemenő, és egy kimenő csöve van. Ezt a két csövet minden játékos tudja állítani, aki rajta van a pumpa mezőn. Véletlen időközönként elromolhat. Vagy a játék elején fix helyen vannak, vagy vízvezeték szerelő karakterek helyezhetik le.
+ */
+
 public class Pump extends Area{
     private int maxCapacity;
     private int waterLevel;
