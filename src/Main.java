@@ -108,6 +108,8 @@ public class Main {
                 Pump pump3 = new Pump();
                 Pipe pipe4 = new Pipe();
                 Pipe pipe5 = new Pipe();
+                r5.MoveTo(pump3);
+                r5.SetPumpConfiguration(pipe4, pipe5);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 12:
