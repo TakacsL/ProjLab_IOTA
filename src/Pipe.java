@@ -7,14 +7,14 @@ public class Pipe extends Area{
 
     @Override
     void Connect(Area a){
-        System.out.println("->Pipe.Connect[area]");
+        System.out.println("->Pipe.Connect["+a.toString()+"]");
         if(connectedAreas.size()>=2){
             System.out.println("Pipe cannot connect to more than 2 areas, returning");
             return;
         }
 
         connectedAreas.add(a);
-        System.out.println("<-Pipe.Connect[Area]");
+        System.out.println("<-Pipe.Connect["+a.toString()+"]");
     }
 
     @Override

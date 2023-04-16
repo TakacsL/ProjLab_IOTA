@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,25 +21,26 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String[] options = {"1.  Mozg·s",
+        String[] options = {"1.  Mozg√°s",
                             "2.  Map Init",
                             "3.  End turn",
-                            "4.  P·lya megjelenÌtÈse",
-                            "5.  Csı elhelyezÈs",
-                            "6.  Csı javÌt·s",
-                            "7.  Csı felszerelÈs",
-                            "8.  Csı rong·l·s",
-                            "9.  Pumpa javÌt·s",
-                            "10. Pumpa elhelyezÈs",
-                            "11. Pumpa ·llÌt·sa",
-                            "12. Csı lÈtrehoz·sa",
-                            "13. Pumpa rong·l·sa",
-                            "14. Pumpa felvÈtele",
-                            "15. KilÈpÈs"
+                            "4.  P√°lya megjelen√≠t√©se",
+                            "5.  Cs√µ elhelyez√©s",
+                            "6.  Cs√µ jav√≠t√°s",
+                            "7.  Cs√µ felszed√©s",
+                            "8.  Cs√µ rong√°l√°s",
+                            "9.  Pumpa jav√≠t√°s",
+                            "10. Pumpa elhelyez√©s",
+                            "11. Pumpa √°ll√≠t√°sa",
+                            "12. Cs√µ l√©trehoz√°sa",
+                            "13. Pumpa rong√°l√°sa",
+                            "14. Pumpa felv√©tele",
+                            "15. Kil√©p√©s"
         };
         Scanner scanner = new Scanner(System.in);
         int option;
         Boolean NotFinished = true;
+        Game.getInstance().StartGame();
         while (NotFinished){
         	cls();
             printMenu(options);
@@ -55,15 +58,38 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
               break;
             case 2:
-                System.out.println("Not yet implemented");
+                Game.getInstance().CreateInitialMap();
                 scanner.nextLine();scanner.nextLine();
               break;
             case 3:
-                System.out.println("Not yet implemented");
+                Game.getInstance().EndTurn();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 4:
-                System.out.println("Not yet implemented");
+                List<Area> areaList = new ArrayList<Area>();
+                Pipe pipe40 = new Pipe();
+                Pipe pipe41 = new Pipe();
+                Pipe pipe42 = new Pipe();
+                Pipe pipe43 = new Pipe();
+                Cistern cistern40 = new Cistern();
+                Cistern cistern41 = new Cistern();
+                Fountain fountain40 = new Fountain();
+                Fountain fountain41 = new Fountain();
+                Pump pump40 = new Pump();
+
+                areaList.add(pipe40);
+                areaList.add(pipe41);
+                areaList.add(pipe42);
+                areaList.add(pipe43);
+                areaList.add(cistern40);
+                areaList.add(cistern41);
+                areaList.add(fountain40);
+                areaList.add(fountain41);
+                areaList.add(pump40);
+                System.out.println("Areas on the map:");
+                for (Area a:areaList) {
+                    System.out.println(a.toString()); }
+
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 5:
@@ -80,7 +106,12 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 7:
-
+                Area a70 = new Area();
+                Repairman r70 = new Repairman();
+                Pipe p70 = new Pipe();
+                p70.Disconnect(a70);
+                System.out.println("->GetArea().Disconnect[p70]");
+                r70.PickupArea(p70);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 8:
@@ -114,7 +145,8 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 12:
-                System.out.println("Not yet implemented");
+                Fountain f = new Fountain();
+                Pipe pipe6 = f.PickupPipe();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 13:
@@ -132,6 +164,7 @@ public class Main {
                 break;
             case 15:
                 System.out.println("Exiting program now...");
+                Game.getInstance().EndGame();
                 NotFinished = false;
                 break;
            

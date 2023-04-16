@@ -32,6 +32,12 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-c.PickupPump()");
         System.out.println("<-" + toString() + ".PickupArea(c)");
     }
+    public void PickupArea(Pipe p) {
+        System.out.println("->" + toString() + ".PickupArea(p)");
+        System.out.println("->p.Disconnect(a1)");
+        System.out.println("<-p.Disconnect(a1)");
+        System.out.println("<-" + toString() + ".PickupArea(p)");
+    }
     
     @Override
     public String toString() {return "[repairman]";}
