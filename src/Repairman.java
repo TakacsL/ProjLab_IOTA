@@ -1,10 +1,23 @@
-/**
- * VÃ­zvezetÃ©k szerelÅ‘ karakter. Olyan jÃ¡tszhatÃ³ karakter, akinek a cÃ©lja, hogy minÃ©l tÃ¶bb vÃ­z eljusson a csiszternÃ¡k valamelyikÃ©be, Ã©s ekÃ¶zben minÃ©l kevesebb folyjon el. KÃ©pes megjavÃ­tani a csÃ¶vet, vagy a pumpÃ¡t, ha ilyen mezÅ‘kÃ¶n Ã¡ll, Ã©s azok Ã©ppen hibÃ¡sak. Ha ciszterna mezÅ‘n Ã¡ll, akkor vehet fel egy pumpÃ¡t, amit egy csÅ‘ mezÅ‘n tud lehelyezni, ezzel kÃ©t rÃ©szre osztva a csÃ¶vet.
+/*
+ * Vízvezeték szerelõ karakter. Olyan játszható karakter, 
+ * akinek a célja, hogy minél több víz eljusson a csiszternák 
+ * valamelyikébe, és eközben minél kevesebb folyjon el. Képes 
+ * megjavítani a csövet, vagy a pumpát, ha ilyen mezõkön áll, 
+ * és azok éppen hibásak. Ha ciszterna mezõn áll, akkor vehet 
+ * fel egy pumpát, amit egy csõ mezõn tud lehelyezni, ezzel két 
+ * részre osztva a csövet.
+
  */
 
 public class Repairman extends PlayableCharacter{
+	/*
+	 * pumpa példány, amit felvett a karakter
+	 */
 	public Pump p;
 
+	/*
+	 * Annak a területnek a megjavítása, amelyen a karakter áll.
+	 */
     void FixArea(){
         System.out.println("->Repairman.FixArea[]");
     	System.out.println("->[a1].Fix()");
@@ -12,6 +25,9 @@ public class Repairman extends PlayableCharacter{
     	System.out.println("<-[a1].Fix()");
         System.out.println("<-Repairman.FixArea[]");
     }
+    /*
+     * Csõ elem elhelyezése a pályán.
+     */
     void PlacePipe(Pipe pipe){
         System.out.println("->" + toString() + ".PlacePipe[]");
     	System.out.println("->[a1].Connect(pipe)");
@@ -19,7 +35,9 @@ public class Repairman extends PlayableCharacter{
     	System.out.println("<-[a1].Connect(pipe)");
         System.out.println("<-" + toString() + ".PlacePipe[]");
     }
-    
+    /*
+     * Pumpa elem elhelyezése a pályán.
+     */
     void PlacePump(Pump pump){
         System.out.println("->" + toString() + ".PlacePump()");
         this.PickupArea(new Cistern());
@@ -29,6 +47,9 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-" + toString() + ".PlacePump()");
     }
     
+    /*
+     * A csõrendszer egyik nyelõ elemének a felvéte.
+     */
     public void PickupArea(Cistern c) {
         System.out.println("->" + toString() + ".PickupArea(c)");
         System.out.println("->c.PickupPump()");
@@ -36,6 +57,9 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-c.PickupPump()");
         System.out.println("<-" + toString() + ".PickupArea(c)");
     }
+    /*
+     * A csõrendszer egyik csõ elemének a felvéte.
+     */
     public void PickupArea(Pipe p) {
         System.out.println("->" + toString() + ".PickupArea(p)");
         System.out.println("->p.Disconnect(a1)");
@@ -43,6 +67,9 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-" + toString() + ".PickupArea(p)");
     }
     
+	/*
+	 * konzolra írást segítõ fv
+	 */
     @Override
     public String toString() {return "[repairman]";}
 }

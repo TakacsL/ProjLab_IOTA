@@ -1,13 +1,22 @@
 import java.util.ArrayList;
+
+/*
+ *   A játék irányításáért felelõs osztály. Magába foglalja a 
+ * 	 körök végén a léptetést, ami minden olyan akciót
+ *   lefuttat, ami a játékosokon kívül történik. 
+ *   A játék elején kialakítja a pálya alapállását
+ */
 import java.util.List;
 
 public final class Game {
 
-    private static Game INSTANCE;
+	//singleton mûködés megvalósítása
+    private static Game INSTANCE;		
 
     private Game() {}
-    public List<Map> maps;
+    public Map map;	//a játékhoz tartozó területrendszert tartalmaza.
 
+  //singleton mûködés megvalósítása
     public static Game getInstance() {
         if(INSTANCE == null) {
             INSTANCE = new Game();
@@ -15,21 +24,20 @@ public final class Game {
         return INSTANCE;
     }
 
-    public void StartGame(){
+    //A játék indítása.
+    public void StartGame(){}
 
-    }
+    //A játék befejezése.
+    public void EndGame(){}
 
-
-    public void EndGame(){
-
-    }
-
+    //A kör befejezése, az elemek léptetése.
     public void EndTurn(){
 
-        System.out.println("->EndTurn[m]");
+        System.out.println("->EndTurn[]");
 
         System.out.println("For all Area");
         System.out.println("->Step[]");
+        for (Area a : map.areas) a.step();
         System.out.println("<-Step[]");
 
         System.out.println("For all PlayableCharacter");
@@ -40,11 +48,10 @@ public final class Game {
         System.out.println("<-EndTurn[m]");
     }
 
+    //A pálya alapállásának kialakítása
     public void CreateInitialMap(){
 
-        Map m = new Map();
-        maps = new ArrayList<Map>();
-        maps.add(m);
+        map = new Map();
 
         System.out.println("->CreateInitialMap[]");
 
@@ -53,10 +60,10 @@ public final class Game {
         Pipe p1 = new Pipe();
         Pipe p2 = new Pipe();
 
-        m.AddArea(f);
-        m.AddArea(c);
-        m.AddArea(p1);
-        m.AddArea(p2);
+        map.AddArea(f);
+        map.AddArea(c);
+        map.AddArea(p1);
+        map.AddArea(p2);
 
         Repairman r1 = new Repairman();
         Repairman r2 = new Repairman();

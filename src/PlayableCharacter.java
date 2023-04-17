@@ -1,18 +1,29 @@
 
 /**
- * Karakterek gyÅ±jtÅ‘ osztÃ¡lya, minden jÃ¡tÃ©kosnak egy ilyen karaktert kell irÃ¡nyÃ­tania a jÃ¡tÃ©k folyamÃ¡n. KÃ©pes mozogni a megadott mezÅ‘kÃ¶n, illetve, ha pumpÃ¡n van, akkor Ã¡tÃ¡llÃ­thatja annak a konfigurÃ¡ciÃ³jÃ¡t.
- */
+ * Karakterek gyûjtõ osztálya, minden játékosnak egy 
+ * ilyen karaktert kell irányítania a játék folyamán. 
+ * Képes mozogni a megadott mezõkön, illetve, ha pumpán 
+ * van, akkor átállíthatja annak a konfigurációját.
+ * */
 
 public class PlayableCharacter {
+	/*
+	 * Az az elem, amelyen a karakter áll.
+	 */
 	Area a1;
 
+	/*
+	 * konstruktor, skeleton miatt a1 inicianilázása
+	 */
 	public PlayableCharacter() {
 		// TODO Auto-generated constructor stub
 		a1 = new Area();
 	}
 	
 	
-	
+	/*
+	 *  A karakter átlép egy másik elemre. 
+	 */
 	public void MoveTo(Area a2){
 		System.out.println("->" + toString() + ".MoveTo[a2]");
 		System.out.println("->[a1].RemoveCharacter[character]");
@@ -30,11 +41,24 @@ public class PlayableCharacter {
 		
 		System.out.println("<-" + toString() + ".MoveTo[a2]");
 	}
+	
+	/*
+	 * A csõrendszer egyik elemének a felvéte, üres fv
+	 */
+	public void PickupArea(Area a) {
+		
+	}
 
+	/*
+	 * a1 getter
+	 */
 	protected Area GetArea(){
 		return a1;
 	}
 
+	/*
+	 * A pumpa be- és kimenetének átállítása.
+	 */
 	public void SetPumpConfiguration(Pipe p1, Pipe p2){
 		System.out.println("->" + toString() + ".SetPumpConfiguration[Pipe, Pipe]");
 		System.out.println("->[GetArea()].SetInput(p1)");
@@ -46,6 +70,14 @@ public class PlayableCharacter {
 		System.out.println("<-" + toString() + ".SetPumpConfiguration[Pipe, Pipe]");
 	}
 	
+	/*
+	 * A kiválasztott tevékenység végrehajtása.
+	 */
+	public void step() {}
+	
+	/*
+	 * konzolra írást segítõ fv
+	 */
 	public String toString() {return "[PlayableCharacter]";}
 
 }

@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+	/*
+	 * A menüelemek konzolra írása függvénybe kiszervezve
+	 */
    
     public static void printMenu(String[] options){
         for (String option : options){
@@ -11,6 +14,9 @@ public class Main {
         System.out.print("Choose your option : ");
     }
     
+    /*
+     * Konzol képernyő törlése függvénybe kiszervezve
+     */
     public static void cls(){
         try {
 
@@ -36,7 +42,6 @@ public class Main {
                             "13. Pumpa rongálása",
                             "14. Pumpa felvétele",
                             "15. Kilépés"
-                            
         };
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -53,6 +58,10 @@ public class Main {
             }        	
             switch(option) {
             case 1:
+            	/*
+            	 * A játékos a karaktert mozgatni tudja.
+            	 * A játékos a karaktert egyik mezőről a másikra mozgatja.
+            	 */
             	PlayableCharacter PC = new PlayableCharacter();
             	Area a2 = new Area();
             	PC.MoveTo(a2);
@@ -73,6 +82,9 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 4:
+            	/*
+            	 * A játékos megtekinti a pályát.
+            	 */
                 List<Area> areaList = new ArrayList<Area>();
                 Pipe pipe40 = new Pipe();
                 Pipe pipe41 = new Pipe();
@@ -119,6 +131,10 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 7:
+            	/*
+            	 * A játékos felvesz egy csövet.
+            	 * A szerelőkkel lévő játékos felvesz egy, a pályán lévő csövet.
+            	 */
                 Area a70 = new Area();
                 Repairman r70 = new Repairman();
                 Pipe p70 = new Pipe();
@@ -170,11 +186,21 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 12:
+            	/*
+            	 * A controller létrehoz egy csövet.
+            	 * A controller folyamatosan létrehoz a 
+            	 * forrásokon újabb csöveket, amelyeket a szerelők fel tudnak venni.
+            	 */
                 Fountain f = new Fountain();
                 Pipe pipe6 = f.PickupPipe();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 13:
+            	/*
+            	 * A controller megrongálja a pumpát.
+            	 * A controller véletlenszerű időközönként megrongál egy,
+            	 *  a pályán lévő pumpát, amelyet a szerelőknek meg kell javítani.
+            	 */
                 Saboteur s2 = new Saboteur();
                 Pump pump4 = new Pump();
                 s2.MoveTo(pump4);
@@ -182,12 +208,21 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 14:
+            	/*
+            	 * pumpa felvétele
+            	 * karbantartó felvesz egy pump elemet a nyelő mezőn
+            	 * amin áll. 
+            	 */
             	Repairman rm = new Repairman();
                 Cistern c = new Cistern();
                 rm.PickupArea(c);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 15:
+            	/*
+            	 * kilépés a menüvezérelt részből, a program jelenlegi verziójában 
+            	 * a futtatás befejezése
+            	 */
                 System.out.println("Exiting program now...");
                 Game.getInstance().EndGame();
                 NotFinished = false;
