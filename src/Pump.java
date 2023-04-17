@@ -1,15 +1,37 @@
 /**
- * Pumpa mezÅ‘. TÃ¶bb bekÃ¶tÃ¶tt csÃ¶ve lehet, ezek kÃ¶zÃ¼l minden pillanatban egy bemenÅ‘, Ã©s egy kimenÅ‘ csÃ¶ve van. Ezt a kÃ©t csÃ¶vet minden jÃ¡tÃ©kos tudja Ã¡llÃ­tani, aki rajta van a pumpa mezÅ‘n. VÃ©letlen idÅ‘kÃ¶zÃ¶nkÃ©nt elromolhat. Vagy a jÃ¡tÃ©k elejÃ©n fix helyen vannak, vagy vÃ­zvezetÃ©k szerelÅ‘ karakterek helyezhetik le.
+Pumpa mezõ. Több bekötött csöve lehet, ezek közül minden 
+pillanatban egy bemenõ, és egy kimenõ csöve van. Ezt a két 
+csövet minden játékos tudja állítani, aki rajta van a pumpa
+mezõn. Véletlen idõközönként elromolhat. Vagy a játék elején 
+fix helyen vannak, vagy vízvezeték szerelõ karakterek helyezhetik le.
  */
 
 public class Pump extends Area{
+	/*
+	 * maximális mennyiségû víz, amit tárolni tud, egész számban
+	 */
     private int maxCapacity;
+    /*
+     * jelenlegi vízszint, egész számban
+     */
     private int waterLevel;
+    /*
+     * állapot tároló
+     */
     private boolean broken;
+    /*
+     * Area ahonnan fogad vizet
+     */
     private Area input;
+    /*
+     * Area ahová ad vizet
+     */
     private Area output;
 
 
+    /*
+     * Az elemhez egy újabb elem csatlakoztatása.
+     */
     @Override
     void Connect(Area a){
         System.out.println("->Pump.Connect["+a.toString()+"]");
@@ -17,9 +39,15 @@ public class Pump extends Area{
         System.out.println("<-Pump.Connect["+a.toString()+"]");
     }
     
+	/*
+	 * konzolra írást segítõ fv
+	 */
     @Override
     public String toString() {return "[pump]"; }
 
+    /*
+     * A hibás pumpa megjavítása.
+     */
     @Override
     void Fix(){
         System.out.println("->Pump.Fix[]");
@@ -27,6 +55,9 @@ public class Pump extends Area{
         System.out.println("<-Pump.Fix[]");
     }
 
+    /*
+     * 	 * Az elem lyukasztása
+     */
     @Override
     void Break() {
         System.out.println("->Pump.Break[]");
@@ -34,6 +65,9 @@ public class Pump extends Area{
         System.out.println("<-Pump.Break[]");
     }
 
+    /*
+     * A pumpa bemenetének kiválasztása.
+     */
     @Override
     public void SetInput(Area a) {
         System.out.println("->Pump.SetInput[Area]");
@@ -43,6 +77,9 @@ public class Pump extends Area{
         System.out.println("<-Pump.SetInput[Area]");
     }
 
+    /*
+     * A pumpa kimenetének kiválasztása.
+     */
     @Override
     public void SetOutput(Area a) {
         System.out.println("->Pump.SetOutput[Area]");
@@ -52,6 +89,10 @@ public class Pump extends Area{
         System.out.println("<-Pump.SetOutput[Area]");
     }
     
+    /*
+     * Pumpa mezõ lehelyezése az elsõ szomszédra
+     * Repairman hívja meg
+     */
     @Override
     void PlacePump(Pump p) {
     	this.Connect(new Pipe());

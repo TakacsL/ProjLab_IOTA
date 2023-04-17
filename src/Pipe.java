@@ -2,13 +2,28 @@ import java.util.List;
 
 
 /**
-* CsÅ‘ mezÅ‘. A kÃ©t vÃ©ge forrÃ¡shoz, ciszternÃ¡hoz, vagy pumpÃ¡hoz van kÃ¶tve. KÃ©t Ã¡llapota van, lyukas, vagy mÅ±kÃ¶dÅ‘kÃ©pes. Egy karakter tartÃ³zkodhat rajta egyszerre. A bemenet, Ã©s kimenet csÃ¶vek kÃ¶zÃ¶tt vÃ­z folyhat, ha nem lyukas a csÅ‘. A csÃ¶vek mozgathatÃ³k, bÃ¡rmelyik vÃ©gÃ©t le lehet csatlakoztatni, Ã©s elvinni mÃ¡shova
+Csõ mezõ. A két vége forráshoz, ciszternához, vagy pumpához van kötve. 
+Két állapota van, lyukas, vagy mûködõképes. Egy karakter tartózkodhat 
+rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat, 
+ha nem lyukas a csõ. A csövek mozgathatók, bármelyik végét le lehet csatlakoztatni, és elvinni máshova
 */
 public class Pipe extends Area{
+	/*
+	 * maximális mennyiségû víz, amit tárolni tud, egész számban
+	 */
     private int maxCapacity;
+    /*
+     * jelenlegi vízszint, egész számban
+     */
     private int waterLevel;
+    /*
+     * állapot tároló
+     */
     private boolean broken;
 
+    /*
+     * Az elemhez egy újabb elem csatlakoztatása.
+     */
     @Override
     void Connect(Area a){
         System.out.println("->Pipe.Connect["+a.toString()+"]");
@@ -21,6 +36,9 @@ public class Pipe extends Area{
         System.out.println("<-Pipe.Connect["+a.toString()+"]");
     }
 
+    /*
+     * A lyukas csõ megjavítása.
+     */
     @Override
     void Fix(){
         System.out.println("->Pipe.Fix[]");
@@ -28,6 +46,9 @@ public class Pipe extends Area{
         System.out.println("<-Pipe.Fix[]");
     }
 
+    /*
+     * A csõ kilyukasztása.
+     */
     @Override
     void Break() {
         System.out.println("->Pipe.Break[]");
@@ -35,7 +56,14 @@ public class Pipe extends Area{
         System.out.println("<-Pipe.Break[]");
     }
     
+    /*
+     * A csõ állapotának lekérdezése.
+     */
+    public Boolean isBroken() {return broken;}
     
+	/*
+	 * konzolra írást segítõ fv
+	 */
     @Override
 	public String toString() {return "[Pipe]"; }
 }

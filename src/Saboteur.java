@@ -1,8 +1,16 @@
 /**
- * SzabotÅ‘r karakter. Olyan jÃ¡tszhatÃ³ karakter, akinek a cÃ©lja, hogy minÃ©l tÃ¶bb vÃ­z elfolyjon a sivatagba. A csapatÃ¡nak a pontjai az elfolyt vizek hatÃ¡sÃ¡ra nÅ‘nek. Ha csÅ‘ mezÅ‘n Ã¡ll, akkor ki tudja lyukasztani a csÃ¶vet, ezzel elfolyik belÅ‘le a vÃ­z, amÃ­g meg nem javÃ­tja valaki.
- */
+ * Szabotõr karakter. Olyan játszható karakter, akinek a célja, 
+ * hogy minél több víz elfolyjon a sivatagba. A csapatának a 
+ * pontjai az elfolyt vizek hatására nõnek. Ha csõ mezõn áll, 
+ * akkor ki tudja lyukasztani a csövet, ezzel elfolyik belõle 
+ * a víz, amíg meg nem javítja valaki.
+
+ * */
 
 public class Saboteur extends PlayableCharacter{
+	/*
+	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
+	 */
     void BreakArea(){
         System.out.println("->Saboteur.BreakArea()");
     	System.out.println("->[a1].Break()");
@@ -11,5 +19,8 @@ public class Saboteur extends PlayableCharacter{
         System.out.println("<-Saboteur.BreakArea()");
     }
     
+	/*
+	 * konzolra írást segítõ fv
+	 */
     public String toString() {return "[saboteur]";}
 }
