@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,24 +21,27 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String[] options = {"1.  Mozg�s",
+        String[] options = {"1.  Mozgás",
                             "2.  Map Init",
                             "3.  End turn",
-                            "4.  P�lya megjelen�t�se",
-                            "5.  Cs� elhelyez�s",
-                            "6.  Cs� jav�t�s",
-                            "7.  Cs� felszerel�s",
-                            "8.  Cs� rong�l�s",
-                            "9.  Pumpa jav�t�s",
-                            "10. Pumpa elhelyez�s",
-                            "11. Pumpa �ll�t�sa",
-                            "12. Cs� l�trehoz�sa",
-                            "13. Pumpa rong�l�sa",
-                            "14. Kil�p�s"
+                            "4.  Pálya megjelenítése",
+                            "5.  Csõ elhelyezés",
+                            "6.  Csõ javítás",
+                            "7.  Csõ felszedés",
+                            "8.  Csõ rongálás",
+                            "9.  Pumpa javítás",
+                            "10. Pumpa elhelyezés",
+                            "11. Pumpa állítása",
+                            "12. Csõ létrehozása",
+                            "13. Pumpa rongálása",
+                            "14. Pumpa felvétele",
+                            "15. Kilépés"
+                            
         };
         Scanner scanner = new Scanner(System.in);
         int option;
         Boolean NotFinished = true;
+        Game.getInstance().StartGame();
         while (NotFinished){
         	cls();
             printMenu(options);
@@ -57,18 +62,41 @@ public class Main {
             /**
              * A controller a játék elején inicializálja a mezőt, amelyen a játékosok interakciókat végezhetnek.
              */
-                System.out.println("Not yet implemented");
+                Game.getInstance().CreateInitialMap();
                 scanner.nextLine();scanner.nextLine();
               break;
             case 3:
             /**
              * A controller meghívja a kör végét. Az összes Step() függvénnyel rendelkező entitás Step() függvénye meghívódik.
              */
-                System.out.println("Not yet implemented");
+                Game.getInstance().EndTurn();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 4:
-                System.out.println("Not yet implemented");
+                List<Area> areaList = new ArrayList<Area>();
+                Pipe pipe40 = new Pipe();
+                Pipe pipe41 = new Pipe();
+                Pipe pipe42 = new Pipe();
+                Pipe pipe43 = new Pipe();
+                Cistern cistern40 = new Cistern();
+                Cistern cistern41 = new Cistern();
+                Fountain fountain40 = new Fountain();
+                Fountain fountain41 = new Fountain();
+                Pump pump40 = new Pump();
+
+                areaList.add(pipe40);
+                areaList.add(pipe41);
+                areaList.add(pipe42);
+                areaList.add(pipe43);
+                areaList.add(cistern40);
+                areaList.add(cistern41);
+                areaList.add(fountain40);
+                areaList.add(fountain41);
+                areaList.add(pump40);
+                System.out.println("Areas on the map:");
+                for (Area a:areaList) {
+                    System.out.println(a.toString()); }
+
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 5:
@@ -77,7 +105,7 @@ public class Main {
              */
                 Repairman r = new Repairman();
                 Pipe pipe = new Pipe();
-                r.PlaceArea(pipe);
+                r.PlacePipe(pipe);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 6:
@@ -91,7 +119,12 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 7:
-
+                Area a70 = new Area();
+                Repairman r70 = new Repairman();
+                Pipe p70 = new Pipe();
+                p70.Disconnect(a70);
+                System.out.println("->GetArea().Disconnect[p70]");
+                r70.PickupArea(p70);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 8:
@@ -121,7 +154,7 @@ public class Main {
                 Repairman r4 = new Repairman();
                 Pipe pTarget = new Pipe();
                 Pump pump2 = new Pump();
-                r4.PlaceArea(pump2);
+                r4.PlacePump(pump2);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 11:
@@ -137,7 +170,8 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 12:
-                System.out.println("Not yet implemented");
+                Fountain f = new Fountain();
+                Pipe pipe6 = f.PickupPipe();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 13:
@@ -148,7 +182,14 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 14:
+            	Repairman rm = new Repairman();
+                Cistern c = new Cistern();
+                rm.PickupArea(c);
+                scanner.nextLine();scanner.nextLine();
+                break;
+            case 15:
                 System.out.println("Exiting program now...");
+                Game.getInstance().EndGame();
                 NotFinished = false;
                 break;
            

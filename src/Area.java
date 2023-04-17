@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,8 +7,13 @@ public class Area {
 	PlayableCharacter player;
 	List<Area> connectedAreas;
 
+	public List<Area> getConnectedAreas() {
+		return connectedAreas;
+	}
+
 	public Area() {
 		// TODO Auto-generated constructor stub
+		connectedAreas = new ArrayList<Area>();
 	}
 	
 	public Boolean RemoveCharacter(PlayableCharacter character) {
@@ -33,18 +39,25 @@ public class Area {
 	}
 
 	void Connect(Area a){}
+	
+	public void Disconnect(Area a1){}
 
 	void Fix(){}
+	
+	void PlacePump(Pump p) {}
 
 	void Break(){}
 	
-	public String toString() {return "[:Area]";}
+	public String toString() {return "[Area]";}
 
-	public void SetInput(Pipe p) {
-		p.Connect(this);
+	public void SetInput(Area a) {
+		a.Connect(this);
 	}
 
-	public void SetOutput(Pipe p) {
-		p.Connect(this);
+	public void SetOutput(Area a) {
+		a.Connect(this);
 	}
+
+
+
 }
