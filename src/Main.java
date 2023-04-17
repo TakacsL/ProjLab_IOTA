@@ -36,6 +36,7 @@ public class Main {
                             "13. Pumpa rongálása",
                             "14. Pumpa felvétele",
                             "15. Kilépés"
+                            
         };
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -58,10 +59,16 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
               break;
             case 2:
+            /**
+             * A controller a játék elején inicializálja a mezőt, amelyen a játékosok interakciókat végezhetnek.
+             */
                 Game.getInstance().CreateInitialMap();
                 scanner.nextLine();scanner.nextLine();
               break;
             case 3:
+            /**
+             * A controller meghívja a kör végét. Az összes Step() függvénnyel rendelkező entitás Step() függvénye meghívódik.
+             */
                 Game.getInstance().EndTurn();
                 scanner.nextLine();scanner.nextLine();
                 break;
@@ -93,12 +100,18 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 5:
+            /**
+             * A szerelőkkel lévő játékos elhelyez a pályán egy csövet, amelynek legalább az egyik vége csatlakozik egy másik elemhez.
+             */
                 Repairman r = new Repairman();
                 Pipe pipe = new Pipe();
                 r.PlacePipe(pipe);
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 6:
+            /**
+             * A szerelőkkel lévő játékos megjavít egy megrongált csövet.
+             */
                 Repairman r2 = new Repairman();
                 Pipe pipe2 = new Pipe();
                 r2.MoveTo(pipe2);
@@ -115,6 +128,9 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 8:
+            /**
+             * A szabotőrökkel lévő játékos megrongál egy, a pályán lévő csövet.
+             */
                 Saboteur s = new Saboteur();
                 Pipe pipe3 = new Pipe();
                 s.MoveTo(pipe3);
@@ -122,6 +138,9 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 9:
+            /** 
+             * A szerelőkkel lévő játékos megjavítja az elromlott pumpát.
+             */
                 Repairman r3 = new Repairman();
                 Pump pump = new Pump();
                 r3.MoveTo(pump);
@@ -129,6 +148,9 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 10:
+            /**
+             * A szerelőkkel lévő játékos elhelyez egy pumpát, amelyhez egy csövön kell állnia a pályán.
+             */
                 Repairman r4 = new Repairman();
                 Pipe pTarget = new Pipe();
                 Pump pump2 = new Pump();
@@ -136,6 +158,9 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 11:
+            /**
+             * A játékos átállítja a pumpát, hogy melyik csőből melyik csőbe folyjon a víz.
+             */
                 Repairman r5 = new Repairman();
                 Pump pump3 = new Pump();
                 Pipe pipe4 = new Pipe();
