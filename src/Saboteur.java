@@ -23,4 +23,8 @@ public class Saboteur extends PlayableCharacter{
 	 * konzolra írást segítõ fv
 	 */
     public String toString() {return "[saboteur]";}
+
+	public void makeSlippery(Pipe p){
+		p.setSlipperyTimer();
+	}
 }

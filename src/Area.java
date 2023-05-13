@@ -93,6 +93,18 @@ public class Area {
 		// TODO Auto-generated method stub
 	}
 
+	/*
+	* Megadja, hogy a mezõ ragadós állapotban van-e
+	 */
+	boolean Sticky(){
+		return false;
+	}
 
+	/*
+	* Megadja, hogy a mezõ csúszós állapotban van-e
+	 */
+	boolean Slippery(){
+		return false;
+	}
 
 }
