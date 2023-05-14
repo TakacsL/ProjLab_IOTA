@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -27,21 +25,23 @@ public class Main {
 
     public static void main(String[] args) {
         String[] options = {"1.  Move",
-                            "2.  Map Init",
-                            "3.  End turn",
-                            "4.  Show map",
-                            "5.  Place pipe",
-                            "6.  Fix area",
-                            "7.  Pick up Pipe",
-                            "8.  Wreck area",
-                            "9. Place pump",
-                            "10. Set pump",
-                            "11. Create pipe",
-                            "12. Controller Wreck Pump",
-                            "13. Pick up Pump",
-                            "14. Make Area Sticky",
-                            "15. Make Area Slippery",
-                            "16. Exit"
+                "2.  Map Init",
+                "3.  End turn",
+                "4.  Show map",
+                "5.  Place pipe",
+                "6.  Fix area",
+                "7.  Pick up Pipe",
+                "8.  Wreck area",
+                "9. Place pump",
+                "10. Set pump",
+                "11. Create pipe",
+                "12. Controller Wreck Pump",
+                "13. Pick up Pump",
+                "14. Make Area Sticky",
+                "15. Make Area Slippery",
+                "16. Save Game",
+                "17. Load Game",
+                "18. Exit"
         };
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -228,7 +228,7 @@ public class Main {
                 else System.out.println("Game not started, please init first");
                 scanner.nextLine();scanner.nextLine();
                 break;
-                case 15:            //make area slimy
+                case 15:            //make area slippery
                     if (Game.getInstance().isGameRunning()) {
                         Game.getInstance().map.printPlayers();
                         Game.getInstance().map.printAreas();
@@ -240,16 +240,30 @@ public class Main {
                     else System.out.println("Game not started, please init first");
                     scanner.nextLine();scanner.nextLine();
                     break;
-            case 16:
-            	/*
-            	 * kilépés a menüvezérelt részből, a program jelenlegi verziójában 
-            	 * a futtatás befejezése
-            	 */
-                System.out.println("Exiting program now...");
-                Game.getInstance().EndGame();
-                NotFinished = false;
-                break;
-           
+                case 16:
+                    /*
+                     * A játék jelenlegi állapotának fájlba mentése
+                     */
+                    System.out.println("Saving game...");
+                    Game.getInstance().SaveGame();
+                    break;
+                case 17:
+                    /*
+                     * A játék mentett állapotának betöltése
+                     */
+                    System.out.println("Loading game...");
+                    Game.getInstance().LoadGame();
+                    break;
+                case 18:
+                    /*
+                     * kilépés a menüvezérelt részből, a program jelenlegi verziójában
+                     * a futtatás befejezése
+                     */
+                    System.out.println("Exiting program now...");
+                    Game.getInstance().EndGame();
+                    NotFinished = false;
+                    break;
+
             default:
           }
         }

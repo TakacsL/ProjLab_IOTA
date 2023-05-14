@@ -6,7 +6,6 @@ public class Fountain extends Area{
 	 * Az elemen lévõ csövet továbbítja a szerelõnek aki fel akarja venni azt.
 	 */
     public Pipe PickupPipe() {
-        System.out.println("+New Pipe Created");
         return new Pipe();
     }
 
@@ -24,5 +23,19 @@ public class Fountain extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Fountain]ID : " + getID();}
+    public String toString() {return "[Fountain] ID : " + getID();}
+
+    public String SavableState() {
+        String res = "areaType:Fountain,areaId:" + getID() + ",";
+        if (player != null) res += "playerId:" + player.getID() + ",";
+        for (Area area : connectedAreas) {
+            res += "connectedAreaId:" + area.getID() + ",";
+        }
+        return res;
+    }
+
+    public Fountain() {
+        super();
+        System.out.println("Create " + this.toString());
+    }
 }

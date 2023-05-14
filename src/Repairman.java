@@ -13,7 +13,12 @@ public class Repairman extends PlayableCharacter{
 	/*
 	 * pumpa példány, amit felvett a karakter
 	 */
-	public Pump p;
+	public Pump pump;
+
+    /*
+     * A szerelõ által felvett csõ
+     */
+    public Pipe pipe;
 
     public Repairman(Area a) {
         super(a);
@@ -22,7 +27,6 @@ public class Repairman extends PlayableCharacter{
     /*
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
-    @Override
     void FixArea(){
         System.out.println("->Repairman.FixArea[]");
     	System.out.println("->[a1].Fix()");
@@ -33,45 +37,45 @@ public class Repairman extends PlayableCharacter{
     /*
      * Csõ elem elhelyezése a pályán.
      */
-    void PlacePipe(Pipe pipe){
+    void PlacePipe(){
+        if(pipe == null) return;
         System.out.println("->" + toString() + ".PlacePipe[]");
-    	System.out.println("->[a1].Connect(pipe)");
-        GetArea().Connect(pipe);
-    	System.out.println("<-[a1].Connect(pipe)");
+        pipe.Connect(GetArea());
+        pipe = null;
         System.out.println("<-" + toString() + ".PlacePipe[]");
     }
     /*
-     * Pumpa elem elhelyezése a pályán.
+     * Pumpa elem elhelyezése egy csõ elemre.
      */
-    void PlacePump(Pump pump){
+    void PlacePump(){
+        if(pump == null) return;
         System.out.println("->" + toString() + ".PlacePump()");
-        this.PickupArea(new Cistern());
-        System.out.println("->p.PlacePump(pump)");
-        p.PlacePump(pump);
-        System.out.println("<-p.PlacePump(pump)");
+        a1.PlacePump(pump);
+        pump = null;
         System.out.println("<-" + toString() + ".PlacePump()");
     }
-    
-    /*
-     * A csõrendszer egyik nyelõ elemének a felvéte.
-     */
-    public void PickupArea(Cistern c) {
-        System.out.println("->" + toString() + ".PickupArea(c)");
-        System.out.println("->c.PickupPump()");
-        p = c.PickupPump();
-        System.out.println("<-c.PickupPump()");
-        System.out.println("<-" + toString() + ".PickupArea(c)");
+
+    void PickupPump(){
+        System.out.println("->" + toString() + ".PickupPump()");
+        pump = a1.PickupPump();
+        System.out.println("<-" + toString() + ".PickupPump()");
     }
+
     /*
      * A csõrendszer egyik csõ elemének a felvéte.
      */
-    public void PickupArea(Pipe p) {
-        System.out.println("->" + toString() + ".PickupArea(p)");
-        System.out.println("->p.Disconnect(a1)");
-        System.out.println("<-p.Disconnect(a1)");
-        System.out.println("<-" + toString() + ".PickupArea(p)");
+    public void PickupPipe(Pipe p) {
+        if(!a1.getConnectedAreas().contains(p)) return;
+        System.out.println("->" + toString() + ".PickupPipe(" + p + ")");
+        p.SetInput(null);
+        p.SetOutput(null);
+        for(int i = 0; i < p.getConnectedAreas().size(); i++) {
+            p.Disconnect(p.getConnectedAreas().get(i));
+        }
+        pipe = p;
+        System.out.println("<-" + toString() + ".PickupPipe(" + p + ")");
     }
-    
+
 	/*
 	 * konzolra írást segítõ fv
 	 */
@@ -81,12 +85,18 @@ public class Repairman extends PlayableCharacter{
     /*
     * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
      */
-    @Override
     void BreakArea(){
-        System.out.println("->Repairman.BreakArea()");
+        System.out.println("->Saboteur.BreakArea()");
         System.out.println("->[a1].Break()");
         GetArea().Break();
         System.out.println("<-[a1].Break()");
-        System.out.println("<-Repairman.BreakArea()");
+        System.out.println("<-Saboteur.BreakArea()");
+    }
+
+    public String SavableState() {
+        String res = "playerType:Repairman,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
+        if (pump != null) res += "hasPump:true,";
+        if (pipe != null) res += "hasPipe:true,";
+        return res;
     }
 }
