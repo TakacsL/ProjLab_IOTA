@@ -15,7 +15,11 @@ public class Repairman extends PlayableCharacter{
 	 */
 	public Pump p;
 
-	/*
+    public Repairman(Area a) {
+        super(a);
+    }
+
+    /*
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
     void FixArea(){
@@ -71,7 +75,7 @@ public class Repairman extends PlayableCharacter{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[repairman]";}
+    public String toString() {return "[Repairman]ID : " + getID() + " on [Area]ID : " + a1.getID();}
 
     /*
     * Annak a csõnek a kilyukasztása, amelyen a karakter áll.

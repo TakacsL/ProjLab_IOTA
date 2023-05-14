@@ -28,6 +28,6 @@ public class Cistern extends Area {
 	 * konzolra írást segítõ fv
 	 */
 	@Override
-	public String toString() {return "[cistern]";}
+	public String toString() {return "[Cistern]ID : " + getID();}
 	
 }

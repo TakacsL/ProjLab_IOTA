@@ -84,7 +84,7 @@ public class Pipe extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]"; }
+	public String toString() {return "[Pipe]ID : " + getID();}
 
     /*
     * beállítja a csõ ragadós idõzítõjét, ameddig ragadós állapotban marad

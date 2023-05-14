@@ -43,7 +43,7 @@ public class Pump extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[pump]"; }
+    public String toString() {return "[Pump]ID : " + getID();}
 
     /*
      * A hibás pumpa megjavítása.

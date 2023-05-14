@@ -8,6 +8,10 @@
  * */
 
 public class Saboteur extends PlayableCharacter{
+	public Saboteur(Area a) {
+		super(a);
+	}
+
 	/*
 	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
@@ -22,7 +26,7 @@ public class Saboteur extends PlayableCharacter{
 	/*
 	 * konzolra írást segítõ fv
 	 */
-    public String toString() {return "[saboteur]";}
+    public String toString() {return "[Saboteur]ID : " + getID() + " on [Area]ID : " + a1.getID();}
 
 	public void makeSlippery(Pipe p){
 		p.setSlipperyTimer();

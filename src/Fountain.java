@@ -24,5 +24,5 @@ public class Fountain extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Fountain]";}
+    public String toString() {return "[Fountain]ID : " + getID();}
 }

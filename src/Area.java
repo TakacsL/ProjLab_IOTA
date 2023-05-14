@@ -13,36 +13,62 @@ public class Area {
 	PlayableCharacter player;
 	//A elemhez kapcsolodó elemeket tárolja.
 	List<Area> connectedAreas;
+	//Az elem egyedülálló azonosítója, id
+	private int ID;
+	//statikus számláló, ami egyrészt számon tartja az elemek számát,
+	// de az ID létrehozásában használjuk, minden használatnál nõ egyel az értéke
+	private static int numOfIDs = 0;
+
+	//getted for ID
+	public int getID() {
+		return ID;
+	}
 
 	public List<Area> getConnectedAreas() {
 		return connectedAreas;
 	}
 
+	public  void printConnectedAreas() {
+		System.out.println("Areas connected are:");
+		for(Area a : connectedAreas) System.out.println(a.toString());
+	}
+
 	public Area() {
 		// TODO Auto-generated constructor stub
 		connectedAreas = new ArrayList<Area>();
+		ID = numOfIDs++;
 	}
 	//Az elemrõl elmozduló karakter eltávolítása az attributumból.
 	public Boolean RemoveCharacter(PlayableCharacter character) {
-        Scanner scanner = new Scanner(System.in);
+        /*Scanner scanner = new Scanner(System.in);
 		System.out.println("Can I remove? (Y/N)");
         if (scanner.next().charAt(0) == 'Y') {
         	return true;
         }
         else {
     		return false;
-        }
+        }*/
+		if (player==null) return false;
+		if (player.getID() == character.getID()) {
+			player = null;
+			return true;
+		}
+		return false;
 	}
 	//Az elemre lépett játékos elmentését valósítja meg.
+	//Mindig igazat add vissza, ahol kell logika, ott override van a specifikus osztalyon
 	public Boolean AcceptCharacter(PlayableCharacter character) {
-        Scanner scanner = new Scanner(System.in);
+        /*Scanner scanner = new Scanner(System.in);
 		System.out.println("Can I accept? (Y/N)");
         if (scanner.next().charAt(0) == 'Y') {
         	return true;
         }
         else {
     		return false;
-        }
+        }*/
+		player = character;
+		player.a1 = this;
+		return true;
 	}
 
 	/*
@@ -73,7 +99,7 @@ public class Area {
 	/*
 	 * konzolra írást segítõ fv
 	 */
-	public String toString() {return "[Area]";}
+	public String toString() {return "[Area]ID : " + ID;}
 
 	/*
 	 * Üres függvény, Pump írja felül

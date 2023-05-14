@@ -14,16 +14,53 @@ public class Map {
     /*
      * A pályán lévõ játékosok listája.
      */
-    public List<PlayableCharacter> playableCharacters;
+    public List<PlayableCharacter> playableCharacters = new ArrayList<PlayableCharacter>();
 
-	/*
-	 * A rendszerhez egy újabb elem illesztése.
-	 */
+    //ID alapján visszaadja az Area-t
+    public Area getAreabyID(int id){
+        for (Area a: areas) {
+            if (a.getID() == id) return a;
+        }
+        return null;
+    }
+
+    public void printAreas(){
+        System.out.println("Available areas are:");
+        for (Area a: areas) {
+            System.out.println(a.toString());
+        }
+    }
+
+    public void printPlayers(){
+        System.out.println("Available players are:");
+        for (PlayableCharacter pc: playableCharacters) {
+            System.out.println(pc.toString());
+        }
+    }
+
+    //ID alapján visszaadja az Player-t
+    public PlayableCharacter getPlayerbyID(int id){
+        for (PlayableCharacter pc: playableCharacters) {
+            if (pc.getID() == id) return pc;
+        }
+        return null;
+    }
+
+    /*
+     * A rendszerhez egy újabb elem illesztése.
+     */
     void AddArea(Area a){
-
         areas.add(a);
         System.out.println("->AddArea["+a.toString()+"]");
         System.out.println("<-AddArea["+a.toString()+"]");
+    }
+    /*
+     * A rendszerhez egy újabb player illesztése.
+     */
+    void AddPlayer(PlayableCharacter pc){
+        playableCharacters.add(pc);
+        System.out.println("->AddPlayer["+pc.toString()+"]");
+        System.out.println("<-AddPlayer["+pc.toString()+"]");
     }
     /*
      * A rendszerbõl az egyik elem elvétele.

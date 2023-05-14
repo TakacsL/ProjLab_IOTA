@@ -13,12 +13,25 @@ public class PlayableCharacter {
 	 */
 	Area a1;
 
+	//A karakter egyedülálló azonosítója, id
+	private int ID;
+	//statikus számláló, ami egyrészt számon tartja az karakterek számát,
+	// de az ID létrehozásában használjuk, minden használatnál nõ egyel az értéke
+	private static int numOfIDs = 0;
+
+	//getted for ID
+	public int getID() {
+		return ID;
+	}
+
 	/*
 	 * konstruktor, skeleton miatt a1 inicianilázása
 	 */
-	public PlayableCharacter() {
+	public PlayableCharacter(Area a) {
 		// TODO Auto-generated constructor stub
-		a1 = new Area();
+		a1 = a;
+		if (!a1.AcceptCharacter(this)) a1 = null;		//if a1 can't accept then not on map
+		ID = numOfIDs++;
 	}
 
 	/*

@@ -11,8 +11,16 @@ import java.util.List;
 public final class Game {
 
 	//singleton mûködés megvalósítása
-    private static Game INSTANCE;		
+    private static Game INSTANCE;
 
+
+    //válzotó ami alapján tudjuk követni a játék jelenlegi állapotát
+    private boolean GameRunning = false;
+
+    //getter for Gamerunning
+    public boolean isGameRunning() {
+        return GameRunning;
+    }
     private Game() {}
     public Map map;	//a játékhoz tartozó területrendszert tartalmaza.
 
@@ -25,14 +33,19 @@ public final class Game {
     }
 
     //A játék indítása.
-    public void StartGame(){}
+    public void StartGame(){
+        GameRunning = true;
+        getInstance().CreateInitialMap();
+    }
 
     //A játék befejezése.
-    public void EndGame(){}
+    public void EndGame(){
+        GameRunning = false;
+    }
 
     //A kör befejezése, az elemek léptetése.
     public void EndTurn(){
-
+        if (!getInstance().GameRunning) return;
         System.out.println("->EndTurn[]");
 
         System.out.println("For all Area");
@@ -48,7 +61,8 @@ public final class Game {
     }
 
     //A pálya alapállásának kialakítása
-    public void CreateInitialMap(){
+    private void CreateInitialMap(){
+        if (!getInstance().GameRunning) return;
 
         map = new Map();
 
@@ -64,13 +78,15 @@ public final class Game {
         map.AddArea(p1);
         map.AddArea(p2);
 
-        Repairman r1 = new Repairman();
-        Repairman r2 = new Repairman();
-        Saboteur s1 = new Saboteur();
-        Saboteur s2 = new Saboteur();
+        Repairman r1 = new Repairman(f);
+        Repairman r2 = new Repairman(c);
+        Saboteur s1 = new Saboteur(p1);
+        Saboteur s2 = new Saboteur(p2);
 
-
-
+        map.AddPlayer(r1);
+        map.AddPlayer(r2);
+        map.AddPlayer(s1);
+        map.AddPlayer(s2);
 
         f.Connect(p1);
         p1.Connect(p2);
