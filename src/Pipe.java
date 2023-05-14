@@ -81,7 +81,8 @@ public class Pipe extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]ID : " + getID() + (broken ? ", broken" : ", not broken");}
+	public String toString() {return "[Pipe]ID : " + getID() + (broken ? ", broken" : ", not broken") +
+            (stickyTimer>0 ? ", sticky" : ", not sticky") + (getSlipperyTimer()>0 ? ", slippery" : ", not slippery");}
 
     /*
     * beállítja a csõ ragadós idõzítõjét, ameddig ragadós állapotban marad
