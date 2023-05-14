@@ -8,9 +8,23 @@
  * */
 
 public class Saboteur extends PlayableCharacter{
+	public Saboteur(Area a) {
+		super(a);
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	void FixArea() {
+		System.out.println("->Saboteur.FixArea[]");
+		System.out.println("I cant do this");
+		System.out.println("<-Saboteur.FixArea[]");}
+
 	/*
 	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
+	@Override
     void BreakArea(){
         System.out.println("->Saboteur.BreakArea()");
     	System.out.println("->[a1].Break()");
@@ -22,7 +36,7 @@ public class Saboteur extends PlayableCharacter{
 	/*
 	 * konzolra írást segítõ fv
 	 */
-    public String toString() {return "[saboteur]";}
+    public String toString() {return "[Saboteur]ID : " + getID() + " on [Area]ID : " + a1.getID();}
 
 	public void makeSlippery(Pipe p){
 		p.setSlipperyTimer();

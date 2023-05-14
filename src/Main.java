@@ -19,7 +19,6 @@ public class Main {
      */
     public static void cls(){
         try {
-
         	new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception ex) {
         	System.out.println(ex);
@@ -27,26 +26,26 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String[] options = {"1.  Mozgás",
+        String[] options = {"1.  Move",
                             "2.  Map Init",
                             "3.  End turn",
-                            "4.  Pálya megjelenítése",
-                            "5.  Csõ elhelyezés",
-                            "6.  Csõ javítás",
-                            "7.  Csõ felszedés",
-                            "8.  Csõ rongálás",
-                            "9.  Pumpa javítás",
-                            "10. Pumpa elhelyezés",
-                            "11. Pumpa állítása",
-                            "12. Csõ létrehozása",
-                            "13. Pumpa rongálása",
-                            "14. Pumpa felvétele",
-                            "15. Kilépés"
+                            "4.  Show map",
+                            "5.  Place pipe",
+                            "6.  Fix area",
+                            "7.  Pick up Pipe",
+                            "8.  Wreck area",
+                            "9. Place pump",
+                            "10. Set pump",
+                            "11. Create pipe",
+                            "12. Controller Wreck Pump",
+                            "13. Pick up Pump",
+                            "14. Make Area Sticky",
+                            "15. Make Area Slimy",
+                            "16. Exit"
         };
         Scanner scanner = new Scanner(System.in);
         int option;
         Boolean NotFinished = true;
-        Game.getInstance().StartGame();
         while (NotFinished){
         	cls();
             printMenu(options);
@@ -62,16 +61,29 @@ public class Main {
             	 * A játékos a karaktert mozgatni tudja.
             	 * A játékos a karaktert egyik mezőről a másikra mozgatja.
             	 */
-            	PlayableCharacter PC = new PlayableCharacter();
+                if (!Game.getInstance().isGameRunning()) {
+                    System.out.println("Game not started, please init first");
+                }
+                else {
+                    Game.getInstance().map.printAreas();
+                    Game.getInstance().map.printPlayers();
+                    System.out.println("Give ID of player");
+                    int playerID = scanner.nextInt();
+                    System.out.println("Give ID of Area to move to");
+                    int areaID = scanner.nextInt();
+                    Game.getInstance().map.getPlayerbyID(playerID).MoveTo(Game.getInstance().map.getAreabyID(areaID));
+                }
+            	/*PlayableCharacter PC = new PlayableCharacter();
             	Area a2 = new Area();
-            	PC.MoveTo(a2);
+            	PC.MoveTo(a2);*/
                 scanner.nextLine();scanner.nextLine();
               break;
             case 2:
             /**
              * A controller a játék elején inicializálja a mezőt, amelyen a játékosok interakciókat végezhetnek.
              */
-                Game.getInstance().CreateInitialMap();
+                Game.getInstance().StartGame();
+                System.out.println("Game initiated, let's play");
                 scanner.nextLine();scanner.nextLine();
               break;
             case 3:
@@ -85,29 +97,11 @@ public class Main {
             	/*
             	 * A játékos megtekinti a pályát.
             	 */
-                List<Area> areaList = new ArrayList<Area>();
-                Pipe pipe40 = new Pipe();
-                Pipe pipe41 = new Pipe();
-                Pipe pipe42 = new Pipe();
-                Pipe pipe43 = new Pipe();
-                Cistern cistern40 = new Cistern();
-                Cistern cistern41 = new Cistern();
-                Fountain fountain40 = new Fountain();
-                Fountain fountain41 = new Fountain();
-                Pump pump40 = new Pump();
-
-                areaList.add(pipe40);
-                areaList.add(pipe41);
-                areaList.add(pipe42);
-                areaList.add(pipe43);
-                areaList.add(cistern40);
-                areaList.add(cistern41);
-                areaList.add(fountain40);
-                areaList.add(fountain41);
-                areaList.add(pump40);
-                System.out.println("Areas on the map:");
-                for (Area a:areaList) {
-                    System.out.println(a.toString()); }
+                if (Game.getInstance().isGameRunning()) {
+                    Game.getInstance().map.printPlayers();
+                    Game.getInstance().map.printAreas();
+                }
+                else System.out.println("Game not started, please init first");
 
                 scanner.nextLine();scanner.nextLine();
                 break;
@@ -115,19 +109,23 @@ public class Main {
             /**
              * A szerelőkkel lévő játékos elhelyez a pályán egy csövet, amelynek legalább az egyik vége csatlakozik egy másik elemhez.
              */
-                Repairman r = new Repairman();
+                /*Repairman r = new Repairman();
                 Pipe pipe = new Pipe();
-                r.PlacePipe(pipe);
+                r.PlacePipe(pipe);*/
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 6:
             /**
              * A szerelőkkel lévő játékos megjavít egy megrongált csövet.
              */
-                Repairman r2 = new Repairman();
-                Pipe pipe2 = new Pipe();
-                r2.MoveTo(pipe2);
-                r2.FixArea();
+                if (Game.getInstance().isGameRunning()) {
+                    Game.getInstance().map.printPlayers();
+                    Game.getInstance().map.printAreas();
+                    System.out.println("Give ID of player");
+                    int playerID = scanner.nextInt();
+                    Game.getInstance().map.getPlayerbyID(playerID).FixArea();
+                }
+                else System.out.println("Game not started, please init first");
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 7:
@@ -135,57 +133,51 @@ public class Main {
             	 * A játékos felvesz egy csövet.
             	 * A szerelőkkel lévő játékos felvesz egy, a pályán lévő csövet.
             	 */
-                Area a70 = new Area();
+                /*Area a70 = new Area();
                 Repairman r70 = new Repairman();
                 Pipe p70 = new Pipe();
                 p70.Disconnect(a70);
                 System.out.println("->GetArea().Disconnect[p70]");
-                r70.PickupArea(p70);
+                r70.PickupArea(p70);*/
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 8:
             /**
              * A szabotőrökkel lévő játékos megrongál egy, a pályán lévő csövet.
              */
-                Saboteur s = new Saboteur();
-                Pipe pipe3 = new Pipe();
-                s.MoveTo(pipe3);
-                s.BreakArea();
+                if (Game.getInstance().isGameRunning()) {
+                    Game.getInstance().map.printPlayers();
+                    Game.getInstance().map.printAreas();
+                    System.out.println("Give ID of player");
+                    int playerID = scanner.nextInt();
+                    Game.getInstance().map.getPlayerbyID(playerID).BreakArea();
+                }
+                else System.out.println("Game not started, please init first");
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 9:
-            /** 
-             * A szerelőkkel lévő játékos megjavítja az elromlott pumpát.
+            /**
+             * A szerelőkkel lévő játékos elhelyez egy pumpát, amelyhez egy csövön kell állnia a pályán.
              */
-                Repairman r3 = new Repairman();
-                Pump pump = new Pump();
-                r3.MoveTo(pump);
-                r3.FixArea();
+                /*Repairman r4 = new Repairman();
+                Pipe pTarget = new Pipe();
+                Pump pump2 = new Pump();
+                r4.PlacePump(pump2);*/
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 10:
             /**
-             * A szerelőkkel lévő játékos elhelyez egy pumpát, amelyhez egy csövön kell állnia a pályán.
-             */
-                Repairman r4 = new Repairman();
-                Pipe pTarget = new Pipe();
-                Pump pump2 = new Pump();
-                r4.PlacePump(pump2);
-                scanner.nextLine();scanner.nextLine();
-                break;
-            case 11:
-            /**
              * A játékos átállítja a pumpát, hogy melyik csőből melyik csőbe folyjon a víz.
              */
-                Repairman r5 = new Repairman();
+                /*Repairman r5 = new Repairman();
                 Pump pump3 = new Pump();
                 Pipe pipe4 = new Pipe();
                 Pipe pipe5 = new Pipe();
                 r5.MoveTo(pump3);
-                r5.SetPumpConfiguration(pipe4, pipe5);
+                r5.SetPumpConfiguration(pipe4, pipe5);*/
                 scanner.nextLine();scanner.nextLine();
                 break;
-            case 12:
+            case 11:
             	/*
             	 * A controller létrehoz egy csövet.
             	 * A controller folyamatosan létrehoz a 
@@ -195,30 +187,60 @@ public class Main {
                 Pipe pipe6 = f.PickupPipe();
                 scanner.nextLine();scanner.nextLine();
                 break;
-            case 13:
+            case 12:
             	/*
             	 * A controller megrongálja a pumpát.
-            	 * A controller véletlenszerű időközönként megrongál egy,
+            	 * A controller véletlenszerű időközönként(1/4) megrongál egy,
             	 *  a pályán lévő pumpát, amelyet a szerelőknek meg kell javítani.
             	 */
-                Saboteur s2 = new Saboteur();
-                Pump pump4 = new Pump();
-                s2.MoveTo(pump4);
-                s2.BreakArea();
+                System.out.println("Should I use random?(Y/N)");
+                if (scanner.next().charAt(0) == 'Y') {
+                    if (Math.random() * 4 < 1) break;           //25% chance to break, and do nothing
+                    int randomID = (int) (Math.random() * Game.getInstance().map.areas.size());     //produces int from 0 to size - 1
+                    Game.getInstance().map.getAreabyID(randomID).Break();
+                    break;
+                }
+                Game.getInstance().map.printAreas();
+                System.out.println("Give ID of area to break");
+                Game.getInstance().map.getAreabyID(scanner.nextInt()).Break();
                 scanner.nextLine();scanner.nextLine();
                 break;
-            case 14:
+            case 13:
             	/*
             	 * pumpa felvétele
             	 * karbantartó felvesz egy pump elemet a nyelő mezőn
             	 * amin áll. 
             	 */
-            	Repairman rm = new Repairman();
+            	/*Repairman rm = new Repairman();
                 Cistern c = new Cistern();
-                rm.PickupArea(c);
+                rm.PickupArea(c);*/
                 scanner.nextLine();scanner.nextLine();
                 break;
-            case 15:
+            case 14:            //make area sticky
+                if (Game.getInstance().isGameRunning()) {
+                    Game.getInstance().map.printPlayers();
+                    Game.getInstance().map.printAreas();
+                    System.out.println("Give ID of player");
+                    int playerID = scanner.nextInt();
+                    Game.getInstance().map.getPlayerbyID(playerID).makeSticky(Game.getInstance().map.getPlayerbyID(playerID).GetArea());
+                    System.out.println("Made Player " + playerID + " area sticky");
+                }
+                else System.out.println("Game not started, please init first");
+                scanner.nextLine();scanner.nextLine();
+                break;
+                case 15:            //make area slimy
+                    if (Game.getInstance().isGameRunning()) {
+                        Game.getInstance().map.printPlayers();
+                        Game.getInstance().map.printAreas();
+                        System.out.println("Give ID of player");
+                        int playerID = scanner.nextInt();
+                        Game.getInstance().map.getPlayerbyID(playerID).GetArea().setStickyTimer();
+                        System.out.println("Made Player " + playerID + " area sticky");
+                    }
+                    else System.out.println("Game not started, please init first");
+                    scanner.nextLine();scanner.nextLine();
+                    break;
+            case 16:
             	/*
             	 * kilépés a menüvezérelt részből, a program jelenlegi verziójában 
             	 * a futtatás befejezése
