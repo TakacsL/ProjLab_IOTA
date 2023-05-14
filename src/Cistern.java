@@ -11,6 +11,8 @@ public class Cistern extends Area {
 	 * Az elemen lévõ pumpát továbbítja a szerelõnek aki fel akarja venni azt.
 	 */
 	public Pump PickupPump() {
+		System.out.println("->" + toString() + ".PickupPump()");
+		System.out.println("<-" + toString() + ".PickupPump()");
 		return new Pump();
 	}
 	
@@ -28,6 +30,20 @@ public class Cistern extends Area {
 	 * konzolra írást segítõ fv
 	 */
 	@Override
-	public String toString() {return "[Cistern]ID : " + getID();}
-	
+	public String toString() {return "[Cistern] ID : " + getID();}
+
+	public String SavableState() {
+		String res = "areaType:Cistern,areaId:" + getID() + ",";
+		if (player != null) res += "playerId:" + player.getID() + ",";
+		for (Area area : connectedAreas) {
+			res += "connectedAreaId:" + area.getID() + ",";
+		}
+		return res;
+	}
+
+	public Cistern() {
+		super();
+		System.out.println("Create " + this.toString() + ": " + getID());
+	}
+
 }

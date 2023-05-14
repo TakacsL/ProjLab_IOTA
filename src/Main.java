@@ -1,47 +1,47 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-	/*
-	 * A menüelemek konzolra írása függvénybe kiszervezve
-	 */
-   
-    public static void printMenu(String[] options){
-        for (String option : options){
+    /*
+     * A menüelemek konzolra írása függvénybe kiszervezve
+     */
+
+    public static void printMenu(String[] options) {
+        for (String option : options) {
             System.out.println(option);
         }
         System.out.print("Choose your option : ");
     }
-    
+
     /*
      * Konzol képernyő törlése függvénybe kiszervezve
      */
-    public static void cls(){
+    public static void cls() {
         try {
-        	new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception ex) {
-        	System.out.println(ex);
+            System.out.println(ex);
         }
     }
 
     public static void main(String[] args) {
         String[] options = {"1.  Move",
-                            "2.  Map Init",
-                            "3.  End turn",
-                            "4.  Show map",
-                            "5.  Place pipe",
-                            "6.  Fix area",
-                            "7.  Pick up Pipe",
-                            "8.  Wreck area",
-                            "9. Place pump",
-                            "10. Set pump",
-                            "11. Create pipe",
-                            "12. Controller Wreck Pump",
-                            "13. Pick up Pump",
-                            "14. Make Area Sticky",
-                            "15. Make Area Slimy",
-                            "16. Exit"
+                "2.  Map Init",
+                "3.  End turn",
+                "4.  Show map",
+                "5.  Place pipe",
+                "6.  Fix area",
+                "7.  Pick up Pipe",
+                "8.  Wreck area",
+                "9. Place pump",
+                "10. Set pump",
+                "11. Create pipe",
+                "12. Controller Wreck Pump",
+                "13. Pick up Pump",
+                "14. Make Area Sticky",
+                "15. Make Area Slimy",
+                "16. Save Game",
+                "17. Load Game",
+                "18. Exit"
         };
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -51,10 +51,10 @@ public class Main {
             printMenu(options);
             option = scanner.nextInt();
             try {System.out.println("Chosen item was : " + options[option - 1]);}
-            catch (ArrayIndexOutOfBoundsException e) {              
+            catch (ArrayIndexOutOfBoundsException e) {
             	System.out.println("Please choose a valid menu item!");
             	scanner.nextLine();scanner.nextLine();
-            }        	
+            }
             switch(option) {
             case 1:
             	/*
@@ -107,11 +107,11 @@ public class Main {
                 break;
             case 5:
             /**
-             * A szerelőkkel lévő játékos elhelyez a pályán egy csövet, amelynek legalább az egyik vége csatlakozik egy másik elemhez.
+             * A szerelőkkel lévő játékos elhelyez a pályán egy csövet.
              */
-                /*Repairman r = new Repairman();
-                Pipe pipe = new Pipe();
-                r.PlacePipe(pipe);*/
+                System.out.println("Give the ID of the repairman");
+                Repairman r5 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                r5.PlacePipe();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 6:
@@ -133,12 +133,10 @@ public class Main {
             	 * A játékos felvesz egy csövet.
             	 * A szerelőkkel lévő játékos felvesz egy, a pályán lévő csövet.
             	 */
-                /*Area a70 = new Area();
-                Repairman r70 = new Repairman();
-                Pipe p70 = new Pipe();
-                p70.Disconnect(a70);
-                System.out.println("->GetArea().Disconnect[p70]");
-                r70.PickupArea(p70);*/
+                System.out.println("Give the ID of the Repairman");
+                Repairman r7 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                System.out.println("Give the ID of the pipe");
+                r7.PickupPipe((Pipe) Game.getInstance().map.getAreabyID(scanner.nextInt()));
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 8:
@@ -159,10 +157,9 @@ public class Main {
             /**
              * A szerelőkkel lévő játékos elhelyez egy pumpát, amelyhez egy csövön kell állnia a pályán.
              */
-                /*Repairman r4 = new Repairman();
-                Pipe pTarget = new Pipe();
-                Pump pump2 = new Pump();
-                r4.PlacePump(pump2);*/
+                System.out.println("Give the ID of the Repairman");
+                Repairman r9 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                r9.PlacePump();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 10:
@@ -180,7 +177,7 @@ public class Main {
             case 11:
             	/*
             	 * A controller létrehoz egy csövet.
-            	 * A controller folyamatosan létrehoz a 
+            	 * A controller folyamatosan létrehoz a
             	 * forrásokon újabb csöveket, amelyeket a szerelők fel tudnak venni.
             	 */
                 Fountain f = new Fountain();
@@ -206,14 +203,12 @@ public class Main {
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 13:
-            	/*
-            	 * pumpa felvétele
-            	 * karbantartó felvesz egy pump elemet a nyelő mezőn
-            	 * amin áll. 
-            	 */
-            	/*Repairman rm = new Repairman();
-                Cistern c = new Cistern();
-                rm.PickupArea(c);*/
+                /**
+                 * A szerelőkkel lévő játékos felvesz egy pumpát, amelyhez egy csövön kell állnia a pályán.
+                 */
+                System.out.println("Give the ID of the Repairman");
+                Repairman r18 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                r18.PickupPump();
                 scanner.nextLine();scanner.nextLine();
                 break;
             case 14:            //make area sticky
@@ -240,20 +235,34 @@ public class Main {
                     else System.out.println("Game not started, please init first");
                     scanner.nextLine();scanner.nextLine();
                     break;
-            case 16:
-            	/*
-            	 * kilépés a menüvezérelt részből, a program jelenlegi verziójában 
+                case 16:
+                    /*
+                     * A játék jelenlegi állapotának fájlba mentése
+                     */
+                    System.out.println("Saving game...");
+                    Game.getInstance().SaveGame();
+                    break;
+                case 17:
+                    /*
+                     * A játék mentett állapotának betöltése
+                     */
+                    System.out.println("Loading game...");
+                    Game.getInstance().LoadGame();
+                    break;
+                case 18:
+                /*
+            	 * kilépés a menüvezérelt részből, a program jelenlegi verziójában
             	 * a futtatás befejezése
             	 */
                 System.out.println("Exiting program now...");
                 Game.getInstance().EndGame();
                 NotFinished = false;
                 break;
-           
+
             default:
           }
         }
-        
+
         scanner.close();
     }
 }

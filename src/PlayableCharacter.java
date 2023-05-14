@@ -24,6 +24,10 @@ public abstract class PlayableCharacter {
 		return ID;
 	}
 
+	public void setID(int id) {
+		this.ID = id;
+	}
+
 	/*
 	 * konstruktor, skeleton miatt a1 inicianilázása
 	 */
@@ -108,7 +112,7 @@ public abstract class PlayableCharacter {
 	/*
 	 * A csõrendszer egyik elemének a felvéte, üres fv
 	 */
-	public void PickupArea(Area a) {
+	public void PickupPipe(Pipe p) {
 
 	}
 
@@ -156,6 +160,7 @@ public abstract class PlayableCharacter {
 		a.setStickyTimer();
 	}
 
+	public abstract String SavableState();
 	/*
 	* Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */

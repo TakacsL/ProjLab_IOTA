@@ -1,7 +1,10 @@
+import java.util.List;
+
+
 /**
-Csõ mezõ. A két vége forráshoz, ciszternához, vagy pumpához van kötve. 
-Két állapota van, lyukas, vagy mûködõképes. Egy karakter tartózkodhat 
-rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat, 
+Csõ mezõ. A két vége forráshoz, ciszternához, vagy pumpához van kötve.
+Két állapota van, lyukas, vagy mûködõképes. Egy karakter tartózkodhat
+rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat,
 ha nem lyukas a csõ. A csövek mozgathatók, bármelyik végét le lehet csatlakoztatni, és elvinni máshova
 */
 public class Pipe extends Area{
@@ -71,23 +74,44 @@ public class Pipe extends Area{
         }
         else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
     }
-    
+
     /*
      * A csõ állapotának lekérdezése.
      */
     public Boolean isBroken() {return broken;}
-    
+
 	/*
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]ID : " + getID() + (broken ? ", broken" : ", not broken");}
+	public String toString() {return "[Pipe]ID : " + getID();}
+
+    /*
+     * Pumpa mezõ lehelyezése a csõre
+     * Repairman hívja meg
+     */
+    @Override
+    void PlacePump(Pump p) {
+        System.out.println("->" + toString() + ".PlacePump(" + p + ")");
+        Pipe newPipe = new Pipe();
+        p.connectedAreas.add(this);
+        p.connectedAreas.add(newPipe);
+        newPipe.SetInput(this.input);
+        p.SetInput(newPipe);
+        this.SetInput(p);
+        System.out.println("<-" + toString() + ".PlacePump(" + p + ")");
+    }
+
 
     /*
     * beállítja a csõ ragadós idõzítõjét, ameddig ragadós állapotban marad
      */
     public void setStickyTimer(){
         stickyTimer = 3;
+    }
+
+    public void setStickyTimer(int timer) {
+        stickyTimer = timer;
     }
 
     /*
@@ -100,9 +124,12 @@ public class Pipe extends Area{
     /*
     * beállítja a csõ csúszós idõzítõjét, ameddig csúszós állapotban marad
      */
-    @Override
     public void setSlipperyTimer(){
         slipperyTimer = 3;
+    }
+
+    public void setSlipperyTimer(int timer) {
+        slipperyTimer = timer;
     }
 
     /*
@@ -110,6 +137,18 @@ public class Pipe extends Area{
      */
     public int getSlipperyTimer(){
         return slipperyTimer;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public void setWaterLevel(int waterLevel) {
+        this.waterLevel = waterLevel;
+    }
+
+    public void setBrokenTimer(int brokenTimer) {
+        this.brokenTimer = brokenTimer;
     }
 
     /*
@@ -128,5 +167,20 @@ public class Pipe extends Area{
     public boolean Sticky(){
         if (getStickyTimer() == 0) return false;
         else return true;
+    }
+
+    public String SavableState() {
+        String res = "areaType:Pipe,areaId:" + getID() + ",";
+        if (player != null) res += "playerId:" + player.getID() + ",";
+        if (slipperyTimer > 0) res += "slipperyTimer:" + slipperyTimer + ",";
+        if (stickyTimer > 0) res += "stickyTimer:" + stickyTimer + ",";
+        if (brokenTimer > 0) res += "brokenTimer:" + brokenTimer + ",";
+        if (broken) res += "broken:" + true + ",";
+        if (maxCapacity > 0) res += "maxCapacity:" + maxCapacity + ",";
+        if (waterLevel > 0) res += "waterLevel:" + waterLevel + ",";
+        for (Area area : connectedAreas) {
+            res += "connectedAreaId:" + area.getID() + ",";
+        }
+        return res;
     }
 }
