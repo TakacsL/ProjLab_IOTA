@@ -44,7 +44,6 @@ public final class Game {
         System.out.println("->Step[]");
         System.out.println("<-Step[]");
 
-
         System.out.println("<-EndTurn[m]");
     }
 

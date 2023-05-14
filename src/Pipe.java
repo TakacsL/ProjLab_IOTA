@@ -22,6 +22,21 @@ public class Pipe extends Area{
     private boolean broken;
 
     /*
+    * Foltozás után a csõ egy ideig nem romolhat el
+     */
+    private int brokenTimer;
+
+    /*
+    * maradék idõ, ameddig még ragadós
+     */
+    private int stickyTimer;
+
+    /*
+    * maradék idõ, ameddig még csúszós
+     */
+    private int slipperyTimer;
+
+    /*
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
@@ -43,6 +58,7 @@ public class Pipe extends Area{
     void Fix(){
         System.out.println("->Pipe.Fix[]");
         broken = true;
+        brokenTimer = 3;
         System.out.println("<-Pipe.Fix[]");
     }
 
@@ -51,9 +67,12 @@ public class Pipe extends Area{
      */
     @Override
     void Break() {
-        System.out.println("->Pipe.Break[]");
-        broken = false;
-        System.out.println("<-Pipe.Break[]");
+        if (brokenTimer == 0) {
+            System.out.println("->Pipe.Break[]");
+            broken = false;
+            System.out.println("<-Pipe.Break[]");
+        }
+        else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
     }
     
     /*
@@ -66,4 +85,50 @@ public class Pipe extends Area{
 	 */
     @Override
 	public String toString() {return "[Pipe]"; }
+
+    /*
+    * beállítja a csõ ragadós idõzítõjét, ameddig ragadós állapotban marad
+     */
+    public void setStickyTimer(){
+        stickyTimer = 3;
+    }
+
+    /*
+    * Megadja mennyi ideig ragadós még a csõ
+     */
+    public int getStickyTimer(){
+        return stickyTimer;
+    }
+
+    /*
+    * beállítja a csõ csúszós idõzítõjét, ameddig csúszós állapotban marad
+     */
+    public void setSlipperyTimer(){
+        slipperyTimer = 3;
+    }
+
+    /*
+    * Megadja mennyi ideig csúszós még a csõ
+     */
+    public int getSlipperyTimer(){
+        return slipperyTimer;
+    }
+
+    /*
+    * Megadja, hogy a csõ csúszós-e
+     */
+    @Override
+    public boolean Slippery(){
+        if(getSlipperyTimer() == 0) return false;
+        else return true;
+    }
+
+    /*
+    * Megadja, hogy a csõ ragadós-e
+     */
+    @Override
+    public boolean Sticky(){
+        if (getStickyTimer() == 0) return false;
+        else return true;
+    }
 }

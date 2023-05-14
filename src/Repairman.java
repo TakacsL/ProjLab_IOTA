@@ -72,4 +72,15 @@ public class Repairman extends PlayableCharacter{
 	 */
     @Override
     public String toString() {return "[repairman]";}
+
+    /*
+    * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
+     */
+    void BreakArea(){
+        System.out.println("->Saboteur.BreakArea()");
+        System.out.println("->[a1].Break()");
+        GetArea().Break();
+        System.out.println("<-[a1].Break()");
+        System.out.println("<-Saboteur.BreakArea()");
+    }
 }
