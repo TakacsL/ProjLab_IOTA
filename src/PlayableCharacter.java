@@ -126,15 +126,12 @@ public abstract class PlayableCharacter {
 	/*
 	 * A pumpa be- és kimenetének átállítása.
 	 */
-	public void SetPumpConfiguration(Pipe p1, Pipe p2){
-		System.out.println("->" + toString() + ".SetPumpConfiguration[Pipe, Pipe]");
-		System.out.println("->[GetArea()].SetInput(p1)");
-		GetArea().SetInput(p1);
-		System.out.println("<-[GetArea()].SetInput(p1)");
-		System.out.println("->[GetArea()].SetOutput(p)");
-		GetArea().SetOutput(p2);
-		System.out.println("<-[GetArea()].SetOutput(p)");
-		System.out.println("<-" + toString() + ".SetPumpConfiguration[Pipe, Pipe]");
+	public void SetPumpConfiguration(Area a1, Area a2){
+		if(GetArea().getConfigureOptions().size() > 0)
+		System.out.println("->" + toString() + ".SetPumpConfiguration("+ a1 + ", " + a2 +")");
+		GetArea().SetInput(a1);
+		GetArea().SetOutput(a2);
+		System.out.println("<-" + toString() + ".SetPumpConfiguration("+ a1 + ", " + a2 +")");
 	}
 
 	/*

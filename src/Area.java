@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 /*
@@ -13,8 +12,10 @@ public class Area {
     PlayableCharacter player;
     //A elemhez kapcsolodó elemeket tárolja.
     List<Area> connectedAreas;
+
     //Az elem egyedülálló azonosítója, id
     private int ID;
+
     //statikus számláló, ami egyrészt számon tartja az elemek számát,
     // de az ID létrehozásában használjuk, minden használatnál nõ egyel az értéke
     private static int numOfIDs = 0;
@@ -135,24 +136,24 @@ public class Area {
         return "[Area]ID : " + ID;
     }
 
-    /*
-     * Üres függvény, Pump írja felül
-     */
     public void SetInput(Area a) {
+        if(input == a) return;
+        System.out.println("->" + toString() + ".SetInput("+ a +")");
         if ((a != null && !connectedAreas.contains(a)) || a == input) return;
+        input = a;
         if (input != null) input.SetOutput(null);
         if (a != null) a.SetOutput(this);
-        input = a;
+        System.out.println("<-" + toString() + ".SetInput("+ a +")");
     }
 
-    /*
-     * Üres függvény, Pump írja felül
-     */
     public void SetOutput(Area a) {
+        if(output == a) return;
+        System.out.println("->" + toString() + ".SetOutput("+ a +")");
+        output = a;
         if ((a != null && !connectedAreas.contains(a)) || a == output) return;
         if (output != null) output.SetInput(null);
         if (a != null) a.SetInput(this);
-        output = a;
+        System.out.println("<-" + toString() + ".SetOutput("+ a +")");
     }
 
     /*
@@ -186,6 +187,11 @@ public class Area {
 
     public String SavableState() {
         return "";
+    }
+
+    //A játékos lekéri az állítható be- és kimeneti opciókat
+    public List<Area> getConfigureOptions() {
+        return new ArrayList<>();
     }
 
     /*

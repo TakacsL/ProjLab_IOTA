@@ -94,8 +94,10 @@ public class Pipe extends Area{
     void PlacePump(Pump p) {
         System.out.println("->" + toString() + ".PlacePump(" + p + ")");
         Pipe newPipe = new Pipe();
-        p.connectedAreas.add(this);
-        p.connectedAreas.add(newPipe);
+        Game.getInstance().map.AddArea(newPipe);
+        Game.getInstance().map.AddArea(p);
+        p.Connect(this);
+        p.Connect(newPipe);
         newPipe.SetInput(this.input);
         p.SetInput(newPipe);
         this.SetInput(p);

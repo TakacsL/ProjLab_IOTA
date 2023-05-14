@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
 Pumpa mezõ. Több bekötött csöve lehet, ezek közül minden 
 pillanatban egy bemenõ, és egy kimenõ csöve van. Ezt a két 
@@ -26,8 +28,10 @@ public class Pump extends Area{
      */
     @Override
     void Connect(Area a){
+        if(connectedAreas.contains(a)) return;
         System.out.println("->Pump.Connect["+a.toString()+"]");
         connectedAreas.add(a);
+        a.connectedAreas.add(this);
         System.out.println("<-Pump.Connect["+a.toString()+"]");
     }
 
@@ -63,11 +67,11 @@ public class Pump extends Area{
      */
     @Override
     public void SetOutput(Area a) {
-        System.out.println("->Pump.SetOutput[Area]");
+        System.out.println("->Pump.SetOutput(" + a + ")");
         if(connectedAreas.contains(a)){
             output = a;
         }
-        System.out.println("<-Pump.SetOutput[Area]");
+        System.out.println("<-Pump.SetOutput(" + a + ")");
     }
 
     public String SavableState() {
@@ -80,6 +84,11 @@ public class Pump extends Area{
             res += "connectedAreaId:" + area.getID() + ",";
         }
         return res;
+    }
+
+    //A játékos lekéri az állítható be- és kimeneti opciókat
+    public List<Area> getConfigureOptions() {
+        return getConnectedAreas();
     }
 
     public Pump() {
