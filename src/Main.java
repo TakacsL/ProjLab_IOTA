@@ -40,7 +40,7 @@ public class Main {
                             "12. Controller Wreck Pump",
                             "13. Pick up Pump",
                             "14. Make Area Sticky",
-                            "15. Make Area Slimy",
+                            "15. Make Area Slippery",
                             "16. Exit"
         };
         Scanner scanner = new Scanner(System.in);
@@ -234,8 +234,8 @@ public class Main {
                         Game.getInstance().map.printAreas();
                         System.out.println("Give ID of player");
                         int playerID = scanner.nextInt();
-                        Game.getInstance().map.getPlayerbyID(playerID).GetArea().setStickyTimer();
-                        System.out.println("Made Player " + playerID + " area sticky");
+                        Game.getInstance().map.getPlayerbyID(playerID).GetArea().setSlipperyTimer();
+                        System.out.println("Made Player " + playerID + " area slippery");
                     }
                     else System.out.println("Game not started, please init first");
                     scanner.nextLine();scanner.nextLine();
