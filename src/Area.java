@@ -127,10 +127,19 @@ public class Area {
 	}
 
 	/*
+	* beállítja a mezõ csúszós idõzítõjét, ameddig csúszós állapotban marad
+	 */
+	public void setSlipperyTimer(){}
+
+	/*
 	* Megadja, hogy a mezõ csúszós állapotban van-e
 	 */
 	boolean Slippery(){
 		return false;
 	}
 
+	/*
+	 * beállítja a mezõ ragadós idõzítõjét, ameddig ragadós állapotban marad
+	 */
+	public void setStickyTimer() {}
 }

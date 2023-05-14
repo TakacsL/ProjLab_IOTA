@@ -22,6 +22,7 @@ public class Repairman extends PlayableCharacter{
     /*
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
+    @Override
     void FixArea(){
         System.out.println("->Repairman.FixArea[]");
     	System.out.println("->[a1].Fix()");
@@ -80,11 +81,12 @@ public class Repairman extends PlayableCharacter{
     /*
     * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
      */
+    @Override
     void BreakArea(){
-        System.out.println("->Saboteur.BreakArea()");
+        System.out.println("->Repairman.BreakArea()");
         System.out.println("->[a1].Break()");
         GetArea().Break();
         System.out.println("<-[a1].Break()");
-        System.out.println("<-Saboteur.BreakArea()");
+        System.out.println("<-Repairman.BreakArea()");
     }
 }

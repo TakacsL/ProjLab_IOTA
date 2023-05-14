@@ -12,9 +12,19 @@ public class Saboteur extends PlayableCharacter{
 		super(a);
 	}
 
+	/**
+	 *
+	 */
+	@Override
+	void FixArea() {
+		System.out.println("->Saboteur.FixArea[]");
+		System.out.println("I cant do this");
+		System.out.println("<-Saboteur.FixArea[]");}
+
 	/*
 	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
+	@Override
     void BreakArea(){
         System.out.println("->Saboteur.BreakArea()");
     	System.out.println("->[a1].Break()");

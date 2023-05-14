@@ -7,7 +7,7 @@ import java.util.List;
  * van, akkor átállíthatja annak a konfigurációját.
  * */
 
-public class PlayableCharacter {
+public abstract class PlayableCharacter {
 	/*
 	 * Az az elem, amelyen a karakter áll.
 	 */
@@ -59,48 +59,49 @@ public class PlayableCharacter {
 	public void MoveTo(Area a2){
 
 		if (getStuckTimer() == 0) {
+			if (this.GetArea().connectedAreas.contains(a2)){				//checks if new area is connected to the current
+				System.out.println("->" + toString() + ".MoveTo[a2]");
+				System.out.println("->[a1].RemoveCharacter[character]");
+				Boolean result = a1.RemoveCharacter(this);
+				System.out.println("<-[a1].RemoveCharacter[character]");
 
-			System.out.println("->" + toString() + ".MoveTo[a2]");
-			System.out.println("->[a1].RemoveCharacter[character]");
-			Boolean result = a1.RemoveCharacter(this);
-			System.out.println("<-[a1].RemoveCharacter[character]");
-
-			//Ha a rálépni kívánt mezõ csúszós állapotban van, akkor egy szomszédos mezõre kerül.
-			Area slippery_area = new Area();
-			if (a2.Slippery()) {
-				List<Area> areas = a2.getConnectedAreas();
-				for (int i = 0; i < areas.size(); i++) {
-					if (areas.get(i) != a2) {
-						slippery_area = areas.get(i);
-						Boolean result3 = slippery_area.AcceptCharacter(this);
-						System.out.println("a1 Succesfully removed character");
-						System.out.println("->[a2].Slippery()");
-						Boolean result4 = slippery_area.AcceptCharacter(this);
-						System.out.println("->[" + slippery_area + "].AcceptCharacter[character]");
-						if (!result4) System.out.println(slippery_area + "Failed to accept");
-						else System.out.println(slippery_area + "Succesfully accepted character");
-						System.out.println("<-" + toString() + ".MoveTo[a2]");
-						if (slippery_area.Sticky()) setStuckTimer();
+				//Ha a rálépni kívánt mezõ csúszós állapotban van, akkor egy szomszédos mezõre kerül.
+				Area slippery_area = new Area();
+				if (a2.Slippery()) {
+					List<Area> areas = a2.getConnectedAreas();
+					for (int i = 0; i < areas.size(); i++) {
+						if (areas.get(i) != a2) {
+							slippery_area = areas.get(i);
+							Boolean result3 = slippery_area.AcceptCharacter(this);
+							System.out.println("a1 Succesfully removed character");
+							System.out.println("->[a2].Slippery()");
+							Boolean result4 = slippery_area.AcceptCharacter(this);
+							System.out.println("->[" + slippery_area + "].AcceptCharacter[character]");
+							if (!result4) System.out.println(slippery_area + "Failed to accept");
+							else System.out.println(slippery_area + "Succesfully accepted character");
+							System.out.println("<-" + toString() + ".MoveTo[a2]");
+							if (slippery_area.Sticky()) setStuckTimer();
+						}
 					}
 				}
-			}
 
-			if (a2.Slippery()) return;
+				if (a2.Slippery()) return;
 
-			if (!result) System.out.println("a1 Failed to remove, returning");
-			else {
-				System.out.println("a1 Succesfully removed character");
-				System.out.println("->[a2].AcceptCharacter[character]");
-				Boolean result2 = a2.AcceptCharacter(this);
-				System.out.println("<-[a2].AcceptCharacter[character]");
-				if (!result2) System.out.println("a2 Failed to accept");
+				if (!result) System.out.println("a1 Failed to remove, returning");
 				else {
-					System.out.println("a2 Succesfully accepted character");
-					if (a2.Sticky()) setStuckTimer();
+					System.out.println("a1 Succesfully removed character");
+					System.out.println("->[a2].AcceptCharacter[character]");
+					Boolean result2 = a2.AcceptCharacter(this);
+					System.out.println("<-[a2].AcceptCharacter[character]");
+					if (!result2) System.out.println("a2 Failed to accept");
+					else {
+						System.out.println("a2 Succesfully accepted character");
+						if (a2.Sticky()) setStuckTimer();
+					}
 				}
+				System.out.println("<-" + toString() + ".MoveTo[a2]");
 			}
-
-			System.out.println("<-" + toString() + ".MoveTo[a2]");
+			else System.out.println("Cant move to an area which is not adjacent");
 		} else System.out.println("Player cannot move for " + getStuckTimer() + " turns");
 	}
 
@@ -138,6 +139,11 @@ public class PlayableCharacter {
 	public void step() {}
 
 	/*
+	 * Annak a területnek a megjavítása, amelyen a karakter áll.
+	 */
+	abstract void FixArea();
+
+	/*
 	 * konzolra írást segítõ fv
 	 */
 	public String toString() {return "[PlayableCharacter]";}
@@ -145,8 +151,13 @@ public class PlayableCharacter {
 	/*
 	* A csövön beállítja a ragadós állapotot
 	 */
-	public void makeSticky(Pipe p){
-		p.setStickyTimer();
+
+	public void makeSticky(Area a){
+		a.setStickyTimer();
 	}
 
+	/*
+	* Annak a csõnek a kilyukasztása, amelyen a karakter áll.
+	 */
+	abstract void BreakArea();
 }

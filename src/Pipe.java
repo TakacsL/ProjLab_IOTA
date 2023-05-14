@@ -1,6 +1,3 @@
-import java.util.List;
-
-
 /**
 Csõ mezõ. A két vége forráshoz, ciszternához, vagy pumpához van kötve. 
 Két állapota van, lyukas, vagy mûködõképes. Egy karakter tartózkodhat 
@@ -57,7 +54,7 @@ public class Pipe extends Area{
     @Override
     void Fix(){
         System.out.println("->Pipe.Fix[]");
-        broken = true;
+        broken = false;
         brokenTimer = 3;
         System.out.println("<-Pipe.Fix[]");
     }
@@ -69,7 +66,7 @@ public class Pipe extends Area{
     void Break() {
         if (brokenTimer == 0) {
             System.out.println("->Pipe.Break[]");
-            broken = false;
+            broken = true;
             System.out.println("<-Pipe.Break[]");
         }
         else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
@@ -84,7 +81,7 @@ public class Pipe extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]ID : " + getID();}
+	public String toString() {return "[Pipe]ID : " + getID() + (broken ? ", broken" : ", not broken");}
 
     /*
     * beállítja a csõ ragadós idõzítõjét, ameddig ragadós állapotban marad
@@ -103,6 +100,7 @@ public class Pipe extends Area{
     /*
     * beállítja a csõ csúszós idõzítõjét, ameddig csúszós állapotban marad
      */
+    @Override
     public void setSlipperyTimer(){
         slipperyTimer = 3;
     }
