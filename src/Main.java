@@ -107,12 +107,13 @@ public class Main {
                 break;
             case 5:
             /**
-             * A szerelőkkel lévő játékos elhelyez a pályán egy csövet, amelynek legalább az egyik vége csatlakozik egy másik elemhez.
+             * A szerelőkkel lévő játékos elhelyez a pályán egy csövet
              */
-                /*Repairman r = new Repairman();
-                Pipe pipe = new Pipe();
-                r.PlacePipe(pipe);*/
-                scanner.nextLine();scanner.nextLine();
+                System.out.println("Give the ID of the repairman");
+                Repairman r5 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                r5.PlacePipe();
+                scanner.nextLine();
+                scanner.nextLine();
                 break;
             case 6:
             /**
@@ -133,13 +134,12 @@ public class Main {
             	 * A játékos felvesz egy csövet.
             	 * A szerelőkkel lévő játékos felvesz egy, a pályán lévő csövet.
             	 */
-                /*Area a70 = new Area();
-                Repairman r70 = new Repairman();
-                Pipe p70 = new Pipe();
-                p70.Disconnect(a70);
-                System.out.println("->GetArea().Disconnect[p70]");
-                r70.PickupArea(p70);*/
-                scanner.nextLine();scanner.nextLine();
+                System.out.println("Give the ID of the Repairman");
+                Repairman r7 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                System.out.println("Give the ID of the pipe");
+                r7.PickupPipe((Pipe) Game.getInstance().map.getAreabyID(scanner.nextInt()));
+                scanner.nextLine();
+                scanner.nextLine();
                 break;
             case 8:
             /**
@@ -151,31 +151,30 @@ public class Main {
                     System.out.println("Give ID of player");
                     int playerID = scanner.nextInt();
                     Game.getInstance().map.getPlayerbyID(playerID).BreakArea();
-                }
-                else System.out.println("Game not started, please init first");
-                scanner.nextLine();scanner.nextLine();
+                } else System.out.println("Game not started, please init first");
+                scanner.nextLine();
+                scanner.nextLine();
                 break;
             case 9:
             /**
              * A szerelőkkel lévő játékos elhelyez egy pumpát, amelyhez egy csövön kell állnia a pályán.
              */
-                /*Repairman r4 = new Repairman();
-                Pipe pTarget = new Pipe();
-                Pump pump2 = new Pump();
-                r4.PlacePump(pump2);*/
-                scanner.nextLine();scanner.nextLine();
+                System.out.println("Give the ID of the Repairman");
+                Repairman r9 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                r9.PlacePump();
+                scanner.nextLine();
+                scanner.nextLine();
                 break;
             case 10:
             /**
              * A játékos átállítja a pumpát, hogy melyik csőből melyik csőbe folyjon a víz.
              */
-                /*Repairman r5 = new Repairman();
-                Pump pump3 = new Pump();
-                Pipe pipe4 = new Pipe();
-                Pipe pipe5 = new Pipe();
-                r5.MoveTo(pump3);
-                r5.SetPumpConfiguration(pipe4, pipe5);*/
-                scanner.nextLine();scanner.nextLine();
+                System.out.println("Give the ID of the player");
+                PlayableCharacter p10 = Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                if (p10.GetArea().getConfigureOptions().size() >= 2)
+                    p10.SetPumpConfiguration(p10.GetArea().getConnectedAreas().get(0), p10.GetArea().getConnectedAreas().get(1));
+                scanner.nextLine();
+                scanner.nextLine();
                 break;
             case 11:
             	/*
@@ -211,10 +210,11 @@ public class Main {
             	 * karbantartó felvesz egy pump elemet a nyelő mezőn
             	 * amin áll. 
             	 */
-            	/*Repairman rm = new Repairman();
-                Cistern c = new Cistern();
-                rm.PickupArea(c);*/
-                scanner.nextLine();scanner.nextLine();
+                System.out.println("Give the ID of the Repairman");
+                Repairman r18 = (Repairman) Game.getInstance().map.getPlayerbyID(scanner.nextInt());
+                r18.PickupPump();
+                scanner.nextLine();
+                scanner.nextLine();
                 break;
             case 14:            //make area sticky
                 if (Game.getInstance().isGameRunning()) {
