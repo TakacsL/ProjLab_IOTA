@@ -228,7 +228,7 @@ public class Main {
                 else System.out.println("Game not started, please init first");
                 scanner.nextLine();scanner.nextLine();
                 break;
-                case 15:            //make area slimy
+                case 15:            //make area slippery
                     if (Game.getInstance().isGameRunning()) {
                         Game.getInstance().map.printPlayers();
                         Game.getInstance().map.printAreas();

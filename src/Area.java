@@ -170,12 +170,17 @@ public class Area {
         return false;
     }
 
-    /*
-     * Megadja, hogy a mezõ csúszós állapotban van-e
-     */
-    boolean Slippery() {
-        return false;
-    }
+	/*
+	* beállítja a mezõ csúszós idõzítõjét, ameddig csúszós állapotban marad
+	 */
+	public void setSlipperyTimer(){}
+
+	/*
+	* Megadja, hogy a mezõ csúszós állapotban van-e
+	 */
+	boolean Slippery(){
+		return false;
+	}
 
     public PlayableCharacter getPlayer() {
         return player;
