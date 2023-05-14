@@ -2,9 +2,9 @@ import java.util.List;
 
 
 /**
-Csõ mezõ. A két vége forráshoz, ciszternához, vagy pumpához van kötve.
-Két állapota van, lyukas, vagy mûködõképes. Egy karakter tartózkodhat
-rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat,
+Csõ mezõ. A két vége forráshoz, ciszternához, vagy pumpához van kötve. 
+Két állapota van, lyukas, vagy mûködõképes. Egy karakter tartózkodhat 
+rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat, 
 ha nem lyukas a csõ. A csövek mozgathatók, bármelyik végét le lehet csatlakoztatni, és elvinni máshova
 */
 public class Pipe extends Area{
@@ -74,17 +74,18 @@ public class Pipe extends Area{
         }
         else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
     }
-
+    
     /*
      * A csõ állapotának lekérdezése.
      */
     public Boolean isBroken() {return broken;}
-
+    
 	/*
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]ID : " + getID();}
+	public String toString() {return "[Pipe]ID : " + getID() + (broken ? ", broken" : ", not broken") +
+            (stickyTimer>0 ? ", sticky" : ", not sticky") + (getSlipperyTimer()>0 ? ", slippery" : ", not slippery");}
 
     /*
      * Pumpa mezõ lehelyezése a csõre
