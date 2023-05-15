@@ -20,6 +20,48 @@ public class Area {
     // de az ID létrehozásában használjuk, minden használatnál nõ egyel az értéke
     private static int numOfIDs = 0;
 
+    /**
+     * water units which can flow to adjacent areas
+     */
+    private int waterLevel = 0;
+
+    /**
+     **  Getter for WaterUnits
+     **/
+    public int getWaterLevel() {
+        return waterLevel;
+    }
+
+    /**
+     **  Function, which increases waterUnits by 1
+     **/
+    public void addWaterLevel(Area AreaFrom){}
+
+    /**
+     * max num of Units an Area can contain, wont be used for cistern and fountain
+     */
+    public int maxCapacity = 10;
+
+    /**
+     * setter for MayCapacity and WaterLevel for exceptional use-cases
+     */
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public void setWaterLevel(int waterLevel) {
+        this.waterLevel = waterLevel;
+    }
+
+    /**
+     ** állapot tároló
+     **/
+    private boolean broken;
+
+    public boolean isBroken() {return broken;}
+
+    public void setBroken(boolean newBroken) {broken = newBroken;}
+
     /*
      * Area ahonnan fogad vizet
      */

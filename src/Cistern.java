@@ -46,4 +46,18 @@ public class Cistern extends Area {
 		System.out.println("Create " + this.toString() + ": " + getID());
 	}
 
+	/**
+	 */
+	@Override
+	public void step(){}
+
+	/**
+	 * AddWaterLevel override, specific for this type of area
+	 * incr repairmans points
+	 */
+	@Override
+	public void addWaterLevel(Area AreaFrom){
+		Game.repairmanPoints++;
+	}
+
 }

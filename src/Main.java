@@ -41,7 +41,8 @@ public class Main {
                 "15. Make Area Slippery",
                 "16. Save Game",
                 "17. Load Game",
-                "18. Exit"
+                "18. End Game",
+                "19. Exit"
         };
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -255,12 +256,16 @@ public class Main {
                     Game.getInstance().LoadGame();
                     break;
                 case 18:
+                    /**
+                     * Game End is called, result is printed to console
+                     */
+                    Game.getInstance().EndGame();
+                case 19:
                     /*
                      * kilépés a menüvezérelt részből, a program jelenlegi verziójában
                      * a futtatás befejezése
                      */
                     System.out.println("Exiting program now...");
-                    Game.getInstance().EndGame();
                     NotFinished = false;
                     break;
 

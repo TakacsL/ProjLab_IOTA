@@ -8,18 +8,6 @@ rajta egyszerre. A bemenet, és kimenet csövek között víz folyhat,
 ha nem lyukas a csõ. A csövek mozgathatók, bármelyik végét le lehet csatlakoztatni, és elvinni máshova
 */
 public class Pipe extends Area{
-	/*
-	 * maximális mennyiségû víz, amit tárolni tud, egész számban
-	 */
-    private int maxCapacity;
-    /*
-     * jelenlegi vízszint, egész számban
-     */
-    private int waterLevel;
-    /*
-     * állapot tároló
-     */
-    private boolean broken;
 
     /*
     * Foltozás után a csõ egy ideig nem romolhat el
@@ -57,7 +45,7 @@ public class Pipe extends Area{
     @Override
     void Fix(){
         System.out.println("->Pipe.Fix[]");
-        broken = false;
+        setBroken(false);
         brokenTimer = 3;
         System.out.println("<-Pipe.Fix[]");
     }
@@ -69,23 +57,19 @@ public class Pipe extends Area{
     void Break() {
         if (brokenTimer == 0) {
             System.out.println("->Pipe.Break[]");
-            broken = true;
+            setBroken(true);
             System.out.println("<-Pipe.Break[]");
         }
         else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
     }
     
-    /*
-     * A csõ állapotának lekérdezése.
-     */
-    public Boolean isBroken() {return broken;}
-    
 	/*
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]ID : " + getID() + (broken ? ", broken" : ", not broken") +
-            (stickyTimer>0 ? ", sticky" : ", not sticky") + (getSlipperyTimer()>0 ? ", slippery" : ", not slippery");}
+	public String toString() {return "[Pipe]ID : " + getID() + (isBroken() ? ", broken" : ", not broken") +
+            (stickyTimer>0 ? ", sticky" : ", not sticky") + (getSlipperyTimer()>0 ? ", slippery" : ", not slippery") +
+            (getWaterLevel() > 0 ? ", hasWater" : ", has no water");}
 
     /*
      * Pumpa mezõ lehelyezése a csõre
@@ -142,14 +126,6 @@ public class Pipe extends Area{
         return slipperyTimer;
     }
 
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
-    }
-
-    public void setWaterLevel(int waterLevel) {
-        this.waterLevel = waterLevel;
-    }
-
     public void setBrokenTimer(int brokenTimer) {
         this.brokenTimer = brokenTimer;
     }
@@ -178,12 +154,39 @@ public class Pipe extends Area{
         if (slipperyTimer > 0) res += "slipperyTimer:" + slipperyTimer + ",";
         if (stickyTimer > 0) res += "stickyTimer:" + stickyTimer + ",";
         if (brokenTimer > 0) res += "brokenTimer:" + brokenTimer + ",";
-        if (broken) res += "broken:" + true + ",";
+        if (isBroken()) res += "broken:" + true + ",";
         if (maxCapacity > 0) res += "maxCapacity:" + maxCapacity + ",";
-        if (waterLevel > 0) res += "waterLevel:" + waterLevel + ",";
+        if (getWaterLevel() > 0) res += "waterLevel:" + getWaterLevel() + ",";
         for (Area area : connectedAreas) {
             res += "connectedAreaId:" + area.getID() + ",";
         }
         return res;
+    }
+
+    /**
+     * Water flowing. If this has water, then decrease it.
+     * If this is broken, then incr. saboteur points, and return
+     * else addWaterLevel for each connectedArea
+     */
+    @Override
+    public void step(){
+        if (getWaterLevel() > 0) {
+            this.setWaterLevel(this.getWaterLevel() - 1);
+            if (isBroken()) {
+                Game.saboteurPoints++;
+                return;
+            }
+            for (Area a : connectedAreas)
+                a.addWaterLevel(this);
+        }
+    }
+
+    /**
+     * AddWaterLevel override, specific for this type of area
+     * If not full, incr. WaterLevel
+     */
+    @Override
+    public void addWaterLevel(Area AreaFrom){
+        if (this.getWaterLevel() < this.maxCapacity) this.setWaterLevel(this.getWaterLevel() + 1);
     }
 }
