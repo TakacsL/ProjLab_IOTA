@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
 Pumpa mezõ. Több bekötött csöve lehet, ezek közül minden 
 pillanatban egy bemenõ, és egy kimenõ csöve van. Ezt a két 
@@ -19,14 +21,6 @@ public class Pump extends Area{
      * állapot tároló
      */
     private boolean broken;
-    /*
-     * Area ahonnan fogad vizet
-     */
-    private Area input;
-    /*
-     * Area ahová ad vizet
-     */
-    private Area output;
 
 
     /*
@@ -34,16 +28,18 @@ public class Pump extends Area{
      */
     @Override
     void Connect(Area a){
+        if(connectedAreas.contains(a)) return;
         System.out.println("->Pump.Connect["+a.toString()+"]");
         connectedAreas.add(a);
+        a.connectedAreas.add(this);
         System.out.println("<-Pump.Connect["+a.toString()+"]");
     }
-    
+
 	/*
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Pump]ID : " + getID() + (broken ? ", broken" : ", not broken");}
+    public String toString() {return "[Pump]ID : " + getID();}
 
     /*
      * A hibás pumpa megjavítása.
@@ -65,57 +61,39 @@ public class Pump extends Area{
         System.out.println("<-Pump.Break[]");
     }
 
-    /*
-     * A pumpa bemenetének kiválasztása.
-     */
-    @Override
-    public void SetInput(Area a) {
-        System.out.println("->Pump.SetInput[Area]");
-        if(connectedAreas.contains(a)){
-            input = a;
-        }
-        System.out.println("<-Pump.SetInput[Area]");
-    }
 
     /*
      * A pumpa kimenetének kiválasztása.
      */
     @Override
     public void SetOutput(Area a) {
-        System.out.println("->Pump.SetOutput[Area]");
+        System.out.println("->Pump.SetOutput(" + a + ")");
         if(connectedAreas.contains(a)){
             output = a;
         }
-        System.out.println("<-Pump.SetOutput[Area]");
+        System.out.println("<-Pump.SetOutput(" + a + ")");
     }
-    
-    /*
-     * Pumpa mezõ lehelyezése az elsõ szomszédra
-     * Repairman hívja meg
-     */
-    @Override
-    void PlacePump(Pump p) {
-    	this.Connect(new Pipe());
-        System.out.println("->[" + toString() +".ConnectedAreas[0]].Disconnect(a1)");
-        this.getConnectedAreas().get(0).Disconnect(this);
-        System.out.println("<-[" + toString() +".ConnectedAreas[0]].Disconnect(a1)");
-        System.out.println("+New Pipe Created");
-        Pipe newPipe = new Pipe();
-        System.out.println("->[newPipe].Connect(a1)");
-        newPipe.Connect(this);
-        System.out.println("<-[newPipe].Connect(a1)");
-        System.out.println("->[newPipe].Connect(pump)");
-        newPipe.Connect(p);
-        System.out.println("<-[newPipe].Connect(pump)");
-        System.out.println("->[pump].SetInput(a1)");
-        p.SetInput(this);
-        System.out.println("<-[pump].SetInput(a1)");
-        System.out.println("->[pump].SetOutput(newPipe)");
-        p.SetOutput(newPipe);
-        System.out.println("<-[pump].SetOutput(newPipe)");
-        System.out.println("->" + toString() +".Connect(p)");
-        this.Connect(p);
-        System.out.println("<-" + toString() +".Connect(p)");
-        
+
+    public String SavableState() {
+        String res = "areaType:Pump,areaId:" + getID() + ",";
+        if (player != null) res += "playerId:" + player.getID() + ",";
+        if (broken) res += "broken:" + true + ",";
+        if (maxCapacity > 0) res += "maxCapacity:" + maxCapacity + ",";
+        if (waterLevel > 0) res += "waterLevel:" + waterLevel + ",";
+        for (Area area : connectedAreas) {
+            res += "connectedAreaId:" + area.getID() + ",";
+        }
+        return res;
     }
+
+    //A játékos lekéri az állítható be- és kimeneti opciókat
+    public List<Area> getConfigureOptions() {
+        return getConnectedAreas();
+    }
+
+    public Pump() {
+        super();
+        System.out.println("Create " + this.toString() + ": " + getID());
+    }
+
 }

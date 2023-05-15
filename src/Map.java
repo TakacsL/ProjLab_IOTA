@@ -28,6 +28,8 @@ public class Map {
         System.out.println("Available areas are:");
         for (Area a: areas) {
             System.out.println(a.toString());
+            for(Area ca: a.connectedAreas)
+                System.out.println("\tis connected to" + ca);
         }
     }
 

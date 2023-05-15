@@ -41,4 +41,9 @@ public class Saboteur extends PlayableCharacter{
 	public void makeSlippery(Pipe p){
 		p.setSlipperyTimer();
 	}
+
+	public String SavableState() {
+		String res = "playerType:Saboteur,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
+		return res;
+	}
 }
