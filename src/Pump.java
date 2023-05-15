@@ -9,20 +9,6 @@ fix helyen vannak, vagy vízvezeték szerelõ karakterek helyezhetik le.
  */
 
 public class Pump extends Area{
-	/*
-	 * maximális mennyiségû víz, amit tárolni tud, egész számban
-	 */
-    private int maxCapacity;
-    /*
-     * jelenlegi vízszint, egész számban
-     */
-    private int waterLevel;
-    /*
-     * állapot tároló
-     */
-    private boolean broken;
-
-
     /*
      * Az elemhez egy újabb elem csatlakoztatása.
      */
@@ -39,7 +25,7 @@ public class Pump extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Pump]ID : " + getID();}
+    public String toString() {return "[Pump]ID : " + getID() + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");}
 
     /*
      * A hibás pumpa megjavítása.
@@ -47,7 +33,7 @@ public class Pump extends Area{
     @Override
     void Fix(){
         System.out.println("->Pump.Fix[]");
-        broken = true;
+        setBroken(false);
         System.out.println("<-Pump.Fix[]");
     }
 
@@ -57,7 +43,7 @@ public class Pump extends Area{
     @Override
     void Break() {
         System.out.println("->Pump.Break[]");
-        broken = false;
+        setBroken(true);
         System.out.println("<-Pump.Break[]");
     }
 
@@ -77,9 +63,9 @@ public class Pump extends Area{
     public String SavableState() {
         String res = "areaType:Pump,areaId:" + getID() + ",";
         if (player != null) res += "playerId:" + player.getID() + ",";
-        if (broken) res += "broken:" + true + ",";
+        if (isBroken()) res += "broken:" + true + ",";
         if (maxCapacity > 0) res += "maxCapacity:" + maxCapacity + ",";
-        if (waterLevel > 0) res += "waterLevel:" + waterLevel + ",";
+        if (getWaterLevel() > 0) res += "waterLevel:" + getWaterLevel() + ",";
         for (Area area : connectedAreas) {
             res += "connectedAreaId:" + area.getID() + ",";
         }
@@ -93,7 +79,34 @@ public class Pump extends Area{
 
     public Pump() {
         super();
-        System.out.println("Create " + this.toString() + ": " + getID());
+        System.out.println("Create " + this + ": " + getID());
+    }
+
+    /**
+     * If empty, nothhing happens
+     * else decrease waterlevel
+     * if broken, sabouteur ponits incr
+     * else add water to output
+     */
+    @Override
+    public void step(){
+        if (getWaterLevel() > 0) {
+            this.setWaterLevel(this.getWaterLevel() - 1);
+            if (isBroken()) {
+                Game.saboteurPoints++;
+                return;
+            }
+            output.addWaterLevel(this);
+        }
+    }
+
+    /**
+     * AddWaterLevel override, specific for this type of area
+     * If not full, and input ID is same as caller, incr. WaterLevel
+     */
+    @Override
+    public void addWaterLevel(Area AreaFrom){
+        if (this.getWaterLevel() < this.maxCapacity && AreaFrom.getID() == input.getID()) this.setWaterLevel(this.getWaterLevel() + 1);
     }
 
 }

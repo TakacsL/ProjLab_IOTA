@@ -7,6 +7,13 @@ public final class Game {
 	//singleton mûködés megvalósítása
     private static Game INSTANCE;
 
+    /**
+     * public static nums of points for each teams
+     */
+    public static int saboteurPoints = 0;
+    public static int repairmanPoints = 0;
+
+
 
     //válzotó ami alapján tudjuk követni a játék jelenlegi állapotát
     private boolean GameRunning = false;
@@ -34,6 +41,9 @@ public final class Game {
 
     //A játék befejezése.
     public void EndGame(){
+        System.out.println("Points are Saboteur : " + saboteurPoints + " vs. Repairman : " + repairmanPoints);
+        if (saboteurPoints != repairmanPoints) System.out.println((saboteurPoints > repairmanPoints ? "Saboteur" : "Repairman") + " team won!");
+        else System.out.println("Game ended in a draw!");
         GameRunning = false;
     }
 
