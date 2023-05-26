@@ -4,11 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8b2b421-eb98-4e3d-b84c-1bfd8c0f4786" name="Changes" comment="step, points and EndGame" />
+    <list default="true" id="b8b2b421-eb98-4e3d-b84c-1bfd8c0f4786" name="Changes" comment="step, points and EndGame">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Assets/Cistern.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Assets/Fountain.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Assets/Pump.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Assets/Repairman.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Assets/Saboteur.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Drawable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Window.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/moveDialog.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/moveDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saveState.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saveState.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cistern.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cistern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Fountain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Fountain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayableCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PlayableCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pump.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repairman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Repairman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Saboteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Saboteur.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -26,25 +61,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "OverrideImplement.generate.javadoc": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "212",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "364",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="JavaApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -65,6 +102,7 @@
       <workItem from="1684070249148" duration="14936000" />
       <workItem from="1684096339312" duration="1543000" />
       <workItem from="1684137994444" duration="4055000" />
+      <workItem from="1685109397504" duration="11975000" />
     </task>
     <task id="LOCAL-00001" summary="Move and IDs">
       <created>1684082593468</created>

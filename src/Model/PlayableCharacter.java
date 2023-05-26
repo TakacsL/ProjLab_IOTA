@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.List;
 
 /**
@@ -147,7 +149,7 @@ public abstract class PlayableCharacter {
 	/*
 	 * konzolra írást segítõ fv
 	 */
-	public String toString() {return "[PlayableCharacter]";}
+	public String toString() {return "[Model.PlayableCharacter]";}
 
 	/*
 	* A csövön beállítja a ragadós állapotot

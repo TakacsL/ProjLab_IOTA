@@ -1,4 +1,6 @@
-import java.util.List;
+package Model;
+
+import Controller.Game;
 
 
 /**
@@ -28,15 +30,15 @@ public class Pipe extends Area{
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
-    void Connect(Area a){
-        System.out.println("->Pipe.Connect["+a.toString()+"]");
+    public void Connect(Area a){
+        System.out.println("->Model.Pipe.Connect["+a.toString()+"]");
         if(connectedAreas.size()>=2){
-            System.out.println("Pipe cannot connect to more than 2 areas, returning");
+            System.out.println("Model.Pipe cannot connect to more than 2 areas, returning");
             return;
         }
 
         connectedAreas.add(a);
-        System.out.println("<-Pipe.Connect["+a.toString()+"]");
+        System.out.println("<-Model.Pipe.Connect["+a.toString()+"]");
     }
 
     /*
@@ -44,21 +46,21 @@ public class Pipe extends Area{
      */
     @Override
     void Fix(){
-        System.out.println("->Pipe.Fix[]");
+        System.out.println("->Model.Pipe.Fix[]");
         setBroken(false);
         brokenTimer = 3;
-        System.out.println("<-Pipe.Fix[]");
+        System.out.println("<-Model.Pipe.Fix[]");
     }
 
     /*
      * A csõ kilyukasztása.
      */
     @Override
-    void Break() {
+    public void Break() {
         if (brokenTimer == 0) {
-            System.out.println("->Pipe.Break[]");
+            System.out.println("->Model.Pipe.Break[]");
             setBroken(true);
-            System.out.println("<-Pipe.Break[]");
+            System.out.println("<-Model.Pipe.Break[]");
         }
         else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
     }
@@ -67,13 +69,13 @@ public class Pipe extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-	public String toString() {return "[Pipe]ID : " + getID() + (isBroken() ? ", broken" : ", not broken") +
+	public String toString() {return "[Model.Pipe]ID : " + getID() + (isBroken() ? ", broken" : ", not broken") +
             (stickyTimer>0 ? ", sticky" : ", not sticky") + (getSlipperyTimer()>0 ? ", slippery" : ", not slippery") +
             (getWaterLevel() > 0 ? ", hasWater" : ", has no water");}
 
     /*
      * Pumpa mezõ lehelyezése a csõre
-     * Repairman hívja meg
+     * Model.Repairman hívja meg
      */
     @Override
     void PlacePump(Pump p) {
@@ -149,7 +151,7 @@ public class Pipe extends Area{
     }
 
     public String SavableState() {
-        String res = "areaType:Pipe,areaId:" + getID() + ",";
+        String res = "areaType:Model.Pipe,areaId:" + getID() + ",";
         if (player != null) res += "playerId:" + player.getID() + ",";
         if (slipperyTimer > 0) res += "slipperyTimer:" + slipperyTimer + ",";
         if (stickyTimer > 0) res += "stickyTimer:" + stickyTimer + ",";

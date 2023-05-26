@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class Area {
     public void addWaterLevel(Area AreaFrom){}
 
     /**
-     * max num of Units an Area can contain, wont be used for cistern and fountain
+     * max num of Units an Model.Area can contain, wont be used for cistern and fountain
      */
     public int maxCapacity = 10;
 
@@ -63,11 +65,11 @@ public class Area {
     public void setBroken(boolean newBroken) {broken = newBroken;}
 
     /*
-     * Area ahonnan fogad vizet
+     * Model.Area ahonnan fogad vizet
      */
     protected Area input;
     /*
-     * Area ahová ad vizet
+     * Model.Area ahová ad vizet
      */
     protected Area output;
 
@@ -132,7 +134,7 @@ public class Area {
     /*
      * Az elemhez egy újabb elem csatlakoztatása.
      */
-    void Connect(Area a) {
+    public void Connect(Area a) {
         System.out.println("->" + toString() + ".Connect(" + a + ")");
         connectedAreas.add(a);
         a.connectedAreas.add(this);
@@ -175,7 +177,7 @@ public class Area {
      * konzolra írást segítõ fv
      */
     public String toString() {
-        return "[Area]ID : " + ID;
+        return "[Model.Area]ID : " + ID;
     }
 
     public void SetInput(Area a) {

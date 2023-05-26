@@ -1,3 +1,7 @@
+package Model;
+
+import Controller.Game;
+
 import java.util.List;
 
 /**
@@ -13,28 +17,28 @@ public class Pump extends Area{
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
-    void Connect(Area a){
+    public void Connect(Area a){
         if(connectedAreas.contains(a)) return;
-        System.out.println("->Pump.Connect["+a.toString()+"]");
+        System.out.println("->Model.Pump.Connect["+a.toString()+"]");
         connectedAreas.add(a);
         a.connectedAreas.add(this);
-        System.out.println("<-Pump.Connect["+a.toString()+"]");
+        System.out.println("<-Model.Pump.Connect["+a.toString()+"]");
     }
 
 	/*
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Pump]ID : " + getID() + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");}
+    public String toString() {return "[Model.Pump]ID : " + getID() + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");}
 
     /*
      * A hibás pumpa megjavítása.
      */
     @Override
     void Fix(){
-        System.out.println("->Pump.Fix[]");
+        System.out.println("->Model.Pump.Fix[]");
         setBroken(false);
-        System.out.println("<-Pump.Fix[]");
+        System.out.println("<-Model.Pump.Fix[]");
     }
 
     /*
@@ -42,9 +46,9 @@ public class Pump extends Area{
      */
     @Override
     void Break() {
-        System.out.println("->Pump.Break[]");
+        System.out.println("->Model.Pump.Break[]");
         setBroken(true);
-        System.out.println("<-Pump.Break[]");
+        System.out.println("<-Model.Pump.Break[]");
     }
 
 
@@ -53,15 +57,15 @@ public class Pump extends Area{
      */
     @Override
     public void SetOutput(Area a) {
-        System.out.println("->Pump.SetOutput(" + a + ")");
+        System.out.println("->Model.Pump.SetOutput(" + a + ")");
         if(connectedAreas.contains(a)){
             output = a;
         }
-        System.out.println("<-Pump.SetOutput(" + a + ")");
+        System.out.println("<-Model.Pump.SetOutput(" + a + ")");
     }
 
     public String SavableState() {
-        String res = "areaType:Pump,areaId:" + getID() + ",";
+        String res = "areaType:Model.Pump,areaId:" + getID() + ",";
         if (player != null) res += "playerId:" + player.getID() + ",";
         if (isBroken()) res += "broken:" + true + ",";
         if (maxCapacity > 0) res += "maxCapacity:" + maxCapacity + ",";

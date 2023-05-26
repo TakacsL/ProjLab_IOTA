@@ -1,3 +1,6 @@
+package Controller;
+
+import Model.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -41,9 +44,9 @@ public final class Game {
 
     //A játék befejezése.
     public void EndGame(){
-        System.out.println("Points are Saboteur : " + saboteurPoints + " vs. Repairman : " + repairmanPoints);
-        if (saboteurPoints != repairmanPoints) System.out.println((saboteurPoints > repairmanPoints ? "Saboteur" : "Repairman") + " team won!");
-        else System.out.println("Game ended in a draw!");
+        System.out.println("Points are Model.Saboteur : " + saboteurPoints + " vs. Model.Repairman : " + repairmanPoints);
+        if (saboteurPoints != repairmanPoints) System.out.println((saboteurPoints > repairmanPoints ? "Model.Saboteur" : "Model.Repairman") + " team won!");
+        else System.out.println("Controller.Game ended in a draw!");
         GameRunning = false;
     }
 
@@ -52,12 +55,12 @@ public final class Game {
         if (!getInstance().GameRunning) return;
         System.out.println("->EndTurn[]");
 
-        System.out.println("For all Area");
+        System.out.println("For all Model.Area");
         System.out.println("->Step[]");
         for (Area a : map.areas) a.step();
         System.out.println("<-Step[]");
 
-        System.out.println("For all PlayableCharacter");
+        System.out.println("For all Model.PlayableCharacter");
         System.out.println("->Step[]");
         System.out.println("<-Step[]");
 
@@ -97,11 +100,11 @@ public final class Game {
         p2.Connect(c);
         c.Connect(p1);
 
-        System.out.println("-->CreatePlayableCharacter[r1: Repairman]");
-        System.out.println("-->CreatePlayableCharacter[r2: Repairman]");
+        System.out.println("-->CreatePlayableCharacter[r1: Model.Repairman]");
+        System.out.println("-->CreatePlayableCharacter[r2: Model.Repairman]");
 
-        System.out.println("-->CreatePlayableCharacter[s1: Saboteur]");
-        System.out.println("-->CreatePlayableCharacter[s2: Saboteur]");
+        System.out.println("-->CreatePlayableCharacter[s1: Model.Saboteur]");
+        System.out.println("-->CreatePlayableCharacter[s2: Model.Saboteur]");
 
         System.out.println("<-CreateInitialMap[]");
 
@@ -122,7 +125,7 @@ public final class Game {
             }
             bw.close();
             fw.close();
-            System.out.println("Game saved");
+            System.out.println("Controller.Game saved");
         } catch (IOException e) {
             System.out.println("Save failed");
             System.out.println(e);
@@ -194,17 +197,17 @@ public final class Game {
                 }
             }
             if (areaType != null) switch (areaType) {
-                case "Fountain":
+                case "Model.Fountain":
                     Fountain fountain = new Fountain();
                     fountain.setID(Integer.parseInt(areaId));
                     map.AddArea(fountain);
                     break;
-                case "Cistern":
+                case "Model.Cistern":
                     Cistern cistern = new Cistern();
                     cistern.setID(Integer.parseInt(areaId));
                     map.AddArea(cistern);
                     break;
-                case "Pipe":
+                case "Model.Pipe":
                     Pipe pipe = new Pipe();
                     pipe.setID(Integer.parseInt(areaId));
                     if (slipperyTimer > 0) pipe.setSlipperyTimer(slipperyTimer);
@@ -215,14 +218,14 @@ public final class Game {
                     if (waterLevel > 0) pipe.setWaterLevel(waterLevel);
                     map.AddArea(pipe);
                     break;
-                case "Pump":
+                case "Model.Pump":
                     Pump pump = new Pump();
                     pump.setID(Integer.parseInt(areaId));
                     map.AddArea(pump);
                     break;
             }
             if (playerType != null) switch (playerType) {
-                case "Repairman":
+                case "Model.Repairman":
                     Repairman repairman = new Repairman(map.getAreabyID(Integer.parseInt(areaId)));
                     repairman.setID(Integer.parseInt(playerId));
                     if (line.contains("hasPump:true")) repairman.pipe = new Pipe();
@@ -230,7 +233,7 @@ public final class Game {
                     map.AddPlayer(repairman);
                     break;
 
-                case "Saboteur":
+                case "Model.Saboteur":
                     Saboteur saboteur = new Saboteur(map.getAreabyID(Integer.parseInt(areaId)));
                     saboteur.setID(Integer.parseInt(playerId));
                     map.AddPlayer(saboteur);
