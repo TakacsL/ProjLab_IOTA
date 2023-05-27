@@ -1,11 +1,22 @@
 package View;
 
+import Controller.Game;
+import Model.PlayableCharacter;
+import Model.Saboteur;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Window extends JFrame{
+    private List<Drawable> components = new ArrayList<>();
+
+    private List<PlayableCharacter> players = new ArrayList<>();
     private JPanel wholePanel;
     private JPanel sidePanel;
     public JPanel gameArea;
@@ -28,7 +39,6 @@ public class Window extends JFrame{
     private JButton setButton;
 
     public String[][] directoryData = {};
-    private final String[] directoryColumnNames = {"Type of PC", "ID of field"};
 
     public Window() {
         setTitle("IOTA_GUI");
@@ -36,10 +46,12 @@ public class Window extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 800);
         setVisible(true);
+
         /*
          *Makes gameArea into absoluteLayout, so we can place stuff to exact coordinates
          */
         gameArea.setLayout(null);
+        //helper variable, so ActionListeners can use window's this, naming convention from js
         var that = this;
         exitButton.addActionListener(new ActionListener() {
             /**
@@ -56,6 +68,7 @@ public class Window extends JFrame{
              */
             @Override
             public void actionPerformed(ActionEvent e) {
+                Game.getInstance().StartGame(that);
             }
         });
         MoveButton.addActionListener(new ActionListener() {
@@ -72,6 +85,19 @@ public class Window extends JFrame{
                 else JOptionPane.showMessageDialog(null, "Didn't move");
             }
         });
+        sabotageButton.addActionListener(new ActionListener() {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("drawing " + components.size() + " components");
+                drawComponents();
+                System.out.println("GameArea has " + gameArea.getComponentCount() + " children");
+            }
+        });
     }
 
 
@@ -82,7 +108,32 @@ public class Window extends JFrame{
         String[] columnNames = {"Saboteur Points", "Repairman points"};
         pointsTable = new JTable(pointsData, columnNames);
         pointsTable.setBounds(0,0,15,15);
-        directoryTable = new JTable(directoryData, directoryColumnNames);
+        Object[] directoryColumnNames = new Object[]{"Type of PC", "ID of field"};
+        directoryTable = new JTable(new DefaultTableModel(directoryColumnNames,0));
         directoryTable.setBounds(0,0,15,15);
+    }
+
+    public void drawComponents(){
+        gameArea.removeAll();
+        for (var item:components) {
+            gameArea.add(item.draw());
+        }
+        DefaultTableModel dtm = (DefaultTableModel) directoryTable.getModel();
+        dtm.setRowCount(0);
+        for (var item:players) {
+            //dtm.setValueAt("Don't know yet", players.indexOf(item), 0);
+            dtm.addRow(new Object[]{item.getViewString(), item.GetArea().getID()});
+            //directoryTable.getModel().setValueAt(item.GetArea().getID(), players.indexOf(item), 0);
+        }
+        revalidate();
+        repaint();
+    }
+
+    public void addComponent(Drawable component){
+        components.add(component);
+    }
+
+    public void addPlayableCharacter(PlayableCharacter pc){
+        players.add(pc);
     }
 }

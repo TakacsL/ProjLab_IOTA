@@ -48,4 +48,12 @@ public class Saboteur extends PlayableCharacter{
 		String res = "playerType:Model.Saboteur,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
 		return res;
 	}
+
+	/**
+	 * @return a string to view pc type
+	 */
+	@Override
+	public String getViewString(){
+		return "Saboteur";
+	}
 }

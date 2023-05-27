@@ -1,6 +1,11 @@
 package Controller;
 
 import Model.*;
+import View.Window;
+import View.drawCistern;
+import View.drawFountain;
+import View.drawPipe;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -15,6 +20,12 @@ public final class Game {
      */
     public static int saboteurPoints = 0;
     public static int repairmanPoints = 0;
+
+    /**
+     * Window variable, stored to gain access to view
+     */
+
+    Window window;
 
 
 
@@ -37,7 +48,8 @@ public final class Game {
     }
 
     //A játék indítása.
-    public void StartGame(){
+    public void StartGame(Window w){
+        window = w;
         GameRunning = true;
         getInstance().CreateInitialMap();
     }
@@ -76,14 +88,22 @@ public final class Game {
         System.out.println("->CreateInitialMap[]");
 
         Fountain f = new Fountain();
+        drawFountain df = new drawFountain(f.getID(), 30, 30);
         Cistern c = new Cistern();
+        drawCistern dc = new drawCistern(c.getID(), 500, 500);
         Pipe p1 = new Pipe();
+        drawPipe dp1 = new drawPipe(p1.getID(), 500, 30);
         Pipe p2 = new Pipe();
+        drawPipe dp2 = new drawPipe(p2.getID(), 30, 500);
 
         map.AddArea(f);
+        window.addComponent(df);
         map.AddArea(c);
+        window.addComponent(dc);
         map.AddArea(p1);
+        window.addComponent(dp1);
         map.AddArea(p2);
+        window.addComponent(dp2);
 
         Repairman r1 = new Repairman(f);
         Repairman r2 = new Repairman(c);
@@ -91,23 +111,20 @@ public final class Game {
         Saboteur s2 = new Saboteur(p2);
 
         map.AddPlayer(r1);
+        window.addPlayableCharacter(r1);
         map.AddPlayer(r2);
+        window.addPlayableCharacter(r2);
         map.AddPlayer(s1);
+        window.addPlayableCharacter(s1);
         map.AddPlayer(s2);
+        window.addPlayableCharacter(s2);
 
         f.Connect(p1);
         p1.Connect(p2);
         p2.Connect(c);
         c.Connect(p1);
 
-        System.out.println("-->CreatePlayableCharacter[r1: Model.Repairman]");
-        System.out.println("-->CreatePlayableCharacter[r2: Model.Repairman]");
-
-        System.out.println("-->CreatePlayableCharacter[s1: Model.Saboteur]");
-        System.out.println("-->CreatePlayableCharacter[s2: Model.Saboteur]");
-
-        System.out.println("<-CreateInitialMap[]");
-
+        window.drawComponents();
 
     }
 
@@ -132,9 +149,9 @@ public final class Game {
         }
     }
 
-    public void LoadGame() {
+    public void LoadGame(Window w) {
         try {
-            Game.getInstance().StartGame();
+            Game.getInstance().StartGame(w);
             RestoreMap();
             RestoreConnections();
             System.out.println("Loaded game restored");

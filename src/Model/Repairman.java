@@ -99,4 +99,12 @@ public class Repairman extends PlayableCharacter{
         if (pipe != null) res += "hasPipe:true,";
         return res;
     }
+
+    /**
+     * @return a string to view pc type
+     */
+    @Override
+    public String getViewString(){
+        return "Repairman";
+    }
 }

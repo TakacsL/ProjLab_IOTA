@@ -114,16 +114,19 @@ public abstract class PlayableCharacter {
 	/*
 	 * A csõrendszer egyik elemének a felvéte, üres fv
 	 */
-	public void PickupPipe(Pipe p) {
-
-	}
+	public void PickupPipe(Pipe p) {}
 
 	/*
 	 * a1 getter
 	 */
-	protected Area GetArea(){
+	public Area GetArea(){
 		return a1;
 	}
+
+	/**
+	 * @return a string to view pc type
+	 */
+	public String getViewString(){return "PlayableCharacter";}
 
 	/*
 	 * A pumpa be- és kimenetének átállítása.
