@@ -1,6 +1,8 @@
 package View;
 
+import javax.accessibility.Accessible;
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class Drawable {
     /**
@@ -36,6 +38,6 @@ public abstract class Drawable {
     /**
      * Visszaadja a megjelenítéshez használt swing komponenst
      */
-    public abstract JButton draw();
+    public abstract Component draw();
 
 }

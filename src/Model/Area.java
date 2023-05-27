@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Game;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +130,7 @@ public class Area {
         }*/
         player = character;
         player.a1 = this;
+        Game.getInstance().getWindow().drawComponents();
         return true;
     }
 

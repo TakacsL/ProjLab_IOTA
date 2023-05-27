@@ -25,7 +25,9 @@ public final class Game {
      * Window variable, stored to gain access to view
      */
 
-    Window window;
+    private Window window;
+
+    public Window getWindow() {return window;}
 
 
 

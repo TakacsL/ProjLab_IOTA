@@ -18,7 +18,7 @@ public class Saboteur extends PlayableCharacter{
 	 *
 	 */
 	@Override
-	void FixArea() {
+	public void FixArea() {
 		System.out.println("->Model.Saboteur.FixArea[]");
 		System.out.println("I cant do this");
 		System.out.println("<-Model.Saboteur.FixArea[]");}
@@ -27,7 +27,7 @@ public class Saboteur extends PlayableCharacter{
 	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
 	@Override
-    void BreakArea(){
+	public void BreakArea(){
         System.out.println("->Model.Saboteur.BreakArea()");
     	System.out.println("->[a1].Break()");
         GetArea().Break();
@@ -40,8 +40,8 @@ public class Saboteur extends PlayableCharacter{
 	 */
     public String toString() {return "[Model.Saboteur]ID : " + getID() + " on [Model.Area]ID : " + a1.getID();}
 
-	public void makeSlippery(Pipe p){
-		p.setSlipperyTimer();
+	public void makeSlippery(){
+		GetArea().setSlipperyTimer();
 	}
 
 	public String SavableState() {

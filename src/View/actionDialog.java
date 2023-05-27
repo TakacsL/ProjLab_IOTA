@@ -1,24 +1,19 @@
 package View;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
-public class moveDialog extends JDialog {
+public class actionDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField charIDField;
-    private JTextField areaIDField;
     private JLabel charIDLabel;
-    private JLabel areaIDLabel;
 
-    private dialogResponse response = new dialogResponse(false, -1, -1);
+    dialogResponse response = new dialogResponse(false, -1, -1);
 
-    public moveDialog() {
+    public actionDialog() {
         setContentPane(contentPane);
-        setTitle("Trying to move somewhere");
-        setBounds(250,250,500,200);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -54,7 +49,6 @@ public class moveDialog extends JDialog {
         // add your code here
         response.OK = true;
         response.playerID = Integer.parseInt(charIDField.getText());
-        response.areaID = Integer.parseInt(areaIDField.getText());
         setVisible(false);
     }
 
