@@ -1,5 +1,8 @@
 package Model;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Szabotõr karakter. Olyan játszható karakter, akinek a célja, 
  * hogy minél több víz elfolyjon a sivatagba. A csapatának a 
@@ -55,5 +58,13 @@ public class Saboteur extends PlayableCharacter{
 	@Override
 	public String getViewString(){
 		return "Saboteur";
+	}
+
+	@Override
+	public JLabel draw() {
+		JLabel component = super.draw();
+		component.setText("Saboteur Id: " + getID());
+
+		return component;
 	}
 }
