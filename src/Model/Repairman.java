@@ -1,4 +1,4 @@
-/*
+package Model;/*
  * Vízvezeték szerelõ karakter. Olyan játszható karakter, 
  * akinek a célja, hogy minél több víz eljusson a csiszternák 
  * valamelyikébe, és eközben minél kevesebb folyjon el. Képes 
@@ -27,12 +27,12 @@ public class Repairman extends PlayableCharacter{
     /*
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
-    void FixArea(){
-        System.out.println("->Repairman.FixArea[]");
+    public void FixArea(){
+        System.out.println("->Model.Repairman.FixArea[]");
     	System.out.println("->[a1].Fix()");
         GetArea().Fix();
     	System.out.println("<-[a1].Fix()");
-        System.out.println("<-Repairman.FixArea[]");
+        System.out.println("<-Model.Repairman.FixArea[]");
     }
     /*
      * Csõ elem elhelyezése a pályán.
@@ -80,23 +80,31 @@ public class Repairman extends PlayableCharacter{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Repairman]ID : " + getID() + " on [Area]ID : " + a1.getID();}
+    public String toString() {return "[Model.Repairman]ID : " + getID() + " on [Model.Area]ID : " + a1.getID();}
 
     /*
     * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
      */
-    void BreakArea(){
-        System.out.println("->Saboteur.BreakArea()");
+    public void BreakArea(){
+        System.out.println("->Model.Saboteur.BreakArea()");
         System.out.println("->[a1].Break()");
         GetArea().Break();
         System.out.println("<-[a1].Break()");
-        System.out.println("<-Saboteur.BreakArea()");
+        System.out.println("<-Model.Saboteur.BreakArea()");
     }
 
     public String SavableState() {
-        String res = "playerType:Repairman,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
+        String res = "playerType:Model.Repairman,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
         if (pump != null) res += "hasPump:true,";
         if (pipe != null) res += "hasPipe:true,";
         return res;
+    }
+
+    /**
+     * @return a string to view pc type
+     */
+    @Override
+    public String getViewString(){
+        return "Repairman";
     }
 }

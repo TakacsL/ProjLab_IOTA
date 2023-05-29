@@ -1,3 +1,8 @@
+package Model;
+
+import Model.Area;
+import Model.PlayableCharacter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +21,7 @@ public class Map {
      */
     public List<PlayableCharacter> playableCharacters = new ArrayList<PlayableCharacter>();
 
-    //ID alapján visszaadja az Area-t
+    //ID alapján visszaadja az Model.Area-t
     public Area getAreabyID(int id){
         for (Area a: areas) {
             if (a.getID() == id) return a;
@@ -51,7 +56,7 @@ public class Map {
     /*
      * A rendszerhez egy újabb elem illesztése.
      */
-    void AddArea(Area a){
+    public void AddArea(Area a){
         areas.add(a);
         System.out.println("->AddArea["+a.toString()+"]");
         System.out.println("<-AddArea["+a.toString()+"]");
@@ -59,7 +64,7 @@ public class Map {
     /*
      * A rendszerhez egy újabb player illesztése.
      */
-    void AddPlayer(PlayableCharacter pc){
+    public void AddPlayer(PlayableCharacter pc){
         playableCharacters.add(pc);
         System.out.println("->AddPlayer["+pc.toString()+"]");
         System.out.println("<-AddPlayer["+pc.toString()+"]");

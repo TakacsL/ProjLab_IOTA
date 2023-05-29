@@ -1,3 +1,5 @@
+package Model;
+
 /*
  * A forrás mezõt reprezentálja. A hozzá csatlakoztatott elemekbe víz áramlik.
  */
@@ -14,7 +16,7 @@ public class Fountain extends Area{
 	 * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
-    void Connect(Area a){
+    public void Connect(Area a){
         System.out.println("->" + toString() + ".Connect["+a.toString()+"]");
         connectedAreas.add(a);
         System.out.println("<-" + toString() + ".Connect["+a.toString()+"]");
@@ -40,10 +42,10 @@ public class Fountain extends Area{
 	 * konzolra írást segítõ fv
 	 */
     @Override
-    public String toString() {return "[Fountain] ID : " + getID();}
+    public String toString() {return "[Model.Fountain] ID : " + getID();}
 
     public String SavableState() {
-        String res = "areaType:Fountain,areaId:" + getID() + ",";
+        String res = "areaType:Model.Fountain,areaId:" + getID() + ",";
         if (player != null) res += "playerId:" + player.getID() + ",";
         for (Area area : connectedAreas) {
             res += "connectedAreaId:" + area.getID() + ",";

@@ -1,3 +1,7 @@
+package Model;
+
+import Controller.Game;
+
 import java.util.List;
 
 /**
@@ -105,23 +109,32 @@ public abstract class PlayableCharacter {
 				}
 				System.out.println("<-" + toString() + ".MoveTo[a2]");
 			}
-			else System.out.println("Cant move to an area which is not adjacent");
-		} else System.out.println("Player cannot move for " + getStuckTimer() + " turns");
+			else {
+				System.out.println("Cant move to an area which is not adjacent");
+				Game.getInstance().getWindow().showFailedMessage();
+			}
+		} else {
+			System.out.println("Player cannot move for " + getStuckTimer() + " turns");
+			Game.getInstance().getWindow().showFailedMessage();
+		}
 	}
 
 	/*
 	 * A csõrendszer egyik elemének a felvéte, üres fv
 	 */
-	public void PickupPipe(Pipe p) {
-
-	}
+	public void PickupPipe(Pipe p) {}
 
 	/*
 	 * a1 getter
 	 */
-	protected Area GetArea(){
+	public Area GetArea(){
 		return a1;
 	}
+
+	/**
+	 * @return a string to view pc type
+	 */
+	public String getViewString(){return "PlayableCharacter";}
 
 	/*
 	 * A pumpa be- és kimenetének átállítása.
@@ -142,24 +155,26 @@ public abstract class PlayableCharacter {
 	/*
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
-	abstract void FixArea();
+	public abstract void FixArea();
 
 	/*
 	 * konzolra írást segítõ fv
 	 */
-	public String toString() {return "[PlayableCharacter]";}
+	public String toString() {return "[Model.PlayableCharacter]";}
 
 	/*
 	* A csövön beállítja a ragadós állapotot
 	 */
 
-	public void makeSticky(Area a){
-		a.setStickyTimer();
+	public void makeSticky(){
+		GetArea().setStickyTimer();
 	}
 
 	public abstract String SavableState();
 	/*
 	* Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
-	abstract void BreakArea();
+	public abstract void BreakArea();
+
+	public void makeSlippery(){}
 }
