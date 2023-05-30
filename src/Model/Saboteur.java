@@ -9,7 +9,6 @@ import java.awt.*;
  * pontjai az elfolyt vizek hatására nõnek. Ha csõ mezõn áll, 
  * akkor ki tudja lyukasztani a csövet, ezzel elfolyik belõle 
  * a víz, amíg meg nem javítja valaki.
-
  * */
 
 public class Saboteur extends PlayableCharacter{
@@ -18,7 +17,7 @@ public class Saboteur extends PlayableCharacter{
 	}
 
 	/**
-	 *
+	 * Fix the current area on which the saboteur is standing
 	 */
 	@Override
 	public void FixArea() {
@@ -26,7 +25,7 @@ public class Saboteur extends PlayableCharacter{
 		System.out.println("I cant do this");
 		System.out.println("<-Model.Saboteur.FixArea[]");}
 
-	/*
+	/**
 	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
 	@Override
@@ -38,15 +37,22 @@ public class Saboteur extends PlayableCharacter{
         System.out.println("<-Model.Saboteur.BreakArea()");
     }
     
-	/*
-	 * konzolra írást segítõ fv
+	/**
+	 * Konzolra írást segítõ fv
 	 */
     public String toString() {return "[Model.Saboteur]ID : " + getID() + " on [Model.Area]ID : " + a1.getID();}
 
+	/**
+	 * Makes the area slippery on which the saboteur is standing
+	 */
 	public void makeSlippery(){
 		GetArea().setSlipperyTimer();
 	}
 
+	/**
+	 * Creates a string that holds information about the saboteur's state
+	 * @return state string
+	 */
 	public String SavableState() {
 		String res = "playerType:Model.Saboteur,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
 		return res;
@@ -60,6 +66,10 @@ public class Saboteur extends PlayableCharacter{
 		return "Saboteur";
 	}
 
+	/**
+	 * Creates a component that represents this Saboteur
+	 * @return component representing this saboteur
+	 */
 	@Override
 	public JLabel draw() {
 		JLabel component = super.draw();

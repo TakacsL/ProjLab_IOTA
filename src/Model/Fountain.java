@@ -4,19 +4,19 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
-/*
+/**
  * A forrás mezõt reprezentálja. A hozzá csatlakoztatott elemekbe víz áramlik.
  */
 public class Fountain extends Area {
 
-    /*
+    /**
      * Az elemen lévõ csövet továbbítja a szerelõnek aki fel akarja venni azt.
      */
     public Pipe PickupPipe() {
         return new Pipe();
     }
 
-    /*
+    /**
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
@@ -47,7 +47,7 @@ public class Fountain extends Area {
     public void addWaterLevel(Area AreaFrom) {
     }
 
-    /*
+    /**
      * konzolra írást segítõ fv
      */
     @Override
@@ -55,6 +55,10 @@ public class Fountain extends Area {
         return "[Model.Fountain] ID : " + getID();
     }
 
+    /**
+     *
+     * @return
+     */
     public String SavableState() {
         String res = "areaType:Model.Fountain,areaId:" + getID() + ",";
         res += "x:" + x + ",y:" + y + ",";
@@ -67,11 +71,18 @@ public class Fountain extends Area {
         return res;
     }
 
+    /**
+     * Constructs fountain object
+     */
     public Fountain() {
         super();
         System.out.println("Create " + this.toString());
     }
 
+    /**
+     * Creates a component that represents this fountain's state
+     * @return component representing the fountain
+     */
     @Override
     public JComponent draw() {
         JButton component = (JButton) super.draw();

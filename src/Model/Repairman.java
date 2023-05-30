@@ -1,33 +1,39 @@
-package Model;/*
- * Vízvezeték szerelõ karakter. Olyan játszható karakter, 
- * akinek a célja, hogy minél több víz eljusson a csiszternák 
- * valamelyikébe, és eközben minél kevesebb folyjon el. Képes 
- * megjavítani a csövet, vagy a pumpát, ha ilyen mezõkön áll, 
- * és azok éppen hibásak. Ha ciszterna mezõn áll, akkor vehet 
- * fel egy pumpát, amit egy csõ mezõn tud lehelyezni, ezzel két 
- * részre osztva a csövet.
+package Model;
 
- */
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Vízvezeték szerelõ karakter. Olyan játszható karakter,
+ * akinek a célja, hogy minél több víz eljusson a csiszternák
+ * valamelyikébe, és eközben minél kevesebb folyjon el. Képes
+ * megjavítani a csövet, vagy a pumpát, ha ilyen mezõkön áll,
+ * és azok éppen hibásak. Ha ciszterna mezõn áll, akkor vehet
+ * fel egy pumpát, amit egy csõ mezõn tud lehelyezni, ezzel két
+ * részre osztva a csövet.
+
+ */
 public class Repairman extends PlayableCharacter{
-	/*
+	/**
 	 * pumpa példány, amit felvett a karakter
 	 */
 	public Pump pump;
 
-    /*
+    /**
      * A szerelõ által felvett csõ
      */
     public Pipe pipe;
 
+    /**
+     * Constructs a repairman
+     * @param a area where the repairman should be placed
+     */
     public Repairman(Area a) {
         super(a);
     }
 
-    /*
+    /**
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
     public void FixArea(){
@@ -37,7 +43,7 @@ public class Repairman extends PlayableCharacter{
     	System.out.println("<-[a1].Fix()");
         System.out.println("<-Model.Repairman.FixArea[]");
     }
-    /*
+    /**
      * Csõ elem elhelyezése a pályán.
      */
     void PlacePipe(){
@@ -47,7 +53,7 @@ public class Repairman extends PlayableCharacter{
         pipe = null;
         System.out.println("<-" + toString() + ".PlacePipe[]");
     }
-    /*
+    /**
      * Pumpa elem elhelyezése egy csõ elemre.
      */
     void PlacePump(){
@@ -58,13 +64,16 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-" + toString() + ".PlacePump()");
     }
 
+    /**
+     * Picking up a pump
+     */
     void PickupPump(){
         System.out.println("->" + toString() + ".PickupPump()");
         pump = a1.PickupPump();
         System.out.println("<-" + toString() + ".PickupPump()");
     }
 
-    /*
+    /**
      * A csõrendszer egyik csõ elemének a felvéte.
      */
     public void PickupPipe(Pipe p) {
@@ -79,13 +88,13 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-" + toString() + ".PickupPipe(" + p + ")");
     }
 
-	/*
+	/**
 	 * konzolra írást segítõ fv
 	 */
     @Override
     public String toString() {return "[Model.Repairman]ID : " + getID() + " on [Model.Area]ID : " + a1.getID();}
 
-    /*
+    /**
     * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
      */
     public void BreakArea(){
@@ -96,6 +105,10 @@ public class Repairman extends PlayableCharacter{
         System.out.println("<-Model.Saboteur.BreakArea()");
     }
 
+    /**
+     * Create a component based on the repairman
+     * @return component which represents a repairman
+     */
     @Override
     public JLabel draw() {
         JLabel component = super.draw();
@@ -104,6 +117,10 @@ public class Repairman extends PlayableCharacter{
         return component;
     }
 
+    /**
+     * Create a string that represents the Repairman's state
+     * @return state string
+     */
     public String SavableState() {
         String res = "playerType:Model.Repairman,playerId:" + getID() + ",areaId:" + a1.getID() + ",";
         if (pump != null) res += "hasPump:true,";

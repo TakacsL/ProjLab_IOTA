@@ -4,7 +4,7 @@ import View.Window;
 import java.util.Scanner;
 
 public class Main {
-	/*
+	/**
 	 * A menüelemek konzolra írása függvénybe kiszervezve
 	 */
    
@@ -15,7 +15,7 @@ public class Main {
         System.out.print("Choose your option : ");
     }
     
-    /*
+    /**
      * Konzol képernyő törlése függvénybe kiszervezve
      */
     public static void cls(){
@@ -25,7 +25,9 @@ public class Main {
         	System.out.println(ex);
         }
     }
-
+/**
+ * Entry point of the program
+ */
     public static void main(String[] args) {
 
         Window w = new Window();

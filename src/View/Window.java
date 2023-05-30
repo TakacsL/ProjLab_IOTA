@@ -9,33 +9,113 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
+/**
+ * Window is responsible for showing everything there is to be shown, the current state of the game,
+ * the game map, the points for each team, and lets the user choose from
+ * a set of actions.
+ */
+
 public class Window extends JFrame{
 
+    /**
+     * JPanel that covers the whole window
+     */
     private JPanel wholePanel;
+    /**
+     * Holds tables about the game's state
+     */
     private JPanel sidePanel;
+    /**
+     * This panel will hold all the game's objects
+     */
     public JPanel gameArea;
+    /**
+     * Holds the menu toolbar
+     */
     private JPanel menuPanel;
+    /**
+     * Holds the directory table
+     */
     private JPanel directoryPanel;
+    /**
+     * Holds the points table
+     */
     private JPanel pointsPanel;
+    /**
+     * Button for starting a new game
+     */
     private JButton newGameButton;
+    /**
+     * Button for exiting the program
+     */
     private JButton exitButton;
+    /**
+     * Toolbar for the available options
+     */
     private JToolBar menuToolBar;
+    /**
+     * Shows information about areas and players
+     */
     private JTable directoryTable;
+    /**
+     * Helps to make the points table scrollable
+     */
     private JScrollPane pointsScrollPane;
+    /**
+     * Shows the points for each team
+     */
     private JTable pointsTable;
+    /**
+     * Helps to make the points table scrollable
+     */
     private JScrollPane directoryScrollPane;
+    /**
+     * Holds the action buttons for controlling the characters
+     */
     private JPanel activityPanel;
+    /**
+     * Button for moving a character
+     */
     private JButton MoveButton;
+    /**
+     * Button for sabotaging with a character
+     */
     private JButton sabotageButton;
+    /**
+     * Button for repairing with a character
+     */
     private JButton repairButton;
+    /**
+     * Button for making an area sticky with a character
+     */
     private JButton stickyButton;
+    /**
+     * Button for making an area slippery with a character
+     */
     private JButton slimyButton;
+    /**
+     * Button for setting a Pumps input and output
+     */
     private JButton setButton;
+    /**
+     * Button for saving the game
+     */
     private JButton saveButton;
+    /**
+     * Button for loading the last saved game
+     */
     private JButton loadButton;
 
+    /**
+     * Holds information to be shown in directoryTable
+     */
     public String[][] directoryData = {};
 
+    /**
+     * Constructs the window object
+     *
+     * Sets up all the necessary action callbacks to operate the game correctly
+     */
     public Window() {
         setTitle("IOTA_GUI");
         setContentPane(wholePanel);
@@ -43,7 +123,7 @@ public class Window extends JFrame{
         setSize(1200, 800);
         setVisible(true);
 
-        /*
+        /**
          *Makes gameArea into absoluteLayout, so we can place stuff to exact coordinates
          */
         gameArea.setLayout(null);
@@ -51,6 +131,10 @@ public class Window extends JFrame{
         var that = this;
         exitButton.addActionListener(new ActionListener() {
             /**
+             * Invoked when an action occurs.
+             *
+             * Exits the program
+             *
              * @param e the event to be processed
              */
             @Override
@@ -60,6 +144,10 @@ public class Window extends JFrame{
         });
         newGameButton.addActionListener(new ActionListener() {
             /**
+             * Invoked when an action occurs.
+             *
+             * Starts a new game
+             *
              * @param e the event to be processed
              */
             @Override
@@ -72,6 +160,8 @@ public class Window extends JFrame{
             /**
              * Invoked when an action occurs.
              *
+             * Saves the current game's state
+             *
              * @param e the event to be processed
              */
             @Override
@@ -82,6 +172,8 @@ public class Window extends JFrame{
         loadButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             *
+             * Loads the last saved game
              *
              * @param e the event to be processed
              */
@@ -94,6 +186,8 @@ public class Window extends JFrame{
         MoveButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             *
+             * Shows the move dialog, then calls the PlayableCharacter::MoveTo function based on the dialog's return data
              *
              * @param e the event to be processed
              */
@@ -109,6 +203,8 @@ public class Window extends JFrame{
             /**
              * Invoked when an action occurs.
              *
+             * Shows the action dialog, then calls the PlayableCharacter::BreakArea function based on the dialog's return data
+             *
              * @param e the event to be processed
              */
             @Override
@@ -122,6 +218,8 @@ public class Window extends JFrame{
         repairButton.addActionListener(new ActionListener() {
             /**
              * Invoked when an action occurs.
+             *
+             * Shows the action dialog, then calls the PlayableCharacter::BreakArea function based on the dialog's return data
              *
              * @param e the event to be processed
              */
@@ -137,6 +235,8 @@ public class Window extends JFrame{
             /**
              * Invoked when an action occurs.
              *
+             * Shows the action dialog, then calls the PlayableCharacter::makeSticky function based on the dialog's return data
+             *
              * @param e the event to be processed
              */
             @Override
@@ -151,6 +251,8 @@ public class Window extends JFrame{
             /**
              * Invoked when an action occurs.
              *
+             * Shows the action dialog, then calls the PlayableCharacter::makeSlippery function based on the dialog's return data
+             *
              * @param e the event to be processed
              */
             @Override
@@ -163,7 +265,9 @@ public class Window extends JFrame{
         });
     }
 
-
+    /**
+     * Initializes the UI elements of the window
+     */
     private void createUIComponents() {
         // TODO: place custom component creation code here
         gameArea = new JPanel();
@@ -176,6 +280,9 @@ public class Window extends JFrame{
         drawComponents();
     }
 
+    /**
+     * Draws all map components and updates the points
+     */
     public void drawComponents(){
         if(Game.getInstance().map == null) return;
         gameArea.removeAll();
@@ -201,6 +308,9 @@ public class Window extends JFrame{
         repaint();
     }
 
+    /**
+     * Shows a message dialog which indicates that something went wrong
+     */
     public void showFailedMessage(){
         final JOptionPane pane = new JOptionPane("It failed");
         final JDialog d = pane.createDialog((JFrame)null, "Sorry");
