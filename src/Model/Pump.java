@@ -2,40 +2,46 @@ package Model;
 
 import Controller.Game;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 /**
-Pumpa mezõ. Több bekötött csöve lehet, ezek közül minden 
-pillanatban egy bemenõ, és egy kimenõ csöve van. Ezt a két 
-csövet minden játékos tudja állítani, aki rajta van a pumpa
-mezõn. Véletlen idõközönként elromolhat. Vagy a játék elején 
-fix helyen vannak, vagy vízvezeték szerelõ karakterek helyezhetik le.
+ * Pumpa mezõ. Több bekötött csöve lehet, ezek közül minden
+ * pillanatban egy bemenõ, és egy kimenõ csöve van. Ezt a két
+ * csövet minden játékos tudja állítani, aki rajta van a pumpa
+ * mezõn. Véletlen idõközönként elromolhat. Vagy a játék elején
+ * fix helyen vannak, vagy vízvezeték szerelõ karakterek helyezhetik le.
  */
 
-public class Pump extends Area{
+public class Pump extends Area {
     /*
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
-    public void Connect(Area a){
-        if(connectedAreas.contains(a)) return;
-        System.out.println("->Model.Pump.Connect["+a.toString()+"]");
-        connectedAreas.add(a);
-        a.connectedAreas.add(this);
-        System.out.println("<-Model.Pump.Connect["+a.toString()+"]");
+    public void Connect(Area a) {
+        if (connectedAreas.contains(a)) return;
+        System.out.println("->Model.Pump.Connect[" + a.toString() + "]");
+        a.Connect(this);
+        if (a.connectedAreas.contains(this))
+            connectedAreas.add(a);
+        System.out.println("<-Model.Pump.Connect[" + a.toString() + "]");
     }
 
-	/*
-	 * konzolra írást segítõ fv
-	 */
+    /*
+     * konzolra írást segítõ fv
+     */
     @Override
-    public String toString() {return "[Model.Pump]ID : " + getID() + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");}
+    public String toString() {
+        return "[Model.Pump]ID : " + getID() + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");
+    }
 
     /*
      * A hibás pumpa megjavítása.
      */
     @Override
-    void Fix(){
+    void Fix() {
         System.out.println("->Model.Pump.Fix[]");
         setBroken(false);
         System.out.println("<-Model.Pump.Fix[]");
@@ -58,7 +64,7 @@ public class Pump extends Area{
     @Override
     public void SetOutput(Area a) {
         System.out.println("->Model.Pump.SetOutput(" + a + ")");
-        if(connectedAreas.contains(a)){
+        if (connectedAreas.contains(a)) {
             output = a;
         }
         System.out.println("<-Model.Pump.SetOutput(" + a + ")");
@@ -66,7 +72,10 @@ public class Pump extends Area{
 
     public String SavableState() {
         String res = "areaType:Model.Pump,areaId:" + getID() + ",";
-        if (player != null) res += "playerId:" + player.getID() + ",";
+        res += "x:" + x + ",y:" + y + ",";
+        for (var player:players) {
+            res += "playerId:" + player.getID() + ",";
+        }
         if (isBroken()) res += "broken:" + true + ",";
         if (maxCapacity > 0) res += "maxCapacity:" + maxCapacity + ",";
         if (getWaterLevel() > 0) res += "waterLevel:" + getWaterLevel() + ",";
@@ -93,7 +102,7 @@ public class Pump extends Area{
      * else add water to output
      */
     @Override
-    public void step(){
+    public void step() {
         if (getWaterLevel() > 0) {
             this.setWaterLevel(this.getWaterLevel() - 1);
             if (isBroken()) {
@@ -109,8 +118,20 @@ public class Pump extends Area{
      * If not full, and input ID is same as caller, incr. WaterLevel
      */
     @Override
-    public void addWaterLevel(Area AreaFrom){
-        if (this.getWaterLevel() < this.maxCapacity && AreaFrom.getID() == input.getID()) this.setWaterLevel(this.getWaterLevel() + 1);
+    public void addWaterLevel(Area AreaFrom) {
+        if (this.getWaterLevel() < this.maxCapacity && AreaFrom.getID() == input.getID())
+            this.setWaterLevel(this.getWaterLevel() + 1);
     }
 
+    @Override
+    public JComponent draw() {
+        JButton component = (JButton) super.draw();
+        try {
+            Image img = ImageIO.read(getClass().getResourceAsStream("/Assets/Pump.png"));
+            component.setIcon(new ImageIcon(img));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return component;
+    }
 }

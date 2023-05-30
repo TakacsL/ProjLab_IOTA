@@ -2,9 +2,6 @@ package Controller;
 
 import Model.*;
 import View.Window;
-import View.drawCistern;
-import View.drawFountain;
-import View.drawPipe;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,7 +9,7 @@ import java.util.StringTokenizer;
 
 public final class Game {
 
-	//singleton mûködés megvalósítása
+    //singleton mûködés megvalósítása
     private static Game INSTANCE;
 
     /**
@@ -27,8 +24,9 @@ public final class Game {
 
     private Window window;
 
-    public Window getWindow() {return window;}
-
+    public Window getWindow() {
+        return window;
+    }
 
 
     //válzotó ami alapján tudjuk követni a játék jelenlegi állapotát
@@ -38,34 +36,38 @@ public final class Game {
     public boolean isGameRunning() {
         return GameRunning;
     }
-    private Game() {}
-    public Map map;	//a játékhoz tartozó területrendszert tartalmaza.
 
-  //singleton mûködés megvalósítása
+    private Game() {
+    }
+
+    public Map map;    //a játékhoz tartozó területrendszert tartalmaza.
+
+    //singleton mûködés megvalósítása
     public static Game getInstance() {
-        if(INSTANCE == null) {
+        if (INSTANCE == null) {
             INSTANCE = new Game();
         }
         return INSTANCE;
     }
 
     //A játék indítása.
-    public void StartGame(Window w){
+    public void StartGame(Window w) {
         window = w;
         GameRunning = true;
         getInstance().CreateInitialMap();
     }
 
     //A játék befejezése.
-    public void EndGame(){
+    public void EndGame() {
         System.out.println("Points are Model.Saboteur : " + saboteurPoints + " vs. Model.Repairman : " + repairmanPoints);
-        if (saboteurPoints != repairmanPoints) System.out.println((saboteurPoints > repairmanPoints ? "Model.Saboteur" : "Model.Repairman") + " team won!");
+        if (saboteurPoints != repairmanPoints)
+            System.out.println((saboteurPoints > repairmanPoints ? "Model.Saboteur" : "Model.Repairman") + " team won!");
         else System.out.println("Controller.Game ended in a draw!");
         GameRunning = false;
     }
 
     //A kör befejezése, az elemek léptetése.
-    public void EndTurn(){
+    public void EndTurn() {
         if (!getInstance().GameRunning) return;
         System.out.println("->EndTurn[]");
 
@@ -82,7 +84,7 @@ public final class Game {
     }
 
     //A pálya alapállásának kialakítása
-    private void CreateInitialMap(){
+    private void CreateInitialMap() {
         if (!getInstance().GameRunning) return;
 
         map = new Map();
@@ -90,22 +92,19 @@ public final class Game {
         System.out.println("->CreateInitialMap[]");
 
         Fountain f = new Fountain();
-        drawFountain df = new drawFountain(f.getID(), 30, 30);
         Cistern c = new Cistern();
-        drawCistern dc = new drawCistern(c.getID(), 500, 500);
         Pipe p1 = new Pipe();
-        drawPipe dp1 = new drawPipe(p1.getID(), 500, 30);
         Pipe p2 = new Pipe();
-        drawPipe dp2 = new drawPipe(p2.getID(), 30, 500);
+
+        f.setCoordinate(30, 30);
+        c.setCoordinate(500, 500);
+        p1.setCoordinate(500, 30);
+        p2.setCoordinate(30, 500);
 
         map.AddArea(f);
-        window.addComponent(df);
         map.AddArea(c);
-        window.addComponent(dc);
         map.AddArea(p1);
-        window.addComponent(dp1);
         map.AddArea(p2);
-        window.addComponent(dp2);
 
         Repairman r1 = new Repairman(f);
         Repairman r2 = new Repairman(c);
@@ -113,13 +112,9 @@ public final class Game {
         Saboteur s2 = new Saboteur(p2);
 
         map.AddPlayer(r1);
-        window.addPlayableCharacter(r1);
         map.AddPlayer(r2);
-        window.addPlayableCharacter(r2);
         map.AddPlayer(s1);
-        window.addPlayableCharacter(s1);
         map.AddPlayer(s2);
-        window.addPlayableCharacter(s2);
 
         f.Connect(p1);
         p1.Connect(p2);
@@ -156,6 +151,7 @@ public final class Game {
             Game.getInstance().StartGame(w);
             RestoreMap();
             RestoreConnections();
+            getWindow().drawComponents();
             System.out.println("Loaded game restored");
         } catch (IOException e) {
             System.out.println("Failed to load game");
@@ -172,7 +168,7 @@ public final class Game {
 
         while (line != null) {
             String playerType = null, playerId = null, areaType = null, areaId = null;
-            int slipperyTimer = 0, stickyTimer = 0, brokenTimer = 0, maxCapacity = 0, waterLevel = 0;
+            int slipperyTimer = 0, stickyTimer = 0, brokenTimer = 0, maxCapacity = 0, waterLevel = 0, x = 0, y = 0;
             boolean broken = false;
 
             StringTokenizer st = new StringTokenizer(line, ",");
@@ -213,22 +209,31 @@ public final class Game {
                     case "waterLevel":
                         waterLevel = Integer.parseInt(value);
                         break;
+                    case "x":
+                        x = Integer.parseInt(value);
+                        break;
+                    case "y":
+                        y = Integer.parseInt(value);
+                        break;
                 }
             }
             if (areaType != null) switch (areaType) {
                 case "Model.Fountain":
                     Fountain fountain = new Fountain();
                     fountain.setID(Integer.parseInt(areaId));
+                    fountain.setCoordinate(x, y);
                     map.AddArea(fountain);
                     break;
                 case "Model.Cistern":
                     Cistern cistern = new Cistern();
                     cistern.setID(Integer.parseInt(areaId));
+                    cistern.setCoordinate(x, y);
                     map.AddArea(cistern);
                     break;
                 case "Model.Pipe":
                     Pipe pipe = new Pipe();
                     pipe.setID(Integer.parseInt(areaId));
+                    pipe.setCoordinate(x, y);
                     if (slipperyTimer > 0) pipe.setSlipperyTimer(slipperyTimer);
                     if (stickyTimer > 0) pipe.setStickyTimer(stickyTimer);
                     if (brokenTimer > 0) pipe.setBrokenTimer(brokenTimer);
@@ -240,6 +245,7 @@ public final class Game {
                 case "Model.Pump":
                     Pump pump = new Pump();
                     pump.setID(Integer.parseInt(areaId));
+                    pump.setCoordinate(x, y);
                     map.AddArea(pump);
                     break;
             }
@@ -270,8 +276,9 @@ public final class Game {
         String line = br.readLine();
 
         while (line != null) {
-            String areaId = null, player = null;
+            String areaId = null;
             ArrayList<String> connectingAreas = new ArrayList<>();
+            ArrayList<String> players = new ArrayList<>();
 
             StringTokenizer st = new StringTokenizer(line, ",");
             while (st.hasMoreTokens()) {
@@ -285,7 +292,7 @@ public final class Game {
                         areaId = value;
                         break;
                     case "playerId":
-                        player = value;
+                        players.add(value);
                         break;
                     case "connectedAreaId":
                         connectingAreas.add(value);
@@ -298,8 +305,9 @@ public final class Game {
                 for (String connectingArea : connectingAreas) {
                     currentArea.Connect(map.getAreabyID(Integer.parseInt(connectingArea)));
                 }
-                if (player != null) {
-                    currentArea.setPlayer(map.getPlayerbyID(Integer.parseInt(player)));
+                if (players != null) {
+                    for(String player: players)
+                    currentArea.addPlayer(map.getPlayerbyID(Integer.parseInt(player)));
                 }
             }
             line = br.readLine();

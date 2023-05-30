@@ -9,6 +9,9 @@ package Model;/*
 
  */
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Repairman extends PlayableCharacter{
 	/*
 	 * pumpa példány, amit felvett a karakter
@@ -91,6 +94,14 @@ public class Repairman extends PlayableCharacter{
         GetArea().Break();
         System.out.println("<-[a1].Break()");
         System.out.println("<-Model.Saboteur.BreakArea()");
+    }
+
+    @Override
+    public JLabel draw() {
+        JLabel component = super.draw();
+        component.setText("Repairman Id: " + getID());
+
+        return component;
     }
 
     public String SavableState() {

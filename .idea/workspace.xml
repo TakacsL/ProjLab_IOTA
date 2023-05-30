@@ -4,22 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8b2b421-eb98-4e3d-b84c-1bfd8c0f4786" name="Changes" comment="GUI dev. 2">
-      <change afterPath="$PROJECT_DIR$/src/View/actionDialog.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/actionDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/dialogResponse.java" afterDir="false" />
+    <list default="true" id="b8b2b421-eb98-4e3d-b84c-1bfd8c0f4786" name="Changes" comment="Restore Main class features after merge">
+      <change afterPath="$PROJECT_DIR$/src/View/PipePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saveState.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saveState.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Cistern.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cistern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Fountain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Fountain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Pipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pipe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/PlayableCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PlayableCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Pump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pump.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Repairman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Repairman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Saboteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Saboteur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Drawable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Drawable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Window.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Window.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/drawPipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/drawPipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/moveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/moveDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/drawCistern.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/drawFountain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/drawPipe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/drawPump.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +39,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Takács" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,27 +55,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "OverrideImplement.generate.javadoc": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "297",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "364",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;297&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;364&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="JavaApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -156,7 +158,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/Takács" />
+                        <option value="Takács" />
                       </list>
                     </value>
                   </entry>
@@ -176,15 +178,5 @@
     <MESSAGE value="GUI, moveDialog, exit, view basics" />
     <MESSAGE value="GUI dev. 2" />
     <option name="LAST_COMMIT_MESSAGE" value="GUI dev. 2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
