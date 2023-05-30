@@ -14,27 +14,38 @@ import java.util.List;
  * */
 
 public abstract class PlayableCharacter {
-	/*
+	/**
 	 * Az az elem, amelyen a karakter áll.
 	 */
 	Area a1;
 
-	//A karakter egyedülálló azonosítója, id
+	/**
+	 * A karakter egyedülálló azonosítója, id
+	 */
 	private int ID;
-	//statikus számláló, ami egyrészt számon tartja az karakterek számát,
-	// de az ID létrehozásában használjuk, minden használatnál nõ egyel az értéke
+	/**
+	 * statikus számláló, ami egyrészt számon tartja az karakterek számát,
+	 * de az ID létrehozásában használjuk, minden használatnál nõ egyel az értéke
+	 */
 	private static int numOfIDs = 0;
 
-	//getted for ID
+	/**
+	 *
+	 * @return character ID
+	 */
 	public int getID() {
 		return ID;
 	}
 
+	/**
+	 *
+	 * @param id set character ID
+	 */
 	public void setID(int id) {
 		this.ID = id;
 	}
 
-	/*
+	/**
 	 * konstruktor, skeleton miatt a1 inicianilázása
 	 */
 	public PlayableCharacter(Area a) {
@@ -44,26 +55,26 @@ public abstract class PlayableCharacter {
 		ID = numOfIDs++;
 	}
 
-	/*
+	/**
 	* A játékos ennyi ideig nem tud mozogni
 	 */
 	private int stuckTimer = 0;
 
-	/*
+	/**
 	* A játékos nem mozgási idejét beállítja
 	 */
 	public void setStuckTimer(){
 		stuckTimer = 3;
 	}
 
-	/*
-	* Visszadja mennyi ideig nem tud mozogni még a játékos
+	/**
+	 * Visszadja mennyi ideig nem tud mozogni még a játékos
 	 */
 	public int getStuckTimer(){
 		return stuckTimer;
 	}
 
-	/*
+	/**
 	 *  A karakter átlép egy másik elemre. 
 	 */
 	public void MoveTo(Area a2){
@@ -121,12 +132,12 @@ public abstract class PlayableCharacter {
 		}
 	}
 
-	/*
+	/**
 	 * A csõrendszer egyik elemének a felvéte, üres fv
 	 */
 	public void PickupPipe(Pipe p) {}
 
-	/*
+	/**
 	 * a1 getter
 	 */
 	public Area GetArea(){
@@ -138,7 +149,7 @@ public abstract class PlayableCharacter {
 	 */
 	public String getViewString(){return "PlayableCharacter";}
 
-	/*
+	/**
 	 * A pumpa be- és kimenetének átállítása.
 	 */
 	public void SetPumpConfiguration(Area a1, Area a2){
@@ -149,23 +160,23 @@ public abstract class PlayableCharacter {
 		System.out.println("<-" + toString() + ".SetPumpConfiguration("+ a1 + ", " + a2 +")");
 	}
 
-	/*
+	/**
 	 * A kiválasztott tevékenység végrehajtása.
 	 */
 	public void step() {}
 
-	/*
+	/**
 	 * Annak a területnek a megjavítása, amelyen a karakter áll.
 	 */
 	public abstract void FixArea();
 
-	/*
+	/**
 	 * konzolra írást segítõ fv
 	 */
 	public String toString() {return "[Model.PlayableCharacter]";}
 
-	/*
-	* A csövön beállítja a ragadós állapotot
+	/**
+	 * A csövön beállítja a ragadós állapotot
 	 */
 
 	public void makeSticky(){
@@ -173,13 +184,20 @@ public abstract class PlayableCharacter {
 	}
 
 	public abstract String SavableState();
-	/*
-	* Annak a csõnek a kilyukasztása, amelyen a karakter áll.
+	/**
+	 * Annak a csõnek a kilyukasztása, amelyen a karakter áll.
 	 */
 	public abstract void BreakArea();
 
+	/**
+	 * Makes the current area slippery
+	 */
 	public void makeSlippery(){}
 
+	/**
+	 * Creates a component which the window should show
+	 * @return created component
+	 */
 	public JLabel draw() {
 		JLabel component = new JLabel();
 		component.setBounds(a1.x, a1.y - 50, 150, 66);

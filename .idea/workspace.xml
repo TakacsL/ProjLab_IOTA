@@ -5,23 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b8b2b421-eb98-4e3d-b84c-1bfd8c0f4786" name="Changes" comment="Restore Main class features after merge">
-      <change afterPath="$PROJECT_DIR$/src/View/PipePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/saveState.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saveState.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Area.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Cistern.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Cistern.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Fountain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Fountain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Pipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pipe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/PlayableCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PlayableCharacter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Pump.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Pump.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Repairman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Repairman.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Saboteur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Saboteur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/PipePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PipePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/drawCistern.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/drawFountain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/drawPipe.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/drawPump.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/actionDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/actionDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/dialogResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/dialogResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/moveDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/moveDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +46,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -55,29 +65,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;297&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;364&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
   <component name="RunManager">
     <configuration name="JavaApplication" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-16" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ProjLab_IOTA" />
       <method v="2">
@@ -169,6 +169,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Move and IDs" />
