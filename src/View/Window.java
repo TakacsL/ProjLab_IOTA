@@ -1,20 +1,16 @@
 package View;
 
 import Controller.Game;
-import Model.PlayableCharacter;
+import Model.Map;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Window extends JFrame{
-    private List<Drawable> components = new ArrayList<>();
 
-    private List<PlayableCharacter> players = new ArrayList<>();
     private JPanel wholePanel;
     private JPanel sidePanel;
     public JPanel gameArea;
@@ -69,6 +65,7 @@ public class Window extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.getInstance().StartGame(that);
+                drawComponents();
             }
         });
         saveButton.addActionListener(new ActionListener() {
@@ -91,6 +88,7 @@ public class Window extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game.getInstance().LoadGame(that);
+                drawComponents();
             }
         });
         MoveButton.addActionListener(new ActionListener() {
@@ -104,6 +102,7 @@ public class Window extends JFrame{
                 moveDialog mwd = new moveDialog();
                 dialogResponse response = mwd.showDialog();
                 if (response.OK) Game.getInstance().map.getPlayerbyID(response.playerID).MoveTo(Game.getInstance().map.getAreabyID(response.areaID));
+                drawComponents();
             }
         });
         sabotageButton.addActionListener(new ActionListener() {
@@ -117,6 +116,7 @@ public class Window extends JFrame{
                 actionDialog dialog = new actionDialog();
                 dialogResponse response = dialog.showDialog();
                 if (response.OK) Game.getInstance().map.getPlayerbyID(response.playerID).BreakArea();
+                drawComponents();
             }
         });
         repairButton.addActionListener(new ActionListener() {
@@ -130,6 +130,7 @@ public class Window extends JFrame{
                 actionDialog dialog = new actionDialog();
                 dialogResponse response = dialog.showDialog();
                 if (response.OK) Game.getInstance().map.getPlayerbyID(response.playerID).FixArea();
+                drawComponents();
             }
         });
         stickyButton.addActionListener(new ActionListener() {
@@ -143,7 +144,7 @@ public class Window extends JFrame{
                 actionDialog dialog = new actionDialog();
                 dialogResponse response = dialog.showDialog();
                 if (response.OK) Game.getInstance().map.getPlayerbyID(response.playerID).makeSticky();
-
+                drawComponents();
             }
         });
         slimyButton.addActionListener(new ActionListener() {
@@ -157,6 +158,7 @@ public class Window extends JFrame{
                 actionDialog dialog = new actionDialog();
                 dialogResponse response = dialog.showDialog();
                 if (response.OK) Game.getInstance().map.getPlayerbyID(response.playerID).makeSlippery();
+                drawComponents();
             }
         });
     }
@@ -171,19 +173,24 @@ public class Window extends JFrame{
         String[] directoryColumnNames = new String[]{"Type of PC", "ID of field", "ID of PC"};
         directoryTable = new JTable(new DefaultTableModel(directoryColumnNames,0));
         directoryTable.setBounds(0,0,15,15);
+        drawComponents();
     }
 
     public void drawComponents(){
+        if(Game.getInstance().map == null) return;
         gameArea.removeAll();
-        for (var item:components) {
-            gameArea.add(item.draw());
+        for (var area:Game.getInstance().map.areas) {
+            gameArea.add(area.draw());
+        }
+        for (var pc:Game.getInstance().map.playableCharacters) {
+            gameArea.add(pc.draw());
         }
         //data model lekérés directoryTable-höz
         DefaultTableModel dtm = (DefaultTableModel) directoryTable.getModel();
         //table törlése
         dtm.setRowCount(0);
         //helyes adatok betöltése
-        for (var item:players) {
+        for (var item:Game.getInstance().map.playableCharacters) {
             dtm.addRow(new Object[]{item.getViewString(), item.GetArea().getID(), item.getID()});
         }
         //ugyanez a pointstTable-el
@@ -192,14 +199,6 @@ public class Window extends JFrame{
         pdtm.addRow(new Object[]{Game.saboteurPoints, Game.repairmanPoints});
         revalidate();
         repaint();
-    }
-
-    public void addComponent(Drawable component){
-        components.add(component);
-    }
-
-    public void addPlayableCharacter(PlayableCharacter pc){
-        players.add(pc);
     }
 
     public void showFailedMessage(){

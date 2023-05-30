@@ -2,6 +2,8 @@ package Model;
 
 import Controller.Game;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -177,4 +179,15 @@ public abstract class PlayableCharacter {
 	public abstract void BreakArea();
 
 	public void makeSlippery(){}
+
+	public JLabel draw() {
+		JLabel component = new JLabel();
+		component.setBounds(a1.x, a1.y - 50, 150, 66);
+		component.setBorder(BorderFactory.createEmptyBorder());
+		component.setVerticalTextPosition(SwingConstants.CENTER);
+		component.setHorizontalTextPosition(SwingConstants.CENTER);
+		component.setForeground(Color.GREEN);
+
+		return component;
+	};
 }
