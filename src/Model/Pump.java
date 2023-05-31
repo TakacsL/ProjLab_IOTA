@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 public class Pump extends Area {
-    /*
+    /**
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
@@ -29,7 +29,7 @@ public class Pump extends Area {
         System.out.println("<-Model.Pump.Connect[" + a.toString() + "]");
     }
 
-    /*
+    /**
      * konzolra írást segítõ fv
      */
     @Override
@@ -37,7 +37,7 @@ public class Pump extends Area {
         return "[Model.Pump]ID : " + getID() + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");
     }
 
-    /*
+    /**
      * A hibás pumpa megjavítása.
      */
     @Override
@@ -47,8 +47,8 @@ public class Pump extends Area {
         System.out.println("<-Model.Pump.Fix[]");
     }
 
-    /*
-     * 	 * Az elem lyukasztása
+    /**
+     * Az elem lyukasztása
      */
     @Override
     void Break() {
@@ -58,7 +58,7 @@ public class Pump extends Area {
     }
 
 
-    /*
+    /**
      * A pumpa kimenetének kiválasztása.
      */
     @Override
@@ -70,6 +70,10 @@ public class Pump extends Area {
         System.out.println("<-Model.Pump.SetOutput(" + a + ")");
     }
 
+    /**
+     * From this state, this object can be recreated
+     * @return the state of this object.
+     */
     public String SavableState() {
         String res = "areaType:Model.Pump,areaId:" + getID() + ",";
         res += "x:" + x + ",y:" + y + ",";
@@ -85,11 +89,17 @@ public class Pump extends Area {
         return res;
     }
 
-    //A játékos lekéri az állítható be- és kimeneti opciókat
+    /**
+     * A játékos lekéri az állítható be- és kimeneti opciókat
+     * @return connected areas
+     */
     public List<Area> getConfigureOptions() {
         return getConnectedAreas();
     }
 
+    /**
+     * Constructs the Pump object
+     */
     public Pump() {
         super();
         System.out.println("Create " + this + ": " + getID());
@@ -115,7 +125,7 @@ public class Pump extends Area {
 
     /**
      * AddWaterLevel override, specific for this type of area
-     * If not full, and input ID is same as caller, incr. WaterLevel
+     * If not full, and input ID is same as caller, increment WaterLevel
      */
     @Override
     public void addWaterLevel(Area AreaFrom) {
@@ -123,6 +133,11 @@ public class Pump extends Area {
             this.setWaterLevel(this.getWaterLevel() + 1);
     }
 
+    /**
+     * Creates the component representing this Pump
+     * Uses the specific png resource
+     * @return component representing this Pump
+     */
     @Override
     public JComponent draw() {
         JButton component = (JButton) super.draw();

@@ -7,9 +7,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+/**
+ * Singleton class
+ *
+ * Holds all necessary game logic
+ */
+
 public final class Game {
 
-    //singleton mûködés megvalósítása
+    /**
+     * singleton mûködés megvalósítása
+     */
+
     private static Game INSTANCE;
 
     /**
@@ -24,25 +33,45 @@ public final class Game {
 
     private Window window;
 
+    /**
+     *
+     * @return the window associated with this game
+     */
     public Window getWindow() {
         return window;
     }
 
 
-    //válzotó ami alapján tudjuk követni a játék jelenlegi állapotát
+    /**
+     * változó ami alapján tudjuk követni a játék jelenlegi állapotát
+     */
     private boolean GameRunning = false;
 
-    //getter for Gamerunning
+    /**
+     *
+     * @return the game running state
+     */
     public boolean isGameRunning() {
         return GameRunning;
     }
 
+    /**
+     * private constructor
+     */
+
     private Game() {
     }
 
-    public Map map;    //a játékhoz tartozó területrendszert tartalmaza.
+    /**
+     * Holds exactly one Map object that contains the Areas and PlayableCharacters
+     */
+    public Map map;
 
-    //singleton mûködés megvalósítása
+    /**
+     * Return the only existing instance
+     *
+     * Singleton type
+     */
     public static Game getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Game();
@@ -50,14 +79,22 @@ public final class Game {
         return INSTANCE;
     }
 
-    //A játék indítása.
+    /**
+     * Initializes the game
+     *
+     * Creates an initial Map state
+     *
+     * @param w The window which should show the game's state
+     */
     public void StartGame(Window w) {
         window = w;
         GameRunning = true;
         getInstance().CreateInitialMap();
     }
 
-    //A játék befejezése.
+    /**
+     * Shows the winning team, sets the running state to false
+     */
     public void EndGame() {
         System.out.println("Points are Model.Saboteur : " + saboteurPoints + " vs. Model.Repairman : " + repairmanPoints);
         if (saboteurPoints != repairmanPoints)
@@ -66,7 +103,9 @@ public final class Game {
         GameRunning = false;
     }
 
-    //A kör befejezése, az elemek léptetése.
+    /**
+     * A kör befejezése, az elemek léptetése.
+     */
     public void EndTurn() {
         if (!getInstance().GameRunning) return;
         System.out.println("->EndTurn[]");
@@ -83,7 +122,9 @@ public final class Game {
         System.out.println("<-EndTurn[m]");
     }
 
-    //A pálya alapállásának kialakítása
+    /**
+     * A pálya alapállásának kialakítása
+     */
     private void CreateInitialMap() {
         if (!getInstance().GameRunning) return;
 
@@ -122,9 +163,14 @@ public final class Game {
         c.Connect(p1);
 
         window.drawComponents();
-
     }
 
+
+    /**
+     * Saves the game's actual state
+     *
+     * Use the LoadGame(Window) to load
+     */
     public void SaveGame() {
         try {
             FileWriter fw = new FileWriter("saveState.txt");
@@ -146,6 +192,10 @@ public final class Game {
         }
     }
 
+    /**
+     * Load the game saved with SaveGame()
+     * @param w The window which should show the game's state
+     */
     public void LoadGame(Window w) {
         try {
             Game.getInstance().StartGame(w);
@@ -159,6 +209,11 @@ public final class Game {
         }
     }
 
+    /**
+     * Reads the file named saveState.txt and creates the map accordingly
+     *
+     * @throws IOException
+     */
     private void RestoreMap() throws IOException {
         FileReader fr = new FileReader("saveState.txt");
         BufferedReader br = new BufferedReader(fr);
@@ -270,6 +325,11 @@ public final class Game {
         fr.close();
     }
 
+    /**
+     * Sets up the connections between areas
+     *
+     * @throws IOException
+     */
     private void RestoreConnections() throws IOException {
         FileReader fr = new FileReader("saveState.txt");
         BufferedReader br = new BufferedReader(fr);

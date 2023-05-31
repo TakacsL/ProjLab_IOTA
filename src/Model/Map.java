@@ -6,22 +6,24 @@ import Model.PlayableCharacter;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
  * A csõrendszert reprezentálja, a játékosok ennek 
  * a mezõin lépkednek és a víz is ezen keresztül folyik.
  */
 public class Map {
 
-	/*
+	/**
 	 * A területrendszert felépítõ elemek halmaza.
 	 */
     public List<Area> areas = new ArrayList<Area>();
-    /*
+    /**
      * A pályán lévõ játékosok listája.
      */
     public List<PlayableCharacter> playableCharacters = new ArrayList<PlayableCharacter>();
 
-    //ID alapján visszaadja az Model.Area-t
+    /**
+     * ID alapján visszaadja az Model.Area-t
+     */
     public Area getAreabyID(int id){
         for (Area a: areas) {
             if (a.getID() == id) return a;
@@ -29,6 +31,7 @@ public class Map {
         return null;
     }
 
+    /*
     public void printAreas(){
         System.out.println("Available areas are:");
         for (Area a: areas) {
@@ -43,9 +46,11 @@ public class Map {
         for (PlayableCharacter pc: playableCharacters) {
             System.out.println(pc.toString());
         }
-    }
+    }*/
 
-    //ID alapján visszaadja az Player-t
+    /**
+     * ID alapján visszaadja az Player-t
+     */
     public PlayableCharacter getPlayerbyID(int id){
         for (PlayableCharacter pc: playableCharacters) {
             if (pc.getID() == id) return pc;
@@ -53,7 +58,7 @@ public class Map {
         return null;
     }
 
-    /*
+    /**
      * A rendszerhez egy újabb elem illesztése.
      */
     public void AddArea(Area a){
@@ -61,7 +66,7 @@ public class Map {
         System.out.println("->AddArea["+a.toString()+"]");
         System.out.println("<-AddArea["+a.toString()+"]");
     }
-    /*
+    /**
      * A rendszerhez egy újabb player illesztése.
      */
     public void AddPlayer(PlayableCharacter pc){
@@ -69,7 +74,7 @@ public class Map {
         System.out.println("->AddPlayer["+pc.toString()+"]");
         System.out.println("<-AddPlayer["+pc.toString()+"]");
     }
-    /*
+    /**
      * A rendszerbõl az egyik elem elvétele.
      */
     void RemoveArea(Area a){

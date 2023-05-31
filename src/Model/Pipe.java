@@ -15,22 +15,22 @@ import java.awt.*;
  */
 public class Pipe extends Area {
 
-    /*
+    /**
      * Foltozás után a csõ egy ideig nem romolhat el
      */
     private int brokenTimer;
 
-    /*
+    /**
      * maradék idõ, ameddig még ragadós
      */
     private int stickyTimer;
 
-    /*
+    /**
      * maradék idõ, ameddig még csúszós
      */
     private int slipperyTimer;
 
-    /*
+    /**
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
@@ -48,7 +48,7 @@ public class Pipe extends Area {
         System.out.println("<-Model.Pipe.Connect[" + a.toString() + "]");
     }
 
-    /*
+    /**
      * A lyukas csõ megjavítása.
      */
     @Override
@@ -59,7 +59,7 @@ public class Pipe extends Area {
         System.out.println("<-Model.Pipe.Fix[]");
     }
 
-    /*
+    /**
      * A csõ kilyukasztása.
      */
     @Override
@@ -71,7 +71,7 @@ public class Pipe extends Area {
         } else System.out.println("The pipe cannot be broken for " + brokenTimer + " turns");
     }
 
-    /*
+    /**
      * konzolra írást segítõ fv
      */
     @Override
@@ -79,7 +79,7 @@ public class Pipe extends Area {
         return "[Model.Pipe]ID : " + getID() + (isBroken() ? ", broken" : ", not broken") + (stickyTimer > 0 ? ", sticky" : ", not sticky") + (getSlipperyTimer() > 0 ? ", slippery" : ", not slippery") + (getWaterLevel() > 0 ? ", hasWater" : ", has no water");
     }
 
-    /*
+    /**
      * Pumpa mezõ lehelyezése a csõre
      * Model.Repairman hívja meg
      */
@@ -98,47 +98,59 @@ public class Pipe extends Area {
     }
 
 
-    /*
+    /**
      * beállítja a csõ ragadós idõzítõjét, ameddig ragadós állapotban marad
      */
     public void setStickyTimer() {
         stickyTimer = 3;
     }
 
+    /**
+     * set sticky timer based on the parameters
+     * @param timer seconds
+     */
     public void setStickyTimer(int timer) {
         stickyTimer = timer;
     }
 
-    /*
+    /**
      * Megadja mennyi ideig ragadós még a csõ
      */
     public int getStickyTimer() {
         return stickyTimer;
     }
 
-    /*
+    /**
      * beállítja a csõ csúszós idõzítõjét, ameddig csúszós állapotban marad
      */
     public void setSlipperyTimer() {
         slipperyTimer = 3;
     }
 
+    /**
+     * Set slippery timer based on the parameter
+     * @param timer seconds
+     */
     public void setSlipperyTimer(int timer) {
         slipperyTimer = timer;
     }
 
-    /*
+    /**
      * Megadja mennyi ideig csúszós még a csõ
      */
     public int getSlipperyTimer() {
         return slipperyTimer;
     }
 
+    /**
+     * Set broken timer based on the parameter
+     * @param brokenTimer seconds
+     */
     public void setBrokenTimer(int brokenTimer) {
         this.brokenTimer = brokenTimer;
     }
 
-    /*
+    /**
      * Megadja, hogy a csõ csúszós-e
      */
     @Override
@@ -147,7 +159,7 @@ public class Pipe extends Area {
         else return true;
     }
 
-    /*
+    /**
      * Megadja, hogy a csõ ragadós-e
      */
     @Override
@@ -156,6 +168,10 @@ public class Pipe extends Area {
         else return true;
     }
 
+    /**
+     * Returns a string that represents this object's state
+     * @return state string
+     */
     public String SavableState() {
         String res = "areaType:Model.Pipe,areaId:" + getID() + ",";
         res += "x:" + x + ",y:" + y + ",";
@@ -174,6 +190,11 @@ public class Pipe extends Area {
         return res;
     }
 
+    /**
+     *
+     * @param character place this character on this area
+     * @return
+     */
     @Override
     public Boolean AcceptCharacter(PlayableCharacter character) {
         return players.size() == 0 && super.AcceptCharacter(character);
@@ -206,6 +227,10 @@ public class Pipe extends Area {
         if (this.getWaterLevel() < this.maxCapacity) this.setWaterLevel(this.getWaterLevel() + 1);
     }
 
+    /**
+     * Creates a component based on this object's state
+     * @return the component representing this object
+     */
     @Override
     public JComponent draw() {
         String label = "Field Id: " + getID();

@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 
-/*
+/**
  * A ciszterna mezõt reprezentálja.
  * Csöveket kreál, amelyeket a rajta
  * álló szerelõk fel tudnak venni.
@@ -15,7 +15,7 @@ import java.awt.*;
 public class Cistern extends Area {
 
 
-    /*
+    /**
      * Az elemen lévõ pumpát továbbítja a szerelõnek aki fel akarja venni azt.
      */
     public Pump PickupPump() {
@@ -24,7 +24,7 @@ public class Cistern extends Area {
         return new Pump();
     }
 
-    /*
+    /**
      * Az elemhez egy újabb elem csatlakoztatása.
      */
     @Override
@@ -37,7 +37,7 @@ public class Cistern extends Area {
         System.out.println("<-" + toString() + ".Connect[" + a.toString() + "]");
     }
 
-    /*
+    /**
      * konzolra írást segítõ fv
      */
     @Override
@@ -45,6 +45,10 @@ public class Cistern extends Area {
         return "[Model.Cistern] ID : " + getID();
     }
 
+    /**
+     * Creates a string that represents this object's state
+     * @return state string
+     */
     public String SavableState() {
         String res = "areaType:Model.Cistern,areaId:" + getID() + ",";
         res += "x:" + x + ",y:" + y + ",";
@@ -57,13 +61,16 @@ public class Cistern extends Area {
         return res;
     }
 
+    /**
+     * Constructs the cistern
+     */
     public Cistern() {
         super();
         System.out.println("Create " + this.toString() + ": " + getID());
     }
 
     /**
-     *
+     * The cisterns do nothing on step call
      */
     @Override
     public void step() {
@@ -71,7 +78,7 @@ public class Cistern extends Area {
 
     /**
      * AddWaterLevel override, specific for this type of area
-     * incr repairmans points
+     * increment repairmans points
      */
     @Override
     public void addWaterLevel(Area AreaFrom) {
@@ -79,7 +86,8 @@ public class Cistern extends Area {
     }
 
     /**
-     * @return
+     * Creates a component to be shown based on this object
+     * @return component representing this cistern
      */
     @Override
     public JComponent draw() {
